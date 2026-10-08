@@ -2,8 +2,17 @@
 
 - 신청 페이지: https://platform.claude.com/offers/startups-application
 - 웹사이트: https://full-fish.com
-- 이메일: contact@full-fish.com (웹사이트와 같은 도메인)
+- 이메일: manseon94@full-fish.com (웹사이트와 같은 도메인)
 - 서술형 답변은 영어로 50~500자
+
+## 신청 순서
+
+1. manseon94@full-fish.com으로 Claude Console 가입 → API 조직(Organization) 생성. 조직이 없으면 신청서에서 고를 게 없음
+2. 같은 계정으로 신청 페이지 로그인 → 신청할 조직 확인 후 제출
+3. 승인 메일("You're in. Welcome to Claude Startups.") → 회원 포털에서 혜택을 각각 따로 신청
+   - API 크레딧: Console에서만 사용, 6개월 후 만료
+   - Team 할인: 기본값이 Standard 2석이므로 Premium 5석으로 바꾸고 결제 금액 $0 확인. $0이어도 카드 등록 필수
+4. 12개월 후 정가로 자동 갱신되니 만료일을 캘린더에 기록
 
 ## What are you building on Claude? (481자)
 
@@ -30,6 +39,7 @@ API credits to prototype Claude features for clients before contracts are signed
 | Company name | FULLFISH |
 | Website | https://full-fish.com |
 | Country | South Korea |
+| City | 사업자등록증 사업장 소재지 기준 |
 | Industry | Software / Developer tools (가장 가까운 항목 선택) |
 | Founded | 사업자등록증의 개업연월일 기준 |
 | Funding | 투자 없음 (Bootstrapped) |
