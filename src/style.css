@@ -134,6 +134,28 @@ h3 { font-size: 19px; font-weight: 700; letter-spacing: -.01em; }
 .card-accent .icon { background: rgba(45, 212, 191, .14); }
 .card-accent .icon svg { stroke: var(--teal-400); }
 
+/* Work */
+.apps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.app { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: transform .2s, box-shadow .2s; }
+.app:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.app-shot { aspect-ratio: 6 / 5; padding-top: 32px; overflow: hidden; display: flex; justify-content: center; background: color-mix(in srgb, var(--accent) 14%, #fff); }
+.app-shot img { display: block; width: 62%; height: auto; align-self: flex-start; border: 6px solid var(--text); border-bottom: 0; border-radius: 26px 26px 0 0; box-shadow: 0 24px 40px -20px rgba(11, 31, 58, .45); }
+.app-body { flex: 1; display: flex; flex-direction: column; padding: 28px; }
+.app-head { display: flex; align-items: center; gap: 14px; }
+.app-head img { width: 56px; height: 56px; border-radius: 14px; flex: none; box-shadow: 0 0 0 1px var(--line); }
+.app-head p { font-size: 13.5px; color: var(--muted); }
+.app-status { margin-left: auto; align-self: flex-start; color: #0f766e; white-space: nowrap; }
+.app-status-soon { color: var(--muted); background: var(--bg-soft); }
+.app-tagline { margin-top: 22px; font-size: 17px; font-weight: 700; letter-spacing: -.01em; }
+.app-desc { margin-top: 8px; color: var(--muted); font-size: 15px; }
+.app-features { margin-top: 18px; display: grid; gap: 8px; font-size: 14.5px; }
+.app-features li { position: relative; padding-left: 22px; }
+.app-features li::before { content: "✓"; position: absolute; left: 0; font-weight: 700; color: var(--accent); }
+.app-tech { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+.app-tech li { padding: 4px 10px; background: var(--bg-soft); border-radius: 6px; font-size: 12.5px; color: var(--muted); }
+.app-link { margin-top: auto; padding-top: 24px; font-size: 15px; font-weight: 600; color: var(--navy-900); }
+.app-link:hover { color: var(--teal-500); }
+
 /* AI */
 .section-dark { background: var(--navy-900); color: #fff; }
 .section-dark .body { color: #b9c6d8; }
@@ -188,6 +210,7 @@ h3 { font-size: 19px; font-weight: 700; letter-spacing: -.01em; }
   .hero-inner, .about-grid, .stack { grid-template-columns: 1fr; gap: 48px; }
   .cards, .process { grid-template-columns: repeat(2, 1fr); }
   .ai-grid { grid-template-columns: 1fr; }
+  .apps { grid-template-columns: 1fr; max-width: 560px; }
   .strengths-grid { grid-template-columns: repeat(2, 1fr); }
   .strengths-grid div { padding: 24px 20px; }
   .strengths-grid div:nth-child(odd) { border-left: 0; padding-left: 0; }
