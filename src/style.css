@@ -160,6 +160,26 @@ h3 { font-size: 19px; font-weight: 700; letter-spacing: -.01em; }
 .app-legal a { text-decoration: underline; text-underline-offset: 3px; }
 .app-legal a:hover { color: var(--teal-500); }
 
+/* Projects: 분류 탭 · 그룹 · 하드웨어 카드 */
+.work-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: -24px 0 48px; }
+.work-tabs a { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; background: #fff; border: 1px solid var(--line); border-radius: 999px; font-size: 15px; font-weight: 600; transition: border-color .2s; }
+.work-tabs a:hover { border-color: var(--navy-900); }
+.work-tabs a span { padding: 1px 8px; background: var(--bg-soft); border-radius: 999px; font-size: 12.5px; color: var(--muted); }
+.work-group + .work-group { margin-top: 72px; }
+.work-group-head { margin-bottom: 24px; }
+.work-group-head h3 { font-size: 24px; letter-spacing: -.02em; }
+.work-group-head p { margin-top: 6px; color: var(--muted); font-size: 15.5px; }
+.app-head h4 { font-size: 19px; font-weight: 700; letter-spacing: -.01em; }
+.app-status-plan { color: #8a5a00; background: #fff3d1; }
+.project-wide { display: grid; grid-template-columns: 1fr; }
+.project-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--line); }
+.project-shots img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; background: #efece7; }
+.project-body { display: grid; grid-template-columns: 1.15fr 1fr; gap: 12px 48px; }
+.project-side { display: flex; flex-direction: column; }
+.project-side .app-features { margin-top: 0; }
+.project-icon { width: 56px; height: 56px; flex: none; display: grid; place-items: center; border-radius: 14px; background: var(--teal-50); box-shadow: 0 0 0 1px rgba(20, 184, 166, .25); }
+.project-icon svg { width: 28px; height: 28px; fill: none; stroke: #0f766e; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
 /* AI */
 .section-dark { background: var(--navy-900); color: #fff; }
 .section-dark .body { color: #b9c6d8; }
@@ -215,6 +235,9 @@ h3 { font-size: 19px; font-weight: 700; letter-spacing: -.01em; }
   .cards, .process { grid-template-columns: repeat(2, 1fr); }
   .ai-grid { grid-template-columns: 1fr; }
   .apps { grid-template-columns: 1fr; max-width: 560px; }
+  .project-wide { max-width: 560px; }
+  .project-body { grid-template-columns: 1fr; }
+  .project-side .app-features { margin-top: 18px; }
   .strengths-grid { grid-template-columns: repeat(2, 1fr); }
   .strengths-grid div { padding: 24px 20px; }
   .strengths-grid div:nth-child(odd) { border-left: 0; padding-left: 0; }

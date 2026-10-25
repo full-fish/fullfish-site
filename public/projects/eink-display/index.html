@@ -1,0 +1,1809 @@
+<!doctype html>
+<html lang="ko" class="doc-page">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>e-ink 디스플레이 2종 제작 플랜 | FULLFISH</title>
+    <meta name="description" content="7.3인치 컬러 e-ink 현관문 디스플레이와 4.26인치 터치 AI 영어 회화 기기를 직접 설계하는 하드웨어 프로젝트의 계획 문서입니다. 부품 선정, 회로, 펌웨어, 앱, 3D 프린팅 케이스까지 담았습니다." />
+    <link rel="canonical" href="https://full-fish.com/projects/eink-display/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="e-ink 디스플레이 2종 제작 플랜 | FULLFISH" />
+    <meta property="og:description" content="현관문 컬러 대시보드와 AI 영어 회화 기기를 직접 설계하는 하드웨어 프로젝트 (계획 단계)" />
+    <meta property="og:url" content="https://full-fish.com/projects/eink-display/" />
+    <meta property="og:image" content="https://full-fish.com/projects/eink-display/img/og.jpg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+    <link rel="stylesheet" href="/projects/project.css" />
+  </head>
+  <body>
+    <header class="header" id="top">
+      <div class="container header-inner">
+        <a href="/" class="logo" aria-label="FULLFISH 홈">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0b1f3a"/><path d="M5 16c3.5-6 11-8.5 16.5-4.2L27 8v16l-5.5-3.8C16 24.5 8.5 22 5 16z" fill="#2dd4bf"/><circle cx="11" cy="15" r="1.6" fill="#0b1f3a"/></svg>
+          <span>FULLFISH</span>
+        </a>
+        <nav class="nav" id="nav" aria-label="주요 메뉴">
+          <a href="/#about">회사소개</a>
+          <a href="/#services">서비스</a>
+          <a href="/#work" aria-current="page">프로젝트</a>
+          <a href="/#ai">AI 개발</a>
+          <a href="/#process">진행 방식</a>
+          <a href="/#contact" class="btn btn-primary btn-sm">프로젝트 문의</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="doc-hero">
+        <div class="container">
+          <nav class="crumbs" aria-label="현재 위치">
+            <a href="/#work">프로젝트</a><span aria-hidden="true">›</span><a href="/#work-hardware">하드웨어</a><span aria-hidden="true">›</span><span aria-current="page">e-ink 디스플레이 2종</span>
+          </nav>
+          <div class="doc-hero-grid">
+            <div class="doc-hero-copy">
+              <p class="eyebrow">Hardware Project</p>
+              <h1>e-ink 디스플레이 2종<br />제작 플랜</h1>
+              <p class="lead">
+                폰이 만든 그림을 블루투스로 받아 띄우는 7.3인치 컬러 e-ink 디스플레이와, 와이파이로 AI에 직접 연결하는
+                4.26인치 터치 영어 공부 기기를 만듭니다. 부품 선정부터 회로, 펌웨어, 앱, 3D 프린팅 케이스까지 직접 설계한
+                계획 문서이고, 완성품은 만든 뒤 따로 정리해 올립니다.
+              </p>
+              <ul class="doc-meta">
+                <li><span class="tag tag-plan">계획 단계</span></li>
+                <li>작성 2026년 10월 21일</li>
+                <li>업데이트 2026년 10월 25일</li>
+              </ul>
+              <ol class="stage" aria-label="진행 단계">
+                <li class="is-current"><b></b><span>계획</span></li>
+                <li><b></b><span>부품 주문</span></li>
+                <li><b></b><span>조립 · 펌웨어</span></li>
+                <li><b></b><span>완성</span></li>
+              </ol>
+            </div>
+            <div class="doc-hero-shots"><button type="button" class="hero-shot" data-lb="a-door" aria-label="크게 보기: 디자인 ② 현관문에 붙인 모습"><img src="/projects/eink-display/img/a-door-800.webp" srcset="/projects/eink-display/img/a-door-800.webp 800w, /projects/eink-display/img/a-door.webp 1600w" sizes="(max-width: 960px) 50vw, 280px" width="1600" height="1000" alt="디자인 ② 현관문에 붙인 모습" decoding="async"><span>기기 A · 현관문 컬러 디스플레이</span></button><button type="button" class="hero-shot" data-lb="b-front" aria-label="크게 보기: 기기 B 완성품 정면 (3D 상상도)"><img src="/projects/eink-display/img/b-front-800.webp" srcset="/projects/eink-display/img/b-front-800.webp 800w, /projects/eink-display/img/b-front.webp 1600w" sizes="(max-width: 960px) 50vw, 280px" width="1600" height="1000" alt="기기 B 완성품 정면 (3D 상상도)" decoding="async"><span>기기 B · 터치 영어 공부·AI 대화</span></button></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="toc-bar" id="tocBar">
+        <div class="container toc-bar-inner">
+          <button type="button" class="toc-toggle" id="tocToggle" aria-expanded="false" aria-controls="toc">
+            <span class="toc-toggle-label">목차</span>
+            <span class="toc-current" id="tocCurrent">한눈에 보기</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="container doc-layout">
+        <aside class="toc" id="toc" aria-label="목차">
+          <p class="toc-title">목차</p>
+          <ol class="toc-list"><li class="toc-chapter"><a href="#overview" data-toc="overview">한눈에 보기</a></li><li class="toc-chapter"><a href="#gallery" data-toc="gallery">이미지 모아 보기</a></li><li class="toc-chapter"><a href="#device-a" data-toc="device-a">기기 A · 7.3인치 컬러</a><ol class="toc-sub"><li><a href="#a-parts" data-toc="a-parts">부품</a></li><li><a href="#a-why" data-toc="a-why">왜 이 조합인가</a></li><li><a href="#a-battery" data-toc="a-battery">배터리 고르기</a></li><li><a href="#a-case-1" data-toc="a-case-1">디자인 ① 나무 받침형</a></li><li><a href="#a-case-1-detail" data-toc="a-case-1-detail">디자인 ① 설계 포인트</a></li><li><a href="#a-case-1-print" data-toc="a-case-1-print">디자인 ① 3D 프린팅</a></li><li><a href="#a-case-2" data-toc="a-case-2">디자인 ② 현관문 자석형</a></li><li><a href="#a-case-2-print" data-toc="a-case-2-print">디자인 ② 3D 프린팅</a></li><li><a href="#a-steps" data-toc="a-steps">만드는 법 (8단계)</a></li><li><a href="#a-firmware" data-toc="a-firmware">펌웨어 설계</a></li><li><a href="#a-app" data-toc="a-app">안드로이드 앱 설계</a></li><li><a href="#a-power" data-toc="a-power">전력과 배터리 수명</a></li><li><a href="#a-ideas" data-toc="a-ideas">화면에 띄울 아이디어</a></li><li><a href="#a-risks" data-toc="a-risks">리스크와 해결책</a></li><li><a href="#a-extend" data-toc="a-extend">확장 아이디어</a></li></ol></li><li class="toc-chapter"><a href="#device-b" data-toc="device-b">기기 B · 4.26인치 터치</a><ol class="toc-sub"><li><a href="#b-look" data-toc="b-look">완성품 모습</a></li><li><a href="#b-case-print" data-toc="b-case-print">케이스 3D 프린팅</a></li><li><a href="#b-parts" data-toc="b-parts">부품</a></li><li><a href="#b-why" data-toc="b-why">왜 이 구성인가</a></li><li><a href="#b-screens" data-toc="b-screens">화면 구성</a></li><li><a href="#b-ai" data-toc="b-ai">AI 연결</a></li><li><a href="#b-keys" data-toc="b-keys">API 키 관리</a></li><li><a href="#b-storage" data-toc="b-storage">저장 공간</a></li><li><a href="#b-refresh" data-toc="b-refresh">화면 갱신 요령</a></li></ol></li><li class="toc-chapter"><a href="#b-wiring" data-toc="b-wiring">기기 B 배선</a></li><li class="toc-chapter"><a href="#soldering" data-toc="soldering">납땜·조립 가이드</a></li><li class="toc-chapter"><a href="#pcb" data-toc="pcb">다음 단계: PCB</a></li><li class="toc-chapter"><a href="#shipping" data-toc="shipping">배송·관세</a></li><li class="toc-chapter"><a href="#buy" data-toc="buy">구매 목록</a></li><li class="toc-chapter"><a href="#references" data-toc="references">참고 자료</a></li></ol>
+          <a href="#top" class="toc-top">맨 위로 ↑</a>
+        </aside>
+
+        <article class="prose" id="doc">
+          <h2 id="overview">한눈에 보기<a aria-label="한눈에 보기 링크" class="h-anchor" href="#overview">#</a></h2>
+<p>기기 두 대를 만들고, 부품비는 합쳐서 <strong>약 22만 원</strong>(배송비와 공구·소모품 별도)입니다. 기기 A는 폰이 만든 그림을 블루투스로 받아 7.3인치 컬러 화면에 띄우는 배터리형 정보 디스플레이로, 현관문에 자석으로 붙입니다. 기기 B는 USB 전원으로 켜 두고, 와이파이로 AI API에 직접 연결하는 4.26인치 터치 영어 공부·음성 대화 기기입니다.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>기기 A: 컬러 정보 디스플레이</th>
+<th>기기 B: 터치 영어 공부·AI 대화</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>용도</td>
+<td>날씨·일정 대시보드, 그림 액자</td>
+<td>랜덤 영어 단어 공부, AI 음성 회화</td>
+</tr>
+<tr>
+<td>보드</td>
+<td>Seeed EN04 (nRF52840, 블루투스)</td>
+<td>Seeed XIAO ESP32-S3 Plus (와이파이)</td>
+</tr>
+<tr>
+<td>화면</td>
+<td>7.3인치 6색 Spectra 6, 800×480, 갱신 20~35초</td>
+<td>4.26인치 흑백 터치, 800×480, 부분 갱신 0.42초</td>
+</tr>
+<tr>
+<td>입력</td>
+<td>버튼 3개</td>
+<td>정전식 터치, 마이크</td>
+</tr>
+<tr>
+<td>소리</td>
+<td>없음</td>
+<td>앰프 + 상자형 스피커 (4Ω 3W)</td>
+</tr>
+<tr>
+<td>전원</td>
+<td>LiPo 1200mAh, 약 8개월마다 충전</td>
+<td>USB 5V 상시 (배터리 없음)</td>
+</tr>
+<tr>
+<td>일을 하는 쪽</td>
+<td>안드로이드 앱이 그림을 만들어 보냄</td>
+<td>보드가 와이파이로 AI API를 직접 호출</td>
+</tr>
+<tr>
+<td>납땜</td>
+<td>필요 없음</td>
+<td>필요 (만능기판에 모듈을 꽂고 뒷면 배선)</td>
+</tr>
+<tr>
+<td>부품비</td>
+<td>약 11만 원 + Seeed 배송비</td>
+<td>약 10만 원 (Good Display 배송비 포함)</td>
+</tr>
+</tbody>
+</table></div>
+<figure class="diagram"><div class="diagram-scroll"><svg aria-label="기기 A는 폰이 그림을 만들고, 기기 B는 보드가 AI에 직접 연결하는 구조도" role="img" viewbox="16 44 728 476"><defs><marker id="dev-arrow" markerheight="6" markerwidth="6" orient="auto-start-reverse" refx="9" refy="5" viewbox="0 0 10 10"><path class="d-arrowhead" d="M0 0L10 5L0 10z"></path></marker></defs><rect class="d-lane" height="132" rx="8" width="712" x="24" y="56"></rect><text class="d-lane-name" x="40" y="80">기기 A · 7.3인치 컬러 (배터리)</text><rect class="d-lane" height="184" rx="8" width="712" x="24" y="212"></rect><text class="d-lane-name" x="40" y="236">기기 B · 4.26인치 터치 (USB 전원)</text><g class="d-links"><path d="M208 136H296" marker-end="url(#dev-arrow)"></path><path d="M464 136H552" marker-end="url(#dev-arrow)"></path><path d="M208 280H296" marker-end="url(#dev-arrow)"></path><path d="M208 352H296" marker-end="url(#dev-arrow)"></path><path d="M464 280H552" marker-end="url(#dev-arrow)"></path><path d="M464 352H552" marker-end="url(#dev-arrow)"></path><path d="M380 380V436" marker-end="url(#dev-arrow)" marker-start="url(#dev-arrow)"></path></g><rect class="d-box main" height="72" rx="8" width="168" x="40" y="100"></rect><text class="d-name" text-anchor="middle" x="124" y="124">안드로이드 폰</text><text class="d-sub" text-anchor="middle" x="124" y="140">날씨·일정 모으기</text><text class="d-sub" text-anchor="middle" x="124" y="156">800×480 그림 그리기</text><rect class="d-box" height="72" rx="8" width="168" x="296" y="100"></rect><text class="d-name" text-anchor="middle" x="380" y="124">EN04 (nRF52840)</text><text class="d-sub" text-anchor="middle" x="380" y="140">받기 · CRC 확인</text><text class="d-sub" text-anchor="middle" x="380" y="156">LiPo 1200mAh 전원</text><rect class="d-box" height="72" rx="8" width="168" x="552" y="100"></rect><text class="d-name" text-anchor="middle" x="636" y="124">7.3인치 6색 화면</text><text class="d-sub" text-anchor="middle" x="636" y="140">Spectra 6, 800×480</text><text class="d-sub" text-anchor="middle" x="636" y="156">한 번 갱신 20~35초</text><rect class="d-box" height="56" rx="8" width="168" x="40" y="252"></rect><text class="d-name" text-anchor="middle" x="124" y="276">터치 (FT6336)</text><text class="d-sub" text-anchor="middle" x="124" y="292">메뉴·주제 고르기</text><rect class="d-box" height="56" rx="8" width="168" x="40" y="324"></rect><text class="d-name" text-anchor="middle" x="124" y="348">마이크 INMP441</text><text class="d-sub" text-anchor="middle" x="124" y="364">내 목소리 녹음</text><rect class="d-box main" height="128" rx="8" width="168" x="296" y="252"></rect><text class="d-name" text-anchor="middle" x="380" y="290">XIAO ESP32-S3 Plus</text><text class="d-sub" text-anchor="middle" x="380" y="314">와이파이 · I2S 2개</text><text class="d-sub" text-anchor="middle" x="380" y="330">PSRAM 8MB</text><text class="d-sub" text-anchor="middle" x="380" y="346">USB 5V 전원</text><rect class="d-box" height="56" rx="8" width="168" x="552" y="252"></rect><text class="d-name" text-anchor="middle" x="636" y="276">4.26인치 화면</text><text class="d-sub" text-anchor="middle" x="636" y="292">800×480, 0.42초 갱신</text><rect class="d-box" height="56" rx="8" width="168" x="552" y="324"></rect><text class="d-name" text-anchor="middle" x="636" y="348">앰프 + 스피커</text><text class="d-sub" text-anchor="middle" x="636" y="364">AI 목소리 재생</text><text class="d-label" text-anchor="middle" x="252" y="128">블루투스</text><text class="d-label" text-anchor="middle" x="252" y="152">그림 192KB</text><text class="d-label" text-anchor="middle" x="508" y="128">50핀 리본</text><text class="d-label" text-anchor="middle" x="252" y="272">I2C</text><text class="d-label" text-anchor="middle" x="252" y="344">I2S</text><text class="d-label" text-anchor="middle" x="508" y="272">SPI</text><text class="d-label" text-anchor="middle" x="508" y="344">I2S</text><text class="d-label" x="392" y="412">와이파이</text><text class="d-label" x="392" y="428">음성·자막 주고받기</text><rect class="d-box dashed" height="72" rx="8" width="232" x="264" y="436"></rect><text class="d-name" text-anchor="middle" x="380" y="460">AI API (클라우드)</text><text class="d-sub" text-anchor="middle" x="380" y="476">OpenAI Realtime · Gemini Live</text><text class="d-sub" text-anchor="middle" x="380" y="492">Claude는 글 작업용</text></svg></div><figcaption>기기 A는 폰이 그림을 만들고, 기기 B는 보드가 AI에 직접 연결합니다</figcaption></figure>
+<p>기기 A는 무거운 일을 폰이 하고 보드는 받아 그리기만 합니다. 기기 B는 보드가 터치·마이크·화면·스피커를 직접 다루고 와이파이로 AI와 음성을 주고받습니다.</p>
+<p>주문은 해외 2곳(Seeed, Good Display)과 국내 3곳(디바이스마트, 아이씨뱅큐, 다이소)이면 끝납니다. 구매처별 목록은 <a href="#buy">구매 목록</a>에 있습니다. 해외 가격은 1달러 ≈ 1,400원으로 환산했습니다.</p>
+<h2 id="gallery">이미지 모아 보기<a aria-label="이미지 모아 보기 링크" class="h-anchor" href="#gallery">#</a></h2>
+<p>케이스 3D 상상도, 연결 구조, 회로도를 한곳에 모았습니다. 누르면 크게 보고 좌우로 넘길 수 있습니다. 화면 속 그림은 예시입니다.</p>
+<div class="gallery"><p class="gallery-label">기기 A · 케이스 디자인 ② (최종 선택)</p><div class="gallery-grid"><button aria-label="크게 보기: 디자인 ② 현관문에 붙인 모습" class="g-item" data-caption="디자인 ② 현관문에 붙인 모습" data-full="/projects/eink-display/img/a-door.webp" data-h="1000" data-lb="a-door" data-w="1600" type="button"><img alt="디자인 ② 현관문에 붙인 모습" decoding="async" height="1000" loading="lazy" sizes="(max-width: 760px) 50vw, 260px" src="/projects/eink-display/img/a-door-800.webp" srcset="/projects/eink-display/img/a-door-800.webp 800w, /projects/eink-display/img/a-door.webp 1600w" width="1600"/><span class="g-cap">디자인 ② 현관문에 붙인 모습</span></button><button aria-label="크게 보기: 디자인 ② 다리를 펴서 세운 뒷모습" class="g-item" data-caption="디자인 ② 다리를 펴서 세운 뒷모습" data-full="/projects/eink-display/img/a-stand.webp" data-h="1000" data-lb="a-stand" data-w="1600" type="button"><img alt="디자인 ② 다리를 펴서 세운 뒷모습" decoding="async" height="1000" loading="lazy" sizes="(max-width: 760px) 50vw, 260px" src="/projects/eink-display/img/a-stand-800.webp" srcset="/projects/eink-display/img/a-stand-800.webp 800w, /projects/eink-display/img/a-stand.webp 1600w" width="1600"/><span class="g-cap">디자인 ② 다리를 펴서 세운 뒷모습</span></button><button aria-label="크게 보기: 디자인 ② 뒷판을 연 속 모습과 뒷판" class="g-item" data-caption="디자인 ② 뒷판을 연 속 모습과 뒷판" data-full="/projects/eink-display/img/a-inside.webp" data-h="1000" data-lb="a-inside" data-w="1600" type="button"><img alt="디자인 ② 뒷판을 연 속 모습과 뒷판" decoding="async" height="1000" loading="lazy" sizes="(max-width: 760px) 50vw, 260px" src="/projects/eink-display/img/a-inside-800.webp" srcset="/projects/eink-display/img/a-inside-800.webp 800w, /projects/eink-display/img/a-inside.webp 1600w" width="1600"/><span class="g-cap">디자인 ② 뒷판을 연 속 모습과 뒷판</span></button><button aria-label="크게 보기: 디자인 ② 케이스 조각을 출력 방향대로 놓은 그림" class="g-item" data-caption="디자인 ② 케이스 조각을 출력 방향대로 놓은 그림" data-full="/projects/eink-display/img/a-door-print.webp" data-h="1000" data-lb="a-door-print" data-w="1600" type="button"><img alt="디자인 ② 케이스 조각을 출력 방향대로 놓은 그림" decoding="async" height="1000" loading="lazy" sizes="(max-width: 760px) 50vw, 260px" src="/projects/eink-display/img/a-door-print-800.webp" srcset="/projects/eink-display/img/a-door-print-800.webp 800w, /projects/eink-display/img/a-door-print.webp 1600w" width="1600"/><span class="g-cap">디자인 ② 케이스 조각을 출력 방향대로 놓은 그림</span></button><button aria-label="크게 보기: FPC 연장 보드로 패널과 보드를 잇는 구조 (ada-2571)" class="g-item g-contain" data-caption="FPC 연장 보드로 패널과 보드를 잇는 구조 (ada-2571)" data-full="/projects/eink-display/img/a-fpc-extension.webp" data-h="889" data-lb="a-fpc-extension" data-w="1600" type="button"><img alt="FPC 연장 보드로 패널과 보드를 잇는 구조 (ada-2571)" decoding="async" height="889" loading="lazy" sizes="(max-width: 760px) 50vw, 260px" src="/projects/eink-display/img/a-fpc-extension-800.webp" srcset="/projects/eink-display/img/a-fpc-extension-800.webp 800w, /projects/eink-display/img/a-fpc-extension.webp 1600w" width="1600"/><span class="g-cap">FPC 연장 보드로 패널과 보드를 잇는 구조 (ada-2571)</span></button></div><p class="gallery-label">기기 A · 케이스 디자인 ① (참고용)</p><div class="gallery-grid"><button aria-label="크게 보기: 디자인 ① 나무 받침형 앞모습" class="g-item" data-caption="디자인 ① 나무 받침형 앞모습" data-full="/projects/eink-display/img/a-wood-front.webp" data-h="1000" data-lb="a-wood-front" data-w="1600" type="button"><img alt="디자인 ① 나무 받침형 앞모습" decoding="async" height="1000" loading="lazy" sizes="(max-width: 760px) 50vw, 260px" src="/projects/eink-display/img/a-wood-front-800.webp" srcset="/projects/eink-display/img/a-wood-front-800.webp 800w, /projects/eink-display/img/a-wood-front.webp 1600w" width="1600"/><span class="g-cap">디자인 ① 나무 받침형 앞모습</span></button><button aria-label="크게 보기: 디자인 ① 뒷모습 · 받침 윗면을 잘라 속을 보인 그림" class="g-item" data-caption="디자인 ① 뒷모습 · 받침 윗면을 잘라 속을 보인 그림" data-full="/projects/eink-display/img/a-wood-back.webp" data-h="1000" data-lb="a-wood-back" data-w="1600" type="button"><img alt="디자인 ① 뒷모습 · 받침 윗면을 잘라 속을 보인 그림" decoding="async" height="1000" loading="lazy" sizes="(max-width: 760px) 50vw, 260px" src="/projects/eink-display/img/a-wood-back-800.webp" srcset="/projects/eink-display/img/a-wood-back-800.webp 800w, /projects/eink-display/img/a-wood-back.webp 1600w" width="1600"/><span class="g-cap">디자인 ① 뒷모습 · 받침 윗면을 잘라 속을 보인 그림</span></button><button aria-label="크게 보기: 디자인 ① 케이스 조각을 출력 방향대로 놓은 그림" class="g-item" data-caption="디자인 ① 케이스 조각을 출력 방향대로 놓은 그림" data-full="/projects/eink-display/img/a-wood-print.webp" data-h="1000" data-lb="a-wood-print" data-w="1600" type="button"><img alt="디자인 ① 케이스 조각을 출력 방향대로 놓은 그림" decoding="async" height="1000" loading="lazy" sizes="(max-width: 760px) 50vw, 260px" src="/projects/eink-display/img/a-wood-print-800.webp" srcset="/projects/eink-display/img/a-wood-print-800.webp 800w, /projects/eink-display/img/a-wood-print.webp 1600w" width="1600"/><span class="g-cap">디자인 ① 케이스 조각을 출력 방향대로 놓은 그림</span></button></div><p class="gallery-label">기기 B</p><div class="gallery-grid"><button aria-label="크게 보기: 기기 B 완성품 정면 (3D 상상도)" class="g-item" data-caption="기기 B 완성품 정면 (3D 상상도)" data-full="/projects/eink-display/img/b-front.webp" data-h="1000" data-lb="b-front" data-w="1600" type="button"><img alt="기기 B 완성품 정면 (3D 상상도)" decoding="async" height="1000" loading="lazy" sizes="(max-width: 760px) 50vw, 260px" src="/projects/eink-display/img/b-front-800.webp" srcset="/projects/eink-display/img/b-front-800.webp 800w, /projects/eink-display/img/b-front.webp 1600w" width="1600"/><span class="g-cap">기기 B 완성품 정면 (3D 상상도)</span></button><button aria-label="크게 보기: 기기 B 뒷덮개를 뗀 내부 모습" class="g-item" data-caption="기기 B 뒷덮개를 뗀 내부 모습" data-full="/projects/eink-display/img/b-inside.webp" data-h="1000" data-lb="b-inside" data-w="1600" type="button"><img alt="기기 B 뒷덮개를 뗀 내부 모습" decoding="async" height="1000" loading="lazy" sizes="(max-width: 760px) 50vw, 260px" src="/projects/eink-display/img/b-inside-800.webp" srcset="/projects/eink-display/img/b-inside-800.webp 800w, /projects/eink-display/img/b-inside.webp 1600w" width="1600"/><span class="g-cap">기기 B 뒷덮개를 뗀 내부 모습</span></button><button aria-label="크게 보기: 기기 B 회로도 v0.1" class="g-item g-contain" data-caption="기기 B 회로도 v0.1" data-full="/projects/eink-display/img/b-schematic.webp" data-h="1752" data-lb="b-schematic" data-w="2880" type="button"><img alt="기기 B 회로도 v0.1" decoding="async" height="1752" loading="lazy" sizes="(max-width: 760px) 50vw, 260px" src="/projects/eink-display/img/b-schematic-800.webp" srcset="/projects/eink-display/img/b-schematic-800.webp 800w, /projects/eink-display/img/b-schematic.webp 2880w" width="2880"/><span class="g-cap">기기 B 회로도 v0.1</span></button></div></div>
+<h2 id="device-a">기기 A: 7.3인치 컬러 디스플레이 (nRF52840)<a aria-label="기기 A · 7.3인치 컬러 링크" class="h-anchor" href="#device-a">#</a></h2>
+<p>안드로이드 폰이 정보를 모아 그림을 만들고 블루투스로 보내면, 보드는 받아서 그리고 다시 잠듭니다. 화면 디자인을 바꿀 때는 앱만 고치면 되고, 보드가 대부분 자고 있어서 배터리가 오래갑니다. 저녁·주말 작업 기준 약 6주가 걸리고, 케이스는 3D 프린터로 출력합니다.</p>
+<h3 id="a-parts">부품<a aria-label="부품 링크" class="h-anchor" href="#a-parts">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>부품</th>
+<th>추천</th>
+<th>역할</th>
+<th>가격</th>
+<th>구입처</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>보드</td>
+<td><a href="https://www.seeedstudio.com/XIAO-ePaper-Display-Board-nRF52840-EN04-p-6589.html" rel="noopener" target="_blank">Seeed EN04</a></td>
+<td>nRF52840(블루투스) + 화면 구동 + LiPo 충전 + 버튼 3개, USB-C</td>
+<td>$10.90</td>
+<td>Seeed 공식몰</td>
+</tr>
+<tr>
+<td>화면</td>
+<td><a href="https://www.seeedstudio.com/7-3inch-Six-Color-eInk-ePaper-Display-with-800x480-Pixels-p-6567.html" rel="noopener" target="_blank">Seeed 7.3인치 Spectra 6</a> (800×480, 50핀)</td>
+<td>6색 표시</td>
+<td>$45.00</td>
+<td>Seeed 공식몰</td>
+</tr>
+<tr>
+<td>배터리</td>
+<td><a href="https://www.icbanq.com/P019326535" rel="noopener" target="_blank">Adafruit LiPo 3.7V 1200mAh</a> (두께 5mm, JST-PH 2.0, 보호회로)</td>
+<td>전원</td>
+<td>16,830원</td>
+<td>아이씨뱅큐</td>
+</tr>
+<tr>
+<td>케이스</td>
+<td>3D 프린팅</td>
+<td>디자인 ② 현관문 자석형 (접이식 다리)</td>
+<td>필라멘트 값</td>
+<td>직접 출력</td>
+</tr>
+<tr>
+<td>연장</td>
+<td>Adafruit 50핀 FPC 연장 세트 (ada-2571)</td>
+<td>패널과 보드를 20cm 케이블로 연결</td>
+<td>9,900원</td>
+<td>디바이스마트</td>
+</tr>
+<tr>
+<td>부착</td>
+<td>네오디뮴 원형자석 10Ø×3t 6개 + 펠트·폼테이프·도어 패드</td>
+<td>현관문(철문)에 붙이기</td>
+<td>3,740원 + 3,000원</td>
+<td>디바이스마트, 다이소</td>
+</tr>
+</tbody>
+</table></div>
+<p>납땜은 필요 없습니다. Seeed의 <a href="https://www.seeedstudio.com/XIAO-ePaper-DIY-Kit-EN04.html" rel="noopener" target="_blank">XIAO ePaper DIY Kit 페이지</a>는 보드(EN04)를 정해 두고 화면만 목록에서 골라 둘을 장바구니에 한 번에 담는 묶음 주문 페이지입니다. 묶음 할인은 없어서 따로 담은 값과 같고($10.90 + $45 = $55.90), 한 번에 배송됩니다. 2026년 10월 25일 기준 EN04는 백오더(입고 대기 주문)이고, 11월 2일 입고 예정입니다. USB-C 데이터 케이블이 필요하고, 충전 전용 케이블로는 코드 업로드가 안 됩니다.</p>
+<h3 id="a-why">왜 이 조합인가<a aria-label="왜 이 조합인가 링크" class="h-anchor" href="#a-why">#</a></h3>
+<ul>
+<li><strong>컬러를 쓰려면 LiPo가 필요합니다.</strong> 6색은 한 번 바뀔 때 최대 70mW를 20~35초 동안 써서 동전전지로는 못 버팁니다 (<a href="https://www.waveshare.com/7.3inch-e-paper-hat-e.htm?sku=27863" rel="noopener" target="_blank">Waveshare 7.3인치 (E)</a>, <a href="https://mouser.com/datasheet/2/490/CR2450CH_620mAh-3471493.pdf" rel="noopener" target="_blank">CR2450 데이터시트</a>).</li>
+<li><strong>크기:</strong> 패널 외곽 170.2×111.2×0.91mm, 표시 영역 160×96mm로 엽서보다 조금 큽니다 (<a href="https://www.pakronics.com.au/products/7-3-spectra-6-e-ink-epaper-display-with-800x480-pixels-spi-interface-support-xiao-arduino-ss100064541" rel="noopener" target="_blank">Pakronics</a>).</li>
+<li><strong>화질:</strong> 원색이 진해서 대시보드와 일러스트에 잘 어울립니다. 사진은 거칠고, 밤에는 조명이 필요합니다 (<a href="https://www.electromaker.io/blog/article/pimoroni-inky-impression-a-practical-guide-to-color-e-ink-displays-for-raspberry-pi" rel="noopener" target="_blank">Electromaker</a>).</li>
+<li><strong>터치는 없습니다.</strong> EN04의 버튼 3개로 페이지 넘기기와 즉시 갱신을 합니다. 터치가 필요한 용도는 기기 B가 맡습니다.</li>
+<li><strong>하루 한 번 이상 갱신하세요.</strong> 판매처는 같은 그림을 하루 넘게 두지 말라고 권장합니다 (<a href="https://openelab.io/de/products/seeed-studio-7-3-epaper" rel="noopener" target="_blank">OpenELAB</a>).</li>
+</ul>
+<h3 id="a-battery">배터리 고르기<a aria-label="배터리 고르기 링크" class="h-anchor" href="#a-battery">#</a></h3>
+<ul>
+<li><strong>두께:</strong> 이름의 숫자는 두께·폭·길이입니다. "503759"처럼 50으로 시작하면 5mm, "103040"처럼 10으로 시작하면 10mm라 피합니다.</li>
+<li><strong>커넥터는 JST-PH 2.0</strong>이어야 EN04에 바로 꽂힙니다. 디바이스마트의 1200mAh급은 10mm 두께에 Molex 1.25 커넥터라 맞지 않습니다.</li>
+<li><strong>극성을 꼭 확인하세요.</strong> 반대로 꽂으면 보드가 고장 납니다 (<a href="https://wiki.seeedstudio.com/epaper_EN04/" rel="noopener" target="_blank">EN04 위키</a>).</li>
+<li><strong>해외 직구는 피하세요.</strong> 배터리만 따로 보내는 건 여객기 운송과 국제우편이 막혀 있습니다 (<a href="https://www.faa.gov/sites/faa.gov/files/Lithium-Battery-Shipping-Guide_508_2026.pdf" rel="noopener" target="_blank">FAA 가이드</a>, <a href="https://postandparcel.info/?p=47790" rel="noopener" target="_blank">UPU 규정</a>).</li>
+</ul>
+<h3 id="a-case-1">케이스 디자인 ①: 나무 받침형 (참고용)<a aria-label="디자인 ① 나무 받침형 링크" class="h-anchor" href="#a-case-1">#</a></h3>
+<p>나무 받침에 화면을 꽂아 세우는 액자형입니다. 전체 크기는 약 19×13.5×7.4cm이고, 화면은 12° 뒤로 기울어 있습니다. 패널, EN04 보드, 배터리는 실제 크기로 모델링했고, 화면 그림은 예시입니다.</p>
+<div class="shots shots-2"><figure class="shot"><button aria-label="크게 보기: 디자인 ① 나무 받침형 앞모습" class="shot-btn" data-lb="a-wood-front" type="button"><img alt="디자인 ① 나무 받침형 앞모습" decoding="async" height="1000" loading="lazy" sizes="(max-width: 760px) 100vw, 760px" src="/projects/eink-display/img/a-wood-front-800.webp" srcset="/projects/eink-display/img/a-wood-front-800.webp 800w, /projects/eink-display/img/a-wood-front.webp 1600w" width="1600"/><span aria-hidden="true" class="shot-zoom"></span></button><figcaption>디자인 ① 나무 받침형 앞모습</figcaption></figure><figure class="shot"><button aria-label="크게 보기: 디자인 ① 뒷모습 · 받침 윗면을 잘라 속을 보인 그림" class="shot-btn" data-lb="a-wood-back" type="button"><img alt="디자인 ① 뒷모습 · 받침 윗면을 잘라 속을 보인 그림" decoding="async" height="1000" loading="lazy" sizes="(max-width: 760px) 100vw, 760px" src="/projects/eink-display/img/a-wood-back-800.webp" srcset="/projects/eink-display/img/a-wood-back-800.webp 800w, /projects/eink-display/img/a-wood-back.webp 1600w" width="1600"/><span aria-hidden="true" class="shot-zoom"></span></button><figcaption>디자인 ① 뒷모습 · 받침 윗면을 잘라 속을 보인 그림</figcaption></figure></div>
+
+<ul>
+<li><strong>화면부:</strong> 흰색 PLA 틀에 7.3인치 패널을 넣고 뒷판으로 덮습니다. 보드가 받침에 들어가서 화면부는 두께 8mm로 얇습니다.</li>
+<li><strong>받침:</strong> 우드 PLA(나무 가루가 섞인 필라멘트)로 뽑은 190×74×22mm 상자입니다. 바닥과 옆벽으로 된 통에 EN04 보드를 눕히고, 배터리는 보드 아래에 넣습니다. 위는 화면부를 꽂는 슬롯이 있는 뚜껑으로 덮습니다.</li>
+<li><strong>버튼·USB-C는 받침 뒷면:</strong> EN04는 전원 스위치, 리셋, 버튼 3개, USB-C가 보드의 한쪽 긴 변에 모여 있고, 버튼을 옆으로 누르는 방식입니다. 그래서 그 변을 받침 뒷벽에 붙였습니다. 버튼 3개에는 따로 뽑은 캡을 끼우고, 리셋은 클립으로 누르는 작은 구멍으로 둡니다. 버튼 아래에는 이전·갱신·다음 표시를 얕게 새깁니다.</li>
+<li><strong>FPC 연결:</strong> 패널의 50핀 FPC는 아래쪽 가운데에서 짧게 나옵니다. 그래서 보드의 50핀 단자가 패널 바로 뒤 아래에 오도록 배치했습니다.</li>
+<li><strong>무게추 자리:</strong> 화면부가 위로 길어서, 뒤에서 버튼을 누르면 밀리거나 넘어질 수 있습니다. 받침 왼쪽 빈 곳에 와셔(지름 24mm 정도)를 쌓는 홈을 2개 내고, 바닥에는 고무발 4개를 붙입니다.</li>
+</ul>
+<h3 id="a-case-1-detail">디자인 ① 설계 포인트<a aria-label="디자인 ① 설계 포인트 링크" class="h-anchor" href="#a-case-1-detail">#</a></h3>
+<ul>
+<li>패널 자리는 171×112mm로 패널(170.2×111.2mm)보다 조금 크게, 앞 창은 162×98mm로 표시 영역(160×96mm)보다 1mm씩 크게 냅니다. 표시 영역은 FPC가 나오는 아래쪽 테두리가 더 넓으니, 패널을 받아 위치를 재고 창을 맞춥니다.</li>
+<li>LiPo(34×62×5mm)는 받침 안 보드 아래에 눕힙니다. 보드는 높이 약 9mm 기둥 4개 위에 올리므로 배터리 위에 3mm쯤 여유가 남습니다. 배터리는 부풀 수 있으니 꽉 끼우지 않습니다.</li>
+<li>받침 뒷벽에 USB-C(12×7mm), 버튼 캡 구멍 3개, 리셋 핀 구멍, 전원 스위치 홈을 냅니다. 그림의 위치는 사진으로 잰 추정값이라, 보드를 받은 뒤 직접 재서 맞춥니다.</li>
+<li>화면부 아래에는 폭 174mm, 깊이 5mm의 혀를 내서 뚜껑 슬롯(175×8.6mm)에 꽂고, 혀 가운데에 FPC가 빠져나갈 홈(약 30×2mm)을 냅니다. FPC는 접히지 않게 완만하게 구부립니다.</li>
+</ul>
+<h3 id="a-case-1-print">디자인 ① 3D 프린팅 방법<a aria-label="디자인 ① 3D 프린팅 링크" class="h-anchor" href="#a-case-1-print">#</a></h3>
+<p>케이스는 다섯 조각으로 나눠 뽑습니다. 모든 조각이 서포트 없이 나오도록 방향을 정했고, 필라멘트는 다 합쳐 150g 안팎으로 예상합니다.</p>
+<figure class="shot"><button aria-label="크게 보기: 디자인 ① 케이스 조각을 출력 방향대로 놓은 그림" class="shot-btn" data-lb="a-wood-print" type="button"><img alt="디자인 ① 케이스 조각을 출력 방향대로 놓은 그림" decoding="async" height="1000" loading="lazy" sizes="(max-width: 760px) 100vw, 760px" src="/projects/eink-display/img/a-wood-print-800.webp" srcset="/projects/eink-display/img/a-wood-print-800.webp 800w, /projects/eink-display/img/a-wood-print.webp 1600w" width="1600"/><span aria-hidden="true" class="shot-zoom"></span></button><figcaption>디자인 ① 케이스 조각을 출력 방향대로 놓은 그림</figcaption></figure>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>조각</th>
+<th>크기</th>
+<th>출력 방향</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>① 화면 앞판 (창 + 테두리)</td>
+<td>184×121×8mm</td>
+<td>앞면이 바닥에 닿게 엎어서</td>
+<td>창이 위아래로 뚫려 서포트가 없고, 보이는 앞면이 매끈하게 나옴</td>
+</tr>
+<tr>
+<td>② 화면 뒷판</td>
+<td>170×111×2mm</td>
+<td>눕혀서</td>
+<td>단순한 판</td>
+</tr>
+<tr>
+<td>③ 받침 통 (바닥, 옆벽, 기둥, 배터리 칸, 무게추 홈)</td>
+<td>190×74×19.5mm</td>
+<td>바로 세워서 (열린 쪽이 위)</td>
+<td>기둥과 벽이 위로 서서 서포트가 필요 없음</td>
+</tr>
+<tr>
+<td>④ 받침 뚜껑 (슬롯, 나사 기둥)</td>
+<td>190×74×2.5mm</td>
+<td>윗면이 바닥에 닿게 뒤집어서</td>
+<td>보이는 윗면이 매끈하게 나오고, 나사 기둥이 위로 섬</td>
+</tr>
+<tr>
+<td>⑤ 버튼 캡 3개</td>
+<td>지름 7mm</td>
+<td>넓은 쪽이 바닥</td>
+<td>작은 부품이라 바닥 면적이 넓어야 안 쓰러짐</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>베드 크기:</strong> 가장 큰 조각(받침 190mm, 화면 앞판 184mm)이 들어가려면 베드가 가로 200mm 이상이어야 합니다. 180mm 베드(예: Bambu Lab A1 mini)는 두 조각을 반으로 나눠 뽑고 붙여야 합니다.</li>
+<li><strong>뒷벽 구멍:</strong> 받침 통을 세워서 뽑으면 뒷벽의 USB-C·버튼 구멍이 옆으로 뚫립니다. 12mm 이하라 윗변은 다리처럼 걸쳐서(브리지) 나오지만, 더 깔끔하게 하려면 구멍 윗변을 물방울 모양으로 뾰족하게 그립니다.</li>
+<li><strong>모서리:</strong> 베드에 닿는 모서리(화면 앞면, 뚜껑 윗면)는 둥글게 말고 1~2mm 45° 모따기로 그립니다. 둥근 모서리는 첫 몇 층이 떠서 처집니다.</li>
+<li><strong>합치기:</strong> 화면 앞판과 뒷판은 M2 나사 4개로 잇고, 나사 구멍에는 열로 박는 인서트 너트를 씁니다. 화면부 혀는 뚜껑 슬롯에 0.3mm 여유로 꽉 끼우고, 흔들리면 순간접착제로 고정합니다. 뚜껑은 바닥에서 M2 나사 4개로 통에 고정합니다.</li>
+<li><strong>패널 보호:</strong> 패널은 유리라 깨지기 쉽습니다. 뒷판과 패널 사이에 얇은 스펀지 테이프(0.5~1mm)를 붙여 누르는 힘이 고르게 퍼지게 합니다.</li>
+<li><strong>필라멘트:</strong> 화면부는 흰 PLA, 받침은 우드 PLA를 씁니다. 우드 PLA는 노즐이 막히기 쉬워 0.4mm보다 0.6mm 노즐이 편합니다. 일반 PLA로 뽑아도 됩니다.</li>
+<li><strong>공차와 테스트:</strong> 구멍과 홈은 0.3~0.5mm 크게 그립니다. 본 출력 전에 받침 뒷벽 부분과 패널 모서리 한 귀퉁이만 얇게 뽑아 맞춰 봅니다.</li>
+</ul>
+<p><strong>조립 순서</strong></p>
+<ol>
+<li>버튼 캡을 받침 통 뒷벽 구멍에 안쪽에서 끼웁니다. 배터리를 보드 아래 칸에 넣고, 그 위 기둥에 EN04를 나사로 고정한 뒤 배터리 커넥터를 꽂습니다. 무게추 와셔도 넣습니다.</li>
+<li>화면 앞판에 패널을 넣고 스펀지 테이프를 붙인 뒤 뒷판을 덮습니다. FPC는 아래 홈으로 빼 둡니다.</li>
+<li>화면부 혀를 뚜껑 슬롯에 끼웁니다.</li>
+<li>뚜껑을 통 위에 살짝 띄운 채 FPC를 EN04의 50핀 단자에 꽂고 잠금을 내립니다. 화면 종류 점퍼가 50핀 쪽인지도 확인합니다.</li>
+<li>뚜껑을 내려 덮고 바닥에서 M2 나사 4개로 고정한 뒤 고무발을 붙입니다.</li>
+</ol>
+<p>FPC가 짧아 뚜껑을 띄운 채 꽂기 어려우면 50핀 0.5mm 피치 FPC 연장 케이블을 씁니다.</p>
+<h3 id="a-case-2">케이스 디자인 ② (최종 선택): 현관문 자석형 + 접이식 다리<a aria-label="디자인 ② 현관문 자석형 링크" class="h-anchor" href="#a-case-2">#</a></h3>
+<p>현관문에 자석으로 붙이는 얇은 액자형이고, 뒤의 다리를 펴면 책상에 세울 수도 있습니다. 크기는 186×128×18mm입니다. 현관문 부착을 우선해 다리를 접으면 뒷면이 완전히 평평해지게 했습니다. 디자인 ①과 같은 패널, 보드, 배터리를 쓰고, 화면 그림은 예시입니다.</p>
+<div class="shots shots-3"><figure class="shot"><button aria-label="크게 보기: 디자인 ② 현관문에 붙인 모습" class="shot-btn" data-lb="a-door" type="button"><img alt="디자인 ② 현관문에 붙인 모습" decoding="async" height="1000" loading="lazy" sizes="(max-width: 760px) 100vw, 760px" src="/projects/eink-display/img/a-door-800.webp" srcset="/projects/eink-display/img/a-door-800.webp 800w, /projects/eink-display/img/a-door.webp 1600w" width="1600"/><span aria-hidden="true" class="shot-zoom"></span></button><figcaption>디자인 ② 현관문에 붙인 모습</figcaption></figure><figure class="shot"><button aria-label="크게 보기: 디자인 ② 다리를 펴서 세운 뒷모습" class="shot-btn" data-lb="a-stand" type="button"><img alt="디자인 ② 다리를 펴서 세운 뒷모습" decoding="async" height="1000" loading="lazy" sizes="(max-width: 760px) 100vw, 760px" src="/projects/eink-display/img/a-stand-800.webp" srcset="/projects/eink-display/img/a-stand-800.webp 800w, /projects/eink-display/img/a-stand.webp 1600w" width="1600"/><span aria-hidden="true" class="shot-zoom"></span></button><figcaption>디자인 ② 다리를 펴서 세운 뒷모습</figcaption></figure><figure class="shot"><button aria-label="크게 보기: 디자인 ② 뒷판을 연 속 모습과 뒷판" class="shot-btn" data-lb="a-inside" type="button"><img alt="디자인 ② 뒷판을 연 속 모습과 뒷판" decoding="async" height="1000" loading="lazy" sizes="(max-width: 760px) 100vw, 760px" src="/projects/eink-display/img/a-inside-800.webp" srcset="/projects/eink-display/img/a-inside-800.webp 800w, /projects/eink-display/img/a-inside.webp 1600w" width="1600"/><span aria-hidden="true" class="shot-zoom"></span></button><figcaption>디자인 ② 뒷판을 연 속 모습과 뒷판</figcaption></figure></div>
+
+
+<ul>
+<li><strong>자석:</strong> 지름 10mm, 두께 3mm 네오디뮴 원형 자석 6개를 뒷판 안쪽 홈에 넣고 순간접착제나 에폭시로 고정합니다. 바깥은 0.5mm 막이 덮어 자석이 보이지 않고, 그 위에 펠트 패드를 붙여 문 도장을 보호하고 미끄럼을 줄입니다. 자석은 모두 같은 극이 바깥을 보게 넣습니다.</li>
+<li><strong>무게와 자석 힘:</strong> 기기는 약 200~250g으로 예상합니다(추정). 10×3mm 자석은 판매처 규격표 기준으로 철판에 바로 붙였을 때 개당 1~2kg쯤 당겨서 6개면 여유가 큽니다. 막과 펠트만큼 힘이 줄고, 아래로 미끄러지는 힘은 마찰이 받칩니다. 붙여 보고 처지면 자석을 12mm로 바꾸거나 개수를 늘립니다.</li>
+<li><strong>현관문 확인:</strong> 아파트 현관문은 대부분 철문이라 자석이 붙지만, 냉장고 자석을 먼저 대 보세요. 문 안쪽(실내 쪽)에 붙이는 것을 기준으로 했습니다.</li>
+<li><strong>접이식 다리:</strong> 뒷판 가운데 칸에 다리가 쏙 들어가서, 접으면 뒷면과 평평해집니다. 펴면 30°에서 멈추고 화면이 약 22° 뒤로 기울어 섭니다. 경첩 핀은 1.75mm 필라멘트 토막을 끼우고 양 끝을 인두로 살짝 녹여 막습니다. 다리 끝에는 고무 패드를 붙입니다.</li>
+<li><strong>버튼·USB-C는 아래쪽 면:</strong> 보드의 버튼 변을 아래 벽에 붙여서 전원 스위치, 리셋, 버튼 3개, USB-C가 아래로 나옵니다. 문에 붙인 채 아래에서 누르기 쉽고, 버튼 바로 위 앞 테두리에 이전·갱신·다음 표시를 새깁니다.</li>
+<li><strong>FPC 연장 케이블이 필요합니다:</strong> 버튼 변을 아래 벽에 붙이면 보드의 50핀 단자가 패널 FPC보다 5cm쯤 위로 올라가서 FPC가 닿지 않습니다. 디바이스마트의 Adafruit 50핀 FPC 연장 세트(ada-2571, 연장 보드 + 20cm 케이블)로 잇습니다. 케이블은 패널 뒤에서 한 번 직각으로 접어 보드 위쪽 변을 돌아 단자에 꽂고, 남는 길이는 접어서 테이프로 붙입니다. 꽂을 때는 원래 FPC와 같은 쪽으로 접점이 향하게 하고, 전원을 넣기 전에 방향을 다시 확인합니다. 반대로 꽂으면 패널이나 보드가 고장 날 수 있습니다.</li>
+<li><strong>배치:</strong> 보드는 왼쪽 아래, 배터리는 보드의 배터리 커넥터 옆인 오른쪽 아래에 둡니다. 보드 왼쪽 두 구멍은 앞틀 기둥에 M2 나사로 고정하고, 나머지는 패널 뒤에 3mm 양면 폼테이프로 받칩니다.</li>
+</ul>
+<figure class="shot"><button aria-label="크게 보기: FPC 연장 보드로 패널과 보드를 잇는 구조 (ada-2571)" class="shot-btn" data-lb="a-fpc-extension" type="button"><img alt="FPC 연장 보드로 패널과 보드를 잇는 구조 (ada-2571)" decoding="async" height="889" loading="lazy" sizes="(max-width: 760px) 100vw, 760px" src="/projects/eink-display/img/a-fpc-extension-800.webp" srcset="/projects/eink-display/img/a-fpc-extension-800.webp 800w, /projects/eink-display/img/a-fpc-extension.webp 1600w" width="1600"/><span aria-hidden="true" class="shot-zoom"></span></button><figcaption>FPC 연장 보드로 패널과 보드를 잇는 구조 (ada-2571)</figcaption></figure>
+<h3 id="a-case-2-print">디자인 ② 3D 프린팅 방법<a aria-label="디자인 ② 3D 프린팅 링크" class="h-anchor" href="#a-case-2-print">#</a></h3>
+<p>다섯 조각이고 모두 서포트 없이 뽑힙니다. 가장 큰 조각이 186mm라 베드는 가로 200mm 이상이 필요합니다. 필라멘트는 다 합쳐 100~130g으로 예상합니다(추정).</p>
+<figure class="shot"><button aria-label="크게 보기: 디자인 ② 케이스 조각을 출력 방향대로 놓은 그림" class="shot-btn" data-lb="a-door-print" type="button"><img alt="디자인 ② 케이스 조각을 출력 방향대로 놓은 그림" decoding="async" height="1000" loading="lazy" sizes="(max-width: 760px) 100vw, 760px" src="/projects/eink-display/img/a-door-print-800.webp" srcset="/projects/eink-display/img/a-door-print-800.webp 800w, /projects/eink-display/img/a-door-print.webp 1600w" width="1600"/><span aria-hidden="true" class="shot-zoom"></span></button><figcaption>디자인 ② 케이스 조각을 출력 방향대로 놓은 그림</figcaption></figure>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>조각</th>
+<th>크기</th>
+<th>출력 방향</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>① 앞틀 (창, 옆벽, 버튼 구멍, 보드 기둥)</td>
+<td>186×128×14.5mm</td>
+<td>앞면이 바닥에 닿게 엎어서</td>
+<td>창이 위아래로 뚫려 서포트가 없고, 앞면이 매끈하게 나옴</td>
+</tr>
+<tr>
+<td>② 뒷판 (자석 홈 6개, 다리 칸, 경첩)</td>
+<td>186×128×3.5mm</td>
+<td>바깥면이 바닥에 닿게</td>
+<td>문에 닿는 면이 평평하고 매끈하게 나오고, 자석 홈과 경첩은 위로 열림</td>
+</tr>
+<tr>
+<td>③ 다리</td>
+<td>59×90×3.5mm</td>
+<td>눕혀서 (바깥면이 바닥)</td>
+<td>층이 다리 길이 방향으로 쌓여 잘 안 부러짐</td>
+</tr>
+<tr>
+<td>④ 버튼 캡 3개</td>
+<td>지름 7mm</td>
+<td>넓은 쪽이 바닥</td>
+<td>작은 부품이라 바닥 면적이 넓어야 안 쓰러짐</td>
+</tr>
+<tr>
+<td>⑤ 다리 칸 가림판</td>
+<td>64×88×1mm</td>
+<td>눕혀서</td>
+<td>다리를 폈을 때 속이 안 보이게 뒷판 안쪽에 붙임</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>경첩:</strong> 핀 구멍은 1.75mm 필라멘트가 들어가게 1.9mm로 그립니다. 구멍이 바닥과 나란히 뚫리므로 물방울 모양으로 그리고, 다리 쪽 마디와 뒷판 쪽 마디 사이는 한쪽 0.3mm쯤 띄웁니다. 다리 마디에는 30°에서 멈추는 턱을 둡니다. 경첩까지 한 번에 뽑는 방식(print-in-place)도 있지만, 처음이면 따로 뽑아 핀을 끼우는 쪽이 실패가 적습니다.</li>
+<li><strong>자석 홈:</strong> 지름 10.2mm, 깊이 3mm로 그리고 바깥에 0.5mm 막을 남깁니다. 막이 얇을수록 자석 힘이 세지지만, 0.4mm보다 얇으면 첫 층이 비칠 수 있습니다.</li>
+<li><strong>아래 벽 구멍:</strong> 앞틀을 엎어 뽑으면 버튼·USB-C 구멍이 옆으로 뚫리니 윗변을 물방울 모양으로 그립니다.</li>
+<li><strong>합치기:</strong> 앞틀과 뒷판은 M2 나사 4개로 잇고, 자주 열게 되니 열 인서트 너트를 씁니다.</li>
+</ul>
+<p><strong>조립 순서</strong></p>
+<ol>
+<li>버튼 캡을 앞틀 아래 벽 구멍에 안쪽에서 끼웁니다.</li>
+<li>패널을 화면이 창 쪽으로 오게 앞틀에 넣고, FPC를 뒤로 접어 연장 보드에 꽂습니다. 연장 보드는 패널 뒤에 양면테이프로 붙입니다.</li>
+<li>연장 케이블을 위로 올려 직각으로 접고, EN04의 50핀 단자에 꽂습니다. 화면 종류 점퍼는 50핀 쪽에 둡니다.</li>
+<li>EN04를 버튼 변이 아래 벽에 닿게 넣고, 왼쪽 두 구멍은 M2 나사로, 나머지는 폼테이프로 고정합니다. 배터리를 오른쪽 칸에 넣고 커넥터를 꽂습니다.</li>
+<li>뒷판에 자석 6개를 같은 극이 바깥을 보게 붙이고, 가림판을 안쪽에 붙인 뒤 다리를 경첩 핀으로 답니다.</li>
+<li>뒷판을 앞틀에 M2 나사 4개로 닫고, 바깥면에 펠트 패드, 다리 끝에 고무 패드를 붙입니다.</li>
+</ol>
+<h3 id="a-steps">만드는 법 (8단계, 약 6주)<a aria-label="만드는 법 (8단계) 링크" class="h-anchor" href="#a-steps">#</a></h3>
+<p>각 단계가 완료 기준을 통과하면 다음으로 넘어갑니다. 가장 오래 걸리기 쉬운 구간은 그림 전송(4단계)과 자동 갱신(6단계)입니다.</p>
+<ol>
+<li><strong>개발 환경 준비</strong>
+<ul>
+<li>Arduino IDE 2에 <strong>Seeed nRF52 Boards</strong> 패키지를 설치합니다. 블루투스 라이브러리(Adafruit Bluefruit)가 함께 들어 있습니다 (<a href="https://wiki.seeedstudio.com/XIAO-BLE-Sense-Bluetooth_Usage/" rel="noopener" target="_blank">Seeed 위키</a>).</li>
+<li>보드는 <strong>Seeed XIAO nRF52840 Plus</strong>를 고르고, 화면 라이브러리 <strong>Seeed_GFX2</strong>는 GitHub ZIP으로 설치합니다 (<a href="https://wiki.seeedstudio.com/epaper_EN04/" rel="noopener" target="_blank">EN04 위키</a>).</li>
+<li>폰에는 테스트용 Nordic <strong>nRF Connect</strong> 앱을 깔아 둡니다.</li>
+</ul>
+</li>
+<li><strong>화면 띄우기 (USB 전원)</strong>
+<ul>
+<li>50핀 리본을 EN04에 끼우고 화면 종류 점퍼를 <strong>50핀</strong> 쪽으로 맞춘 뒤, Seeed_GFX2의 7.3인치 Spectra 6 예제를 올립니다.</li>
+<li>빨리 확인하려면 <a href="https://wiki.seeedstudio.com/EN04_opendisplay" rel="noopener" target="_blank">OpenDisplay</a> 펌웨어로 Chrome에서 사진을 바로 보낼 수 있습니다.</li>
+<li>완료 기준: 6색 테스트 그림이 뜨고, USB를 뽑아도 화면이 남아 있습니다.</li>
+</ul>
+</li>
+<li><strong>블루투스로 글자 보내기</strong>
+<ul>
+<li>Bluefruit의 bleuart 예제로 시작해, nRF Connect에서 보낸 글자를 화면에 그리도록 고칩니다. 이 단계는 영문으로 테스트합니다.</li>
+<li>완료 기준: 폰에서 보낸 "Hello"가 화면에 표시됩니다.</li>
+</ul>
+</li>
+<li><strong>그림 전송 만들기</strong>
+<ul>
+<li>800×480 6색 그림은 픽셀당 4비트라 192,000바이트입니다. 242바이트씩 794조각으로 받아 EN04의 2MB 저장 공간에 기록합니다.</li>
+<li>앱보다 먼저 PC 파이썬(bleak)으로 테스트 그림을 보내 보면 펌웨어 문제를 빨리 찾습니다.</li>
+<li>완료 기준: 테스트 그림이 깨짐 없이 뜨고, 조각 하나를 빼면 CRC 오류로 거부됩니다.</li>
+</ul>
+</li>
+<li><strong>안드로이드 앱 첫 버전</strong>
+<ul>
+<li>기기 검색·연결, 미리보기, '지금 보내기' 버튼까지만 만듭니다.</li>
+<li>완료 기준: 버튼 한 번에 앱 미리보기와 같은 그림이 뜹니다.</li>
+</ul>
+</li>
+<li><strong>데이터 연동과 자동 갱신</strong>
+<ul>
+<li>날씨, 캘린더, 할 일 등을 붙이고 WorkManager 주기 작업(최소 15분)을 겁니다.</li>
+<li>완료 기준: 폰을 만지지 않아도 주기마다 화면이 바뀝니다.</li>
+</ul>
+</li>
+<li><strong>배터리 연결과 절전</strong>
+<ul>
+<li>LiPo 극성을 확인하고 꽂은 뒤, 절전 체크리스트를 적용합니다. 멀티미터(µA 범위)로 대기 전류를 잽니다.</li>
+<li>완료 기준: 대기 평균 30µA 이하, 배터리만으로 갱신해도 재시작이 없습니다.</li>
+</ul>
+</li>
+<li><strong>케이스 출력과 마감</strong>
+<ul>
+<li>케이스를 출력하고 리본 케이블이 꺾이지 않게 고정합니다.</li>
+<li>완료 기준: 1주일 동안 문제없이 자동 갱신됩니다.</li>
+</ul>
+</li>
+</ol>
+<h3 id="a-firmware">펌웨어 설계<a aria-label="펌웨어 설계 링크" class="h-anchor" href="#a-firmware">#</a></h3>
+<p>보드 펌웨어는 기다리기, 받기, 확인, 그리기, 잠자기 다섯 가지만 합니다. 화면 디자인은 폰이 그림으로 만들어 보내므로, 한 번 만들면 거의 고칠 일이 없습니다.</p>
+<p><strong>한 번 갱신되는 순서</strong></p>
+<ol>
+<li>보드는 1~2초마다 블루투스 광고 신호를 보내며 대기합니다.</li>
+<li>폰이 연결하면 MTU를 247바이트로, 전송 모드를 2M PHY로 올립니다.</li>
+<li>폰이 <strong>머리글</strong>(크기, 형식, 전체 길이, CRC, 갱신 방식)을 보냅니다.</li>
+<li>폰이 그림을 <strong>조각</strong>으로 나눠 '응답 없는 쓰기'로 보냅니다. 192,000바이트면 794조각입니다.</li>
+<li>폰이 <strong>끝 신호</strong>를 보내면 보드가 CRC를 비교합니다. 맞으면 화면을 갱신하고, 틀리면 '실패 + 빠진 순번'을 알려 다시 받습니다.</li>
+<li>갱신이 끝나면 패널을 절전시키고 연결을 끊은 뒤 1번으로 돌아갑니다.</li>
+</ol>
+<p><strong>블루투스 서비스 구성</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>속성</th>
+<th>하는 일</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>제어 (CTRL)</td>
+<td>쓰기, 알림</td>
+<td>머리글·끝 신호 받기, 성공/실패와 상태 알리기</td>
+</tr>
+<tr>
+<td>데이터 (DATA)</td>
+<td>응답 없는 쓰기</td>
+<td>그림 조각 받기</td>
+</tr>
+<tr>
+<td>배터리 (표준 서비스 0x180F)</td>
+<td>읽기</td>
+<td>배터리 잔량 %</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>머리글 구조</strong> (20바이트, 리틀 엔디안)</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>위치</th>
+<th>크기</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>2</td>
+<td>고정값 'E','I'</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>버전 (1)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>형식: 0 = 1비트 흑백, 1 = 4비트 6색, 2 = 압축(RLE)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2</td>
+<td>가로 픽셀 (800)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>2</td>
+<td>세로 픽셀 (480)</td>
+</tr>
+<tr>
+<td>8</td>
+<td>4</td>
+<td>전체 길이 (192,000)</td>
+</tr>
+<tr>
+<td>12</td>
+<td>4</td>
+<td>CRC32</td>
+</tr>
+<tr>
+<td>16</td>
+<td>1</td>
+<td>갱신 방식: 0 = 전체, 1 = 부분 (6색은 전체만)</td>
+</tr>
+<tr>
+<td>17</td>
+<td>1</td>
+<td>페이지 번호</td>
+</tr>
+<tr>
+<td>18</td>
+<td>2</td>
+<td>예약</td>
+</tr>
+</tbody>
+</table></div>
+<p>조각은 순번 2바이트 + 그림 데이터 최대 242바이트입니다. 그림을 저장 공간에 여러 장 넣어 두면 폰 없이도 버튼으로 페이지를 넘길 수 있습니다.</p>
+<p><strong>펌웨어 뼈대 (Arduino + Bluefruit)</strong></p>
+<pre class="code" data-lang="Arduino (C++)"><code class="language-cpp">#include &lt;bluefruit.h&gt;
+
+// UUID는 직접 만든 128비트 값으로 바꾸세요
+BLEService        epd("서비스-UUID");
+BLECharacteristic data("데이터-UUID");
+BLEBas            battery;            // 표준 배터리 서비스
+
+const uint32_t FRAME_SIZE = 192000;  // 800×480 6색, 픽셀당 4비트
+
+void onData(uint16_t conn, BLECharacteristic* chr, uint8_t* buf, uint16_t len) {
+  uint16_t seq = buf[0] | (buf[1] &lt;&lt; 8);
+  uint32_t off = seq * 242;
+  if (len &gt; 2 &amp;&amp; off + (len - 2) &lt;= FRAME_SIZE) {
+    flashWrite(off, buf + 2, len - 2);  // RAM 대신 2MB 저장 공간에 기록
+  }
+}
+
+void setup() {
+  Bluefruit.configPrphBandwidth(BANDWIDTH_MAX);  // 큰 MTU 허용
+  Bluefruit.begin();
+  Bluefruit.autoConnLed(false);
+  Bluefruit.setTxPower(0);
+  Bluefruit.setName("EINK-01");
+
+  epd.begin();
+  data.setProperties(CHR_PROPS_WRITE_WO_RESP);
+  data.setPermission(SECMODE_NO_ACCESS, SECMODE_OPEN);
+  data.setMaxLen(244);
+  data.setWriteCallback(onData);
+  data.begin();
+  // 제어(CTRL)도 같은 방식: CHR_PROPS_WRITE | CHR_PROPS_NOTIFY
+  battery.begin();
+
+  Bluefruit.Advertising.addFlags(BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE);
+  Bluefruit.Advertising.addService(epd);
+  Bluefruit.ScanResponse.addName();
+  Bluefruit.Advertising.setInterval(1600, 3200);  // 1~2초 (0.625ms 단위)
+  Bluefruit.Advertising.restartOnDisconnect(true);
+  Bluefruit.Advertising.start(0);
+}
+
+void loop() {
+  // 끝 신호 + CRC 통과 표시가 있으면: 저장 공간의 그림을 패널로 보내 갱신하고 패널 절전
+  delay(1000);  // 쉬는 동안 칩이 저전력 상태로 들어감
+}
+</code></pre>
+<p>화면 그리기는 블루투스 콜백 안에서 하지 말고 표시만 해 두었다가 loop에서 처리하세요. 콜백이 길어지면 통신이 끊길 수 있습니다.</p>
+<p><strong>절전 체크리스트</strong> (<a href="https://forum.seeedstudio.com/t/system-on-sleep-of-xiao-ble/270472?page=4" rel="noopener" target="_blank">Seeed 포럼 실측 스레드</a>)</p>
+<ul class="tasks">
+<li><span aria-hidden="true" class="task-box"></span>연결 LED와 상태 LED 끄기</li>
+<li><span aria-hidden="true" class="task-box"></span>내장 플래시를 절전 모드(명령 0xB9)로 넣기</li>
+<li><span aria-hidden="true" class="task-box"></span>DC/DC 전원 모드 켜기</li>
+<li><span aria-hidden="true" class="task-box"></span>송신 출력 0dBm, 광고 간격 1~2초</li>
+<li><span aria-hidden="true" class="task-box"></span>화면 갱신 후 패널 절전(hibernate)</li>
+<li><span aria-hidden="true" class="task-box"></span>갱신을 기다릴 때 while 루프 대신 delay로 쉬기</li>
+<li><span aria-hidden="true" class="task-box"></span>배터리 전압은 가끔만 읽기</li>
+</ul>
+<h3 id="a-app">안드로이드 앱 설계<a aria-label="안드로이드 앱 설계 링크" class="h-anchor" href="#a-app">#</a></h3>
+<p>최종 앱은 Kotlin으로 만들고, 하는 일은 모으기, 그리기, 보내기 세 가지입니다. 테스트 도구로 시작해 단계적으로 옮겨 갑니다.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>방법</th>
+<th>코딩</th>
+<th>할 수 있는 것</th>
+<th>한계</th>
+<th>언제 쓰나</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nRF Connect 앱</td>
+<td>없음</td>
+<td>바이트 직접 보내기, 서비스 확인</td>
+<td>그림 전송은 불편</td>
+<td>펌웨어 테스트 (2~4단계)</td>
+</tr>
+<tr>
+<td>웹 페이지 + Web Bluetooth</td>
+<td>HTML·JavaScript</td>
+<td>안드로이드 Chrome에서 그림 보내기</td>
+<td>자동 갱신 불가</td>
+<td>빠른 시제품</td>
+</tr>
+<tr>
+<td>Kotlin 앱 + <a href="https://github.com/NordicSemiconductor/Android-BLE-Library" rel="noopener" target="_blank">Nordic BLE 라이브러리</a></td>
+<td>Kotlin</td>
+<td>자동 갱신, 캘린더·알림 읽기, 여러 대 관리</td>
+<td>개발 시간이 가장 김</td>
+<td>최종 버전</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>앱 화면:</strong> 홈(미리보기, '지금 보내기', 마지막 갱신 시각, 보드 배터리 %), 레이아웃, 데이터 설정, 기기 관리.</p>
+<p><strong>데이터 가져오기</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>데이터</th>
+<th>가져오는 방법</th>
+<th>필요한 권한</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>날씨</td>
+<td><a href="https://open-meteo.com/en/about" rel="noopener" target="_blank">Open-Meteo</a> (비상업 무료, 키 불필요)</td>
+<td>인터넷</td>
+</tr>
+<tr>
+<td>오늘 일정</td>
+<td>CalendarContract에서 오늘 범위 조회 (<a href="https://developer.android.com/identity/providers/calendar-provider" rel="noopener" target="_blank">가이드</a>)</td>
+<td>캘린더 읽기</td>
+</tr>
+<tr>
+<td>삼성 리마인더</td>
+<td>Microsoft To Do 동기화 후 Graph API로 읽기 (<a href="https://support.microsoft.com/lt-LT/ToDo/sync-microsoft-to-do-with-the-samsung-reminder-app" rel="noopener" target="_blank">동기화</a>, <a href="https://learn.microsoft.com/ko-KR/graph/todo-concept-overview" rel="noopener" target="_blank">To Do API</a>)</td>
+<td>Microsoft 로그인</td>
+</tr>
+<tr>
+<td>알림 개수</td>
+<td>NotificationListenerService</td>
+<td>알림 접근 허용</td>
+</tr>
+<tr>
+<td>할 일·메모</td>
+<td>앱 안에 저장 (Room)</td>
+<td>없음</td>
+</tr>
+<tr>
+<td>걸음 수</td>
+<td>Health Connect</td>
+<td>건강 데이터 권한</td>
+</tr>
+<tr>
+<td>블루투스</td>
+<td>Android 12 이상 BLUETOOTH_SCAN, BLUETOOTH_CONNECT</td>
+<td>근처 기기 권한</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>화면 그리기</strong></p>
+<ol>
+<li>800×480 Bitmap에 Canvas로 글자·아이콘을 그립니다. 한글은 굵은 고딕이 잘 읽힙니다.</li>
+<li>6색(흑·백·빨강·노랑·파랑·초록)으로 바꿉니다. 사진은 채도·대비를 올린 뒤 디더링합니다.</li>
+<li>픽셀마다 색 번호(4비트)를 붙이고 2픽셀을 1바이트로 묶습니다. 색 번호 순서는 펌웨어와 맞추세요.</li>
+<li>CRC32를 머리글에 넣고 242바이트씩 보냅니다.</li>
+</ol>
+<p><strong>자동 갱신</strong></p>
+<ul>
+<li><strong>WorkManager:</strong> 15분 이상 간격으로 모으기, 그리기, 보내기를 실행합니다 (<a href="https://developer.android.com/reference/androidx/work/PeriodicWorkRequest" rel="noopener" target="_blank">문서</a>).</li>
+<li><strong>연결은 짧게:</strong> 보내고 바로 끊습니다 (<a href="https://developer.android.com/develop/connectivity/bluetooth/ble/background" rel="noopener" target="_blank">BLE 백그라운드 가이드</a>).</li>
+<li><strong>집에 오면 바로 갱신 (선택):</strong> CompanionDeviceManager의 startObservingDevicePresence를 씁니다.</li>
+<li><strong>제조사 절전 기능:</strong> 삼성 등에서는 앱을 절전 예외로 설정하세요.</li>
+<li><strong>바뀐 게 없으면 건너뛰기:</strong> 새 그림의 CRC가 지난번과 같으면 보내지 않습니다.</li>
+</ul>
+<h3 id="a-power">전력과 배터리 수명<a aria-label="전력과 배터리 수명 링크" class="h-anchor" href="#a-power">#</a></h3>
+<p>LiPo 1200mAh로 1시간마다 갱신하면 <strong>약 8개월</strong>(조건에 따라 5~12개월)마다 충전하면 됩니다. 갱신 횟수가 배터리를 가장 크게 좌우합니다.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>보통 조건</th>
+<th>범위</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>대기 (광고 포함)</td>
+<td>20µA</td>
+<td>10~50µA</td>
+<td>XIAO nRF52840 실측 약 5~20µA + EN04 여유</td>
+</tr>
+<tr>
+<td>갱신 1회 (화면 + 전송)</td>
+<td>0.13mAh</td>
+<td>0.08~0.22mAh</td>
+<td>6색 최대 70mW × 20~35초 + 전송 약 7초</td>
+</tr>
+<tr>
+<td>쓸 수 있는 용량</td>
+<td>1,200mAh의 90%</td>
+<td>—</td>
+<td>보호회로 차단 (대략)</td>
+</tr>
+<tr>
+<td>자연 방전</td>
+<td>하루 약 0.8mAh</td>
+<td>—</td>
+<td>LiPo 일반값 (대략)</td>
+</tr>
+</tbody>
+</table></div>
+<div aria-label="충전 주기(일) = (1200 × 0.9) ÷ (대기 전류(mA) × 24 + 0.8 + 하루 갱신 횟수 × 0.13)" class="formula" role="math"><span class="formula-lhs">충전 주기(일) =</span><span class="frac"><span class="num">1200 × 0.9</span><span class="den">대기 전류(mA) × 24 + 0.8 + 하루 갱신 횟수 × 0.13</span></span></div>
+<p><strong>충전 주기를 늘리는 방법:</strong> 밤 11시~아침 7시는 갱신하지 않기, 그림이 같으면 건너뛰기(단 하루 한 번은 갱신), 날씨·일정은 1~3시간마다, 정해진 시간에만 광고, 2000mAh급으로 키우기(약 1.7배).</p>
+<h3 id="a-ideas">화면에 띄울 아이디어<a aria-label="화면에 띄울 아이디어 링크" class="h-anchor" href="#a-ideas">#</a></h3>
+<p>첫 화면은 <strong>날씨 + 오늘 일정</strong>을 추천합니다. 매일 보게 되고, 데이터를 구하기 쉽고, 1시간 갱신이면 충분합니다.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>분류</th>
+<th>아이디어</th>
+<th>데이터</th>
+<th>갱신</th>
+<th>난이도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>정보</td>
+<td><strong>날씨 + 오늘 일정</strong></td>
+<td>Open-Meteo, 캘린더</td>
+<td>1시간</td>
+<td>쉬움</td>
+</tr>
+<tr>
+<td>정보</td>
+<td>출근길 버스·지하철 도착</td>
+<td>공공데이터포털 교통 API</td>
+<td>아침에만 15분</td>
+<td>중간</td>
+</tr>
+<tr>
+<td>정보</td>
+<td>환율·주가</td>
+<td>무료 시세 API</td>
+<td>1시간</td>
+<td>쉬움</td>
+</tr>
+<tr>
+<td>생산성</td>
+<td>할 일·장보기 목록</td>
+<td>앱에서 입력</td>
+<td>바꿀 때마다</td>
+<td>쉬움</td>
+</tr>
+<tr>
+<td>생산성</td>
+<td>D-day·습관 기록</td>
+<td>앱 안에 저장</td>
+<td>하루 1번</td>
+<td>쉬움</td>
+</tr>
+<tr>
+<td>폰 연동</td>
+<td>알림 개수 (내용은 숨김)</td>
+<td>알림 리스너</td>
+<td>15분</td>
+<td>중간</td>
+</tr>
+<tr>
+<td>폰 연동</td>
+<td>걸음 수·폰 배터리</td>
+<td>Health Connect</td>
+<td>1시간</td>
+<td>중간</td>
+</tr>
+<tr>
+<td>생활</td>
+<td>냉장고 메모판·가족 메시지</td>
+<td>앱에서 입력·촬영</td>
+<td>바꿀 때마다</td>
+<td>쉬움</td>
+</tr>
+<tr>
+<td>생활</td>
+<td>손님용 Wi-Fi QR 코드</td>
+<td>한 번 입력</td>
+<td>거의 안 함</td>
+<td>쉬움</td>
+</tr>
+<tr>
+<td>재미</td>
+<td>컬러 그림·사진 액자</td>
+<td>갤러리</td>
+<td>하루 1번</td>
+<td>중간</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>디자인 요령:</strong> 글자는 크고 굵게, 선은 2픽셀 이상. 6색을 그대로 쓰는 평면 디자인이 가장 선명합니다. 구석에 마지막 갱신 시각을, 배터리 20% 아래면 충전 표시를 띄웁니다. 여러 페이지를 만들어 버튼으로 넘기면 한 화면에 다 욱여넣지 않아도 됩니다.</p>
+<h3 id="a-risks">리스크와 해결책<a aria-label="리스크와 해결책 링크" class="h-anchor" href="#a-risks">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>리스크</th>
+<th>증상</th>
+<th>해결책</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>안드로이드 백그라운드 제한</td>
+<td>자동 갱신이 가끔 빠짐</td>
+<td>절전 예외, WorkManager, 필요하면 CompanionDeviceService</td>
+</tr>
+<tr>
+<td>폰이 범위 밖</td>
+<td>갱신이 멈춤</td>
+<td>마지막 화면은 남음, '마지막 갱신 시각'으로 확인</td>
+</tr>
+<tr>
+<td>갱신이 느림</td>
+<td>한 번에 20~35초, 여러 번 깜빡임</td>
+<td>하루 몇 번 바뀌는 대시보드·액자로 사용</td>
+</tr>
+<tr>
+<td>같은 그림을 오래 둠</td>
+<td>잔상</td>
+<td>하루 한 번 이상 갱신</td>
+</tr>
+<tr>
+<td>그림 용량 192KB</td>
+<td>메모리 빠듯, 전송 7초 안팎</td>
+<td>2MB 저장 공간에 기록, 끊기면 다시 보냄</td>
+</tr>
+<tr>
+<td>대기 전류가 큼</td>
+<td>충전 주기가 짧아짐</td>
+<td>직접 측정, 절전 체크리스트 점검</td>
+</tr>
+<tr>
+<td>LiPo 극성 반대</td>
+<td>보드 고장</td>
+<td>꽂기 전에 +/− 확인</td>
+</tr>
+<tr>
+<td>LiPo 부풀음·손상</td>
+<td>케이스에 눌리면 위험</td>
+<td>0.5~1mm 여유, 부풀면 바로 교체</td>
+</tr>
+<tr>
+<td>리본 케이블 파손</td>
+<td>화면 일부가 안 나옴</td>
+<td>날카롭게 접지 않기, 테이프로 고정</td>
+</tr>
+<tr>
+<td>EN04·패널 품절</td>
+<td>부품 수급 지연</td>
+<td>Waveshare 7.3인치 HAT(E) + XIAO nRF52840</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="a-extend">확장 아이디어<a aria-label="확장 아이디어 링크" class="h-anchor" href="#a-extend">#</a></h3>
+<ul>
+<li><strong>버튼 활용:</strong> 버튼 3개로 페이지 넘기기와 '지금 갱신' 요청을 넣습니다.</li>
+<li><strong>여러 대:</strong> 방마다 다른 화면을 띄웁니다. 거실은 날씨, 현관은 일정.</li>
+<li><strong>기성 펌웨어로 먼저 써 보기:</strong> <a href="https://wiki.seeedstudio.com/EN04_opendisplay" rel="noopener" target="_blank">OpenDisplay</a>로 하드웨어를 먼저 확인합니다.</li>
+<li><strong>폰 없이 자동 갱신:</strong> Home Assistant의 OpenDisplay 통합(2026.4 이상)으로 집 서버가 대신 보냅니다.</li>
+<li><strong>무선 펌웨어 업데이트:</strong> Bluefruit의 BLEDfu를 넣습니다.</li>
+<li><strong>자석 충전 단자:</strong> EN04의 5V·GND에 연결합니다. 반드시 5V만 넣으세요.</li>
+<li><strong>동전전지 흑백판:</strong> 7.5인치 흑백 + CR2450 2개로 충전 없이 약 2년. 패널 외곽이 같아 케이스를 함께 씁니다.</li>
+</ul>
+<h2 id="device-b">기기 B: 4.26인치 터치 영어 공부·AI 대화 기기 (ESP32-S3)<a aria-label="기기 B · 4.26인치 터치 링크" class="h-anchor" href="#device-b">#</a></h2>
+<p>책상에 USB로 켜 두고, 터치로 '단어 공부'와 'AI 대화', 대화 주제를 바로 고릅니다. 보드가 와이파이로 OpenAI·Gemini 같은 일반 AI API에 직접 연결하므로 폰과 앱이 필요 없습니다. 부품비는 약 10만 원입니다.</p>
+<h3 id="b-look">완성품 모습 (3D 상상도)<a aria-label="완성품 모습 링크" class="h-anchor" href="#b-look">#</a></h3>
+<p>책상에 세우는 쐐기형이고, 앞면 약 12.5×10.7cm, 깊이 약 5cm입니다. 패널, 어댑터, XIAO는 실제 크기로 모델링했습니다.</p>
+<div class="shots shots-2"><figure class="shot"><button aria-label="크게 보기: 기기 B 완성품 정면 (3D 상상도)" class="shot-btn" data-lb="b-front" type="button"><img alt="기기 B 완성품 정면 (3D 상상도)" decoding="async" height="1000" loading="lazy" sizes="(max-width: 760px) 100vw, 760px" src="/projects/eink-display/img/b-front-800.webp" srcset="/projects/eink-display/img/b-front-800.webp 800w, /projects/eink-display/img/b-front.webp 1600w" width="1600"/><span aria-hidden="true" class="shot-zoom"></span></button><figcaption>기기 B 완성품 정면 (3D 상상도)</figcaption></figure><figure class="shot"><button aria-label="크게 보기: 기기 B 뒷덮개를 뗀 내부 모습" class="shot-btn" data-lb="b-inside" type="button"><img alt="기기 B 뒷덮개를 뗀 내부 모습" decoding="async" height="1000" loading="lazy" sizes="(max-width: 760px) 100vw, 760px" src="/projects/eink-display/img/b-inside-800.webp" srcset="/projects/eink-display/img/b-inside-800.webp 800w, /projects/eink-display/img/b-inside.webp 1600w" width="1600"/><span aria-hidden="true" class="shot-zoom"></span></button><figcaption>기기 B 뒷덮개를 뗀 내부 모습</figcaption></figure></div>
+
+<ul>
+<li><strong>화면:</strong> 위쪽에 4.26인치 터치 패널, 그 위 테두리에 마이크 구멍이 있습니다.</li>
+<li><strong>스피커:</strong> 화면 아래 그릴 뒤에 Adafruit 3351 상자형 스피커(70×30×17mm)를 가로로 두고 나사로 고정합니다. 울림통이 붙어 있어 케이스 밀폐에 덜 민감하지만, 앞면은 스펀지 테이프로 그릴에 밀착합니다. 그릴 영역 높이가 30mm로 늘어 케이스가 약 0.7cm 커졌습니다.</li>
+<li><strong>USB-C:</strong> XIAO를 오른쪽 옆벽에 붙여 연장 케이블 없이 옆면으로 바로 나오게 합니다. 케이스 구멍은 플러그 몸통(약 12×7mm)이 들어갈 만큼 내야 끝까지 꽂힙니다.</li>
+<li><strong>내부:</strong> 패널 뒷면에 어댑터를 세우고, 옆에 XIAO·마이크·앰프를 올린 만능기판을 둡니다. 어댑터까지는 리본 케이블 1줄입니다. XIAO의 U.FL 단자에 와이파이 안테나를 꽂아 케이스 안쪽 위 플라스틱 벽에 붙이면 수신이 좋아집니다. 공유기 가까이면 없어도 동작하고, 안테나 동봉 여부는 받아서 확인합니다.</li>
+<li><strong>3D 프린팅 여유:</strong> 구멍과 홈은 0.3~0.5mm 크게 그리고, 본 케이스 전에 기판 고정부와 옆면 구멍만 있는 테스트 틀을 먼저 뽑아 맞춰 봅니다.</li>
+</ul>
+<h3 id="b-case-print">케이스 3D 프린팅 방법<a aria-label="케이스 3D 프린팅 링크" class="h-anchor" href="#b-case-print">#</a></h3>
+<p>케이스는 <strong>앞판, 몸통, 뒷덮개 세 조각으로 나눠 뽑습니다.</strong> 한 덩어리로 세워 뽑으면 스피커·마이크 구멍이 옆으로 뚫리고, 화면 창 윗변(93mm)과 지붕에 서포트가 필요해집니다.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>조각</th>
+<th>출력 방향</th>
+<th>이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>앞판 (화면 창, 스피커 구멍, 마이크 구멍)</td>
+<td>바깥면이 바닥에 닿게 엎어서</td>
+<td>구멍이 전부 위아래로 뚫려 45도 문제가 없고, 바깥면이 매끈하게 나옴</td>
+</tr>
+<tr>
+<td>몸통 (옆면·바닥·지붕)</td>
+<td>뒷면을 바닥에 대고</td>
+<td>옆벽이 위로 서서 서포트가 거의 필요 없음</td>
+</tr>
+<tr>
+<td>뒷덮개</td>
+<td>평평하게 눕혀서</td>
+<td>단순한 판</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>스피커 구멍:</strong> 지름 2mm, 간격 3mm 정도로 그립니다. 첫 층이 살짝 퍼져 구멍이 좁아지니 0.2~0.3mm 크게 그립니다.</li>
+<li><strong>합치기:</strong> 앞판과 몸통은 M2 나사나 끼움 걸쇠로 잇습니다. 나사 구멍에는 열로 박는 인서트 너트를 쓰면 여러 번 분해해도 안 망가집니다.</li>
+<li><strong>USB-C 받침벽:</strong> XIAO 바로 뒤에 몸통과 일체로 받침벽을 세워, 케이블을 꽂는 힘이 납땜이 아니라 케이스로 가게 합니다. 구멍은 플러그 몸통(약 12×7mm)이 들어갈 만큼 냅니다. 자주 뽑았다 꽂을 거면 패널형 USB-C 연장 케이블을 나사로 고정하는 방법도 있습니다.</li>
+<li><strong>공차:</strong> 구멍과 홈은 0.3~0.5mm 여유를 둡니다. 3D 프린팅은 구멍이 약간 작게 나옵니다.</li>
+<li><strong>테스트 출력 먼저:</strong> 본 케이스 전에 앞판 구멍 몇 줄과 기판 고정부·USB-C 구멍만 있는 얇은 틀을 뽑아 맞춰 봅니다. 필라멘트 몇 g이면 됩니다.</li>
+</ul>
+<h3 id="b-parts">부품<a aria-label="부품 링크" class="h-anchor" href="#b-parts">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>부품</th>
+<th>모델</th>
+<th>핵심 사양</th>
+<th>가격</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>화면</td>
+<td><a href="https://www.good-display.com/product/371.html" rel="noopener" target="_blank">Good Display GDEQ0426T82-T01C</a></td>
+<td>4.26인치 800×480 (219 DPI) 흑백, SSD1677, 부분 갱신 0.42초 / 전체 3.5초, 정전식 터치 FT6336</td>
+<td>$25.23</td>
+</tr>
+<tr>
+<td>화면 어댑터</td>
+<td><a href="https://buy-lcd.com/products/esp32-fts02" rel="noopener" target="_blank">ESP32-FTS02</a></td>
+<td>24핀 화면 + 6핀 터치 단자를 한 보드에, 3.3V 입력, microSD 슬롯</td>
+<td>$9.86</td>
+</tr>
+<tr>
+<td>보드</td>
+<td>Seeed XIAO ESP32-S3 Plus</td>
+<td>ESP32-S3R8, PSRAM 8MB, 플래시 16MB, 21×17.8mm, GPIO 20개 (앞 11 + 뒷면 패드 9)</td>
+<td>13,970원</td>
+</tr>
+<tr>
+<td>마이크</td>
+<td>INMP441 모듈</td>
+<td>I2S 디지털 마이크, 3.3V</td>
+<td>8,250원</td>
+</tr>
+<tr>
+<td>앰프</td>
+<td>MAX98357A (Adafruit 3006)</td>
+<td>I2S 입력 D급 앰프, 5V 권장</td>
+<td>11,880원</td>
+</tr>
+<tr>
+<td>스피커</td>
+<td><a href="https://adafruit.com/product/3351" rel="noopener" target="_blank">Adafruit 3351 상자형 스피커</a></td>
+<td>4Ω 3W, 70×30×17mm, 울림통 일체형, JST PH 커넥터, MAX98357A용으로 안내됨</td>
+<td>7,321원</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>부품명은 GDEQ0426T82-T01C입니다.</strong> 판매 페이지 제목의 "GDEY"는 오기입니다. 받으면 패널 뒷면 라벨을 확인하세요.</li>
+<li><strong>라이브러리:</strong> <a href="https://github.com/ZinggJM/GxEPD2" rel="noopener" target="_blank">GxEPD2</a>가 1.5.3부터 이 패널을 지원합니다. 터치(FT6336)는 GxEPD2가 처리하지 않아, I2C로 좌표를 읽는 짧은 코드나 별도 라이브러리를 씁니다.</li>
+<li><strong>XIAO는 핀 헤더가 없습니다.</strong> 수 핀 헤더를 달아 만능기판의 암 헤더에 꽂습니다 (<a href="#b-wiring">배선</a>·<a href="#soldering">납땜</a> 섹션).</li>
+</ul>
+<p><strong>조립용 부품 (만능기판 방식)</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>부품</th>
+<th>사양</th>
+<th>용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>양면 만능기판</td>
+<td>구멍마다 패드가 따로 있는 2.54mm 간격, 약 4×6cm로 잘라 씀</td>
+<td>XIAO·마이크·앰프를 올리는 판</td>
+</tr>
+<tr>
+<td>암 헤더</td>
+<td>2.54mm, 1줄</td>
+<td>모듈을 꽂았다 뺐다 하기</td>
+</tr>
+<tr>
+<td>수 핀 헤더</td>
+<td>2.54mm, 7핀 2개</td>
+<td>XIAO에 달기 (동봉 안 됨)</td>
+</tr>
+<tr>
+<td>저항 R1·R2</td>
+<td>4.7kΩ 2개 (선택)</td>
+<td>터치 I2C 풀업, 어댑터에 있으면 생략</td>
+</tr>
+<tr>
+<td>콘덴서 C1·C2</td>
+<td>100µF 16V 1개, 0.1µF 1개 (선택)</td>
+<td>앰프 전원 안정</td>
+</tr>
+<tr>
+<td>전선</td>
+<td>28~30AWG 여러 색</td>
+<td>기판 뒷면 배선, 어댑터 연결</td>
+</tr>
+<tr>
+<td>글루건</td>
+<td>저온형</td>
+<td>전선·부품 고정, 납땜 부위 보강</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="b-why">왜 이 구성인가<a aria-label="왜 이 구성인가 링크" class="h-anchor" href="#b-why">#</a></h3>
+<ul>
+<li><strong>4.2인치(400×300)보다 4.26인치:</strong> 화면 넓이는 거의 같고(약 52㎠ 대 54㎠) 픽셀은 가로세로 1.8배 촘촘합니다. 글자 높이 4mm면 34픽셀 대 19픽셀이라, 뜻·예문·자막 같은 한글이 훨씬 선명합니다.</li>
+<li><strong>nRF52840 대신 ESP32-S3:</strong> USB 전원이라 절전보다 와이파이가 중요합니다. I2S를 2개 쓸 수 있고 PSRAM 8MB라 화면(48KB)과 음성 버퍼가 넉넉합니다.</li>
+<li><strong>DevKitC 대신 XIAO:</strong> 메모리는 같고 손톱만해서, 패널(105×62mm) 뒤에 어댑터(58.6×54.7mm)와 나란히 들어갑니다.</li>
+<li><strong>완제품은 딱 맞는 게 없습니다:</strong> M5Stack PaperMono는 스피커가 없고, Waveshare ESP32-S3-ePaper-3.97은 터치가 없고, Waveshare Touch-ePaper-1.54는 화면이 너무 작습니다.</li>
+</ul>
+<h3 id="b-screens">화면 구성<a aria-label="화면 구성 링크" class="h-anchor" href="#b-screens">#</a></h3>
+<ul>
+<li><strong>홈:</strong> [단어 공부] [AI 대화] 큰 버튼 2개, 아래에 오늘 공부한 단어 수</li>
+<li><strong>주제 고르기:</strong> 여행, 회사, 일상, 면접, 자유 대화, "오늘 단어로 대화"를 3×2 격자로</li>
+<li><strong>대화 중:</strong> 가운데 [누르고 말하기], 위에 AI가 방금 한 말의 영어 자막, 아래 [다시 듣기] [한글 뜻] [끝내기]</li>
+<li><strong>단어 공부:</strong> 단어와 발음기호를 크게, 탭하면 뜻과 예문, [알아요] [몰라요]. 모르는 단어는 더 자주 나오게 하고(라이트너 박스), 손을 안 대도 10~30분마다 다음 단어로 넘어갑니다.</li>
+<li><strong>터치 요령:</strong> 버튼은 1cm 이상으로 크게, 누른 버튼은 바로 흑백 반전, 10~20번 넘길 때마다 전체 갱신으로 잔상을 지웁니다.</li>
+<li><strong>단어장:</strong> 보드가 와이파이로 받아 저장하고, 단어 관리는 웹 페이지 하나로 합니다.</li>
+</ul>
+<h3 id="b-ai">AI 연결<a aria-label="AI 연결 링크" class="h-anchor" href="#b-ai">#</a></h3>
+<p>말하기 연습은 음성을 바로 주고받는 모델(gpt-realtime mini, Gemini Live)에 맡기고, 단어 고르기·예문 만들기 같은 글 작업은 Claude에 맡깁니다. 둘 다 같은 보드에서 API만 바꿔 부릅니다.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>방식</th>
+<th>특징</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenAI Realtime API</td>
+<td>음성→음성 직통, 자막용 텍스트도 내려줌. Espressif 공식 예제(WebRTC)</td>
+</tr>
+<tr>
+<td>Gemini Live</td>
+<td>구글 Gemini의 음성 대화 버전, 분당 요금</td>
+</tr>
+<tr>
+<td>Claude</td>
+<td>음성 입출력이 없어 음성→글자 → Claude → 글자→음성 3단계. 한 마디에 2~5초, 발음 교정에 불리</td>
+</tr>
+<tr>
+<td>xiaozhi</td>
+<td>AI가 아니라 보드용 오픈소스 프로그램. 서버는 직접 띄워 쓰는 게 좋음</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>요금 (하루 10분, 나 5분·AI 5분 기준, 대략)</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>모델</th>
+<th>단가</th>
+<th>한 달</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gpt-realtime-2.1 mini</td>
+<td>입력 $10 / 출력 $20 (100만 토큰당)</td>
+<td>약 6천 원</td>
+</tr>
+<tr>
+<td>Gemini 3.8 Live</td>
+<td>입력 $0.005 / 출력 $0.018 (분당)</td>
+<td>약 5천 원</td>
+</tr>
+<tr>
+<td>gpt-realtime-2.1</td>
+<td>입력 $32 / 출력 $64 (100만 토큰당)</td>
+<td>약 2만 원</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>에코:</strong> 스피커 소리가 마이크로 들어가니, 처음에는 버튼을 누른 동안만 말하는 방식으로 시작합니다.</li>
+<li><strong>공부 팁:</strong> 오늘 나온 단어 10개를 AI 지시문에 넣고 "이 단어들로 나랑 대화하고, 내가 쓰면 칭찬해 줘"라고 시킵니다.</li>
+</ul>
+<h3 id="b-keys">API 키 관리<a aria-label="API 키 관리 링크" class="h-anchor" href="#b-keys">#</a></h3>
+<p>방에만 두는 기기라 중계 서버 없이 키를 기기에 넣어도 됩니다. 키가 새는 경로는 기기가 아니라 코드와 화면입니다.</p>
+<ul>
+<li>키는 <code>secrets.h</code>에 두고 <code>.gitignore</code>에 추가합니다. GitHub에 올라간 키는 봇이 금방 찾습니다.</li>
+<li>시리얼 로그에 키를 찍지 말고, 로그 화면을 캡처해 올리지 않습니다.</li>
+<li>이 기기 전용 키를 따로 만들고, 콘솔에서 월 사용 한도를 걸고 자동 충전을 끕니다.</li>
+<li>기기를 남에게 주거나 버릴 때는 플래시를 지웁니다.</li>
+</ul>
+<h3 id="b-storage">저장 공간 (단어장·발음)<a aria-label="저장 공간 링크" class="h-anchor" href="#b-storage">#</a></h3>
+<p>글자는 수만 단어도 들어가고, 발음 음성은 골라서 저장합니다. 플래시 16MB에서 펌웨어와 업데이트 여유를 빼면 파일에 약 9~12MB를 씁니다. 음성은 말소리용 압축(16kbps) 기준 대략적인 값입니다.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>내용</th>
+<th>단어당 크기</th>
+<th>3,000단어면</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>단어 + 뜻 + 예문 + 해석 (글자)</td>
+<td>약 0.2KB</td>
+<td>약 0.6MB</td>
+</tr>
+<tr>
+<td>단어 발음 음성 (약 1초)</td>
+<td>약 2KB</td>
+<td>약 6MB</td>
+</tr>
+<tr>
+<td>예문 음성 (약 4초)</td>
+<td>약 8KB</td>
+<td>약 24MB (안 들어감)</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>글자:</strong> 전부 보드에 저장합니다. 한글 폰트도 1MB 안팎이면 충분합니다.</li>
+<li><strong>단어 발음:</strong> 공부 중인 단어장 3,000~4,000단어까지 보드에 저장합니다.</li>
+<li><strong>예문 음성:</strong> 눌렀을 때 음성 변환(TTS) API로 받아 재생하고, 받은 건 보드에 저장해 둡니다.</li>
+<li><strong>전부 저장하려면:</strong> 어댑터의 microSD 슬롯을 씁니다. 다만 핀이 2개 더 필요해 XIAO 뒷면 패드를 납땜해야 합니다.</li>
+</ul>
+<h3 id="b-refresh">화면 갱신 요령 (수명·스크롤)<a aria-label="화면 갱신 요령 링크" class="h-anchor" href="#b-refresh">#</a></h3>
+<p>터치 횟수는 문제가 아니고, 닳는 건 화면을 바꾸는 횟수입니다. 예전 e-ink 사양서는 부분·전체 갱신을 구분하지 않고 약 100만 번을 적었는데, 보수적인 값입니다. GxEPD2 개발자의 시험에서는 약 1,000만 번에서야 지워지지 않는 잔상이 보였습니다.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>쓰는 방식</th>
+<th>하루 갱신</th>
+<th>100만 번까지</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>단어 넘기기 30분 (6초에 한 장)</td>
+<td>약 330번</td>
+<td>약 8년</td>
+</tr>
+<tr>
+<td>단어 넘기기 1시간 (6초에 한 장)</td>
+<td>약 650번</td>
+<td>약 4년</td>
+</tr>
+<tr>
+<td>단어 넘기기 2시간 (5초에 한 장)</td>
+<td>약 1,500번</td>
+<td>약 2년</td>
+</tr>
+<tr>
+<td>AI 대화 10분</td>
+<td>약 60번</td>
+<td>무시해도 됨</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>부분 갱신만 계속하지 않기:</strong> 10~20번에 한 번 전체 갱신으로 잔상을 지웁니다.</li>
+<li><strong>갱신 후 패널 전원 끄기:</strong> 몇 초 동안 터치가 없으면 <code>display.powerOff()</code>를 부릅니다. 높은 전압이 오래 걸려 있으면 화면이 상할 수 있습니다.</li>
+<li><strong>AI 대화는 문장 단위로:</strong> 내 문장이 확정될 때 1번, AI 답이 다 나왔을 때 1번 갱신합니다. 글자마다 갱신하지 않습니다.</li>
+<li><strong>스크롤은 페이지 넘김으로:</strong> 부분 갱신이 0.42초라 손가락을 따라가는 스크롤은 안 됩니다. 스와이프 한 번에 한 페이지씩 넘깁니다.</li>
+<li><strong>갱신 줄이기:</strong> 앞면에 단어와 뜻을 같이 보여 주고, 대화 화면은 최근 2~3번 주고받은 내용을 말풍선 목록으로 보여 줍니다.</li>
+<li><strong>피할 것:</strong> 초 단위 시계, 애니메이션, 직사광선과 50℃ 넘는 고온.</li>
+</ul>
+<p>하루 몇 시간씩 빠르게 넘기거나 부드러운 스크롤이 꼭 필요하면 LCD가 대안입니다. 예를 들어 <a href="https://www.waveshare.com/esp32-s3-touch-lcd-3.5b.htm?sku=31334" rel="noopener" target="_blank">Waveshare ESP32-S3-Touch-LCD-3.5B</a>($32.99)는 3.5인치 터치 LCD에 마이크·오디오 칩이 다 있어 납땜이 거의 없습니다. 대신 화면이 빛나서 계속 띄워 두기에는 e-ink가 낫습니다.</p>
+<h2 id="b-wiring">기기 B 배선 (XIAO 앞쪽 11핀만 사용)<a aria-label="기기 B 배선 링크" class="h-anchor" href="#b-wiring">#</a></h2>
+<p>XIAO 앞쪽의 2.54mm 구멍 11개만으로 화면, 터치, 마이크, 앰프가 모두 연결됩니다. 마이크와 앰프가 클럭선(BCLK·WS)을 함께 쓰기 때문이고, 그래서 납땜하기 까다로운 뒷면 1.27mm 패드는 쓰지 않습니다.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>XIAO 핀</th>
+<th>GPIO</th>
+<th>연결 대상</th>
+<th>신호</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D8</td>
+<td>7</td>
+<td>어댑터 SCK</td>
+<td>화면 SPI 클럭</td>
+</tr>
+<tr>
+<td>D10</td>
+<td>9</td>
+<td>어댑터 SDI(MOSI)</td>
+<td>화면 데이터</td>
+</tr>
+<tr>
+<td>D1</td>
+<td>2</td>
+<td>어댑터 CS</td>
+<td>화면 선택</td>
+</tr>
+<tr>
+<td>D6</td>
+<td>43</td>
+<td>어댑터 DC</td>
+<td>명령/데이터 구분</td>
+</tr>
+<tr>
+<td>D0</td>
+<td>1</td>
+<td>어댑터 BUSY</td>
+<td>화면 갱신 중 표시</td>
+</tr>
+<tr>
+<td>D4</td>
+<td>5</td>
+<td>어댑터 터치 SDA</td>
+<td>터치 I2C 데이터</td>
+</tr>
+<tr>
+<td>D5</td>
+<td>6</td>
+<td>어댑터 터치 SCL</td>
+<td>터치 I2C 클럭</td>
+</tr>
+<tr>
+<td>D2</td>
+<td>3</td>
+<td>마이크 SCK + 앰프 BCLK (둘 다)</td>
+<td>I2S 비트 클럭</td>
+</tr>
+<tr>
+<td>D3</td>
+<td>4</td>
+<td>마이크 WS + 앰프 LRC (둘 다)</td>
+<td>I2S 채널 클럭</td>
+</tr>
+<tr>
+<td>D7</td>
+<td>44</td>
+<td>마이크 SD</td>
+<td>마이크 소리 입력</td>
+</tr>
+<tr>
+<td>D9</td>
+<td>8</td>
+<td>앰프 DIN</td>
+<td>스피커 소리 출력</td>
+</tr>
+<tr>
+<td>3V3</td>
+<td>—</td>
+<td>어댑터 3.3V, 마이크 VDD</td>
+<td>전원</td>
+</tr>
+<tr>
+<td>5V</td>
+<td>—</td>
+<td>앰프 VIN</td>
+<td>전원 (5V면 소리가 더 큼)</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>—</td>
+<td>어댑터, 마이크, 앰프 GND</td>
+<td>접지</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>마이크 L/R 핀은 GND</strong>에 연결합니다 (왼쪽 채널).</li>
+<li><strong>스피커</strong>는 앰프의 +/− 단자에 연결합니다.</li>
+<li><strong>화면 RST는 비워 둡니다.</strong> GxEPD2는 RST 없이도 동작하고 패널 딥슬립만 못 씁니다. USB 전원이라 상관없고, 필요하면 뒷면 패드 하나만 쓰면 됩니다.</li>
+<li><strong>터치 INT·RST는 일단 쓰지 않고</strong> 좌표를 주기적으로 읽는 폴링으로 시작합니다.</li>
+<li><strong>D6은 원래 UART TX</strong>라 부팅 로그가 잠깐 나가는데, CS가 선택되지 않은 상태라 화면에 영향이 없도록 DC를 배치했습니다.</li>
+<li><strong>XIAO의 3V3·GND 구멍은 하나씩</strong>이라, 전선 두 가닥을 꼬아 같이 넣거나 모듈에서 모듈로 이어 나눕니다.</li>
+<li><strong>어댑터 저항 스위치는 2.2Ω</strong>으로 맞춥니다 (SSD 계열 칩). UC 계열용인 0.47Ω이 아닙니다.</li>
+<li>보드를 받으면 어댑터의 실크 라벨과 회로도로 핀 이름을 최종 확인합니다.</li>
+</ul>
+<p><strong>회로도 v0.1</strong></p>
+<figure class="shot"><button aria-label="크게 보기: 기기 B 회로도 v0.1" class="shot-btn" data-lb="b-schematic" type="button"><img alt="기기 B 회로도 v0.1" decoding="async" height="1752" loading="lazy" sizes="(max-width: 760px) 100vw, 760px" src="/projects/eink-display/img/b-schematic-800.webp" srcset="/projects/eink-display/img/b-schematic-800.webp 800w, /projects/eink-display/img/b-schematic.webp 2880w" width="2880"/><span aria-hidden="true" class="shot-zoom"></span></button><figcaption>기기 B 회로도 v0.1</figcaption></figure>
+<p>이름표가 같은 곳끼리 연결합니다. 예를 들어 I2S_BCLK는 U1 D2, 마이크 SCK, 앰프 BCLK 세 곳을 잇는 선입니다. 직접 납땜할 칩은 없고, 모듈 외에 더하는 부품은 저항 2개와 콘덴서 2개(둘 다 선택)뿐입니다.</p>
+<ul>
+<li><strong>R1·R2 (4.7kΩ):</strong> 터치 I2C 풀업입니다. 어댑터에 이미 있으면 생략합니다. 받은 뒤 테스터로 TP SDA와 3.3V 사이 저항을 재 확인합니다.</li>
+<li><strong>C1·C2 (100µF, 0.1µF):</strong> 앰프 VIN 바로 옆에 달아 소리가 클 때의 잡음·재부팅을 막습니다.</li>
+<li><strong>앰프 핀 이름은 Adafruit 3006 기준입니다.</strong> 다른 모듈은 위치가 아니라 핀 이름을 보고 잇습니다. GAIN을 비우면 9dB, SD를 비우면 모노 출력입니다.</li>
+<li><strong>스피커 (Adafruit 3351, 4Ω 3W):</strong> 5V에서 앰프 최대 출력이 정격(3W)에 가까워 코드에서 볼륨 상한(약 80%)을 둡니다. 스피커 선 끝이 JST PH 플러그라, 앰프가 나사 단자면 플러그를 잘라 연결하거나 만능기판에 JST PH 소켓을 달아요. 전원은 5V 2A 충전기를 씁니다.</li>
+</ul>
+<p><strong>만능기판으로 조립 (추천)</strong></p>
+<ol>
+<li>양면 만능기판을 약 4×6cm로 자릅니다. 패널 뒤 어댑터 옆 빈 공간이 약 46×62mm입니다.</li>
+<li>XIAO·마이크·앰프 자리에 암 헤더를 납땜하고 모듈을 꽂습니다.</li>
+<li>기판 뒷면에서 얇은 전선으로 회로도의 같은 이름표끼리 잇습니다 (<a href="#soldering">납땜·조립 가이드</a>의 배선 방법).</li>
+<li>기판 밖으로 나가는 선은 어댑터로 가는 리본 1줄(9가닥)과 스피커 선 2가닥뿐입니다.</li>
+</ol>
+<p><strong>검토했지만 쓰지 않는 대안:</strong> Seeed EE04는 4.26인치 패널을 바로 꽂을 수 있지만, 화면·버튼·배터리 측정에 핀을 써서 남는 앞쪽 핀이 D9 하나뿐입니다. 터치·마이크·앰프에 필요한 6핀을 만들려면 보드 부품이 달린 핀을 빼서 써야 하고, XIAO가 이미 납땜돼 있어 오히려 더 어렵습니다 (<a href="https://github.com/Seeed-Studio/Seeed_GFX/blob/main/User_Setups/EPaper_Board_Pins_Setups.h" rel="noopener" target="_blank">Seeed_GFX 핀 설정</a>).</p>
+<h2 id="soldering">납땜·조립 가이드 (기기 B)<a aria-label="납땜·조립 가이드 링크" class="h-anchor" href="#soldering">#</a></h2>
+<p>처음이어도 충분히 할 수 있습니다. 납땜할 곳은 전부 2.54mm 간격 구멍(XIAO 앞쪽 핀, 마이크·앰프 모듈, 어댑터 헤더)이고, 패널은 FPC 커넥터에 꽂기만 합니다. 기기 A는 납땜이 필요 없습니다.</p>
+<p><strong>필요한 도구</strong></p>
+<ul>
+<li>온도 조절 되는 인두 (USB-C 펜형도 충분)</li>
+<li>실납 0.6~0.8mm (유연납이 훨씬 쉬움), 플럭스, 솔더윅</li>
+<li>28~30AWG 실리콘 전선 여러 색, 와이어 스트리퍼</li>
+<li>수축튜브, 멀티미터, 고정용 마스킹테이프</li>
+</ul>
+<p><strong>한 군데 납땜하는 방법</strong></p>
+<ol>
+<li>인두를 330~350℃로 맞춥니다. 무연납이면 360℃ 정도입니다.</li>
+<li>전선 피복을 2~3mm 벗기고 꼰 다음 납을 살짝 먹입니다(예비납).</li>
+<li>모듈 구멍에 전선을 꽂고, 인두를 패드와 전선에 <strong>동시에</strong> 1~2초 댑니다.</li>
+<li>납은 인두가 아니라 패드 쪽에 대서 녹여 넣습니다. 납을 먼저 떼고 인두를 떼며, 전체 3초 안에 끝냅니다.</li>
+<li>매끈한 원뿔 모양이면 잘 된 것입니다. 동그란 구슬처럼 맺히면 냉납이니 플럭스를 바르고 다시 녹입니다.</li>
+<li>옆 핀과 붙으면 솔더윅을 대고 인두로 눌러 빨아냅니다.</li>
+<li>끝난 전선은 수축튜브나 핫글루로 고정해 당겨도 빠지지 않게 합니다.</li>
+</ol>
+<p><strong>만능기판 배선 방법</strong></p>
+<ol>
+<li>암 헤더 다리를 위에서 구멍에 끼우고 뒷면에서 구멍마다 납땜합니다. 핀마다 작은 납 덩어리가 생깁니다.</li>
+<li>전선 양 끝을 2~3mm 벗기고 예비납을 먹입니다.</li>
+<li>전선을 핀 바로 옆 빈 구멍에 위에서 꽂아 뒷면으로 빼고, 핀 다리 쪽으로 꺾어 맞대고 한꺼번에 납땜합니다. 당겨도 힘이 기판 구멍에 걸려서 덜 떨어집니다.</li>
+<li>다른 끝도 연결할 핀에 같은 방식으로 붙이고, 길면 글루건으로 군데군데 고정합니다.</li>
+</ol>
+<ul>
+<li><strong>옆 구멍은 헤더 줄 바깥쪽으로:</strong> 줄 방향으로 바로 옆 구멍은 다른 핀 자리라 납이 번지면 합선됩니다.</li>
+<li><strong>붙어 있는 핀끼리:</strong> 마이크 L/R와 GND처럼 바로 옆이면 두 패드를 납으로 이어도 됩니다.</li>
+<li><strong>GND·3.3V·5V 공용 줄:</strong> 빈 구멍 몇 개를 납으로 길게 이어 두고, 그 줄 아무 데나 전선을 붙입니다.</li>
+<li><strong>기판 고를 때:</strong> 구멍마다 패드가 따로 있는 양면 만능기판을 씁니다. 줄 단위로 이어진 스트립 기판은 처음엔 헷갈립니다.</li>
+<li><strong>끝나면:</strong> 멀티미터 통전 모드로 회로도의 이름표를 하나씩 짚으며 연결과 합선을 확인합니다.</li>
+</ul>
+<p><strong>조립 순서:</strong> 한 번에 다 연결하지 말고 한 단계씩 연결하고 확인합니다.</p>
+<ul class="tasks">
+<li><span aria-hidden="true" class="task-box"></span>XIAO만 USB로 연결해 와이파이 예제 확인</li>
+<li><span aria-hidden="true" class="task-box"></span>화면 연결 → GxEPD2 예제로 글자 표시</li>
+<li><span aria-hidden="true" class="task-box"></span>터치 연결 → 누른 좌표 출력</li>
+<li><span aria-hidden="true" class="task-box"></span>마이크 연결 → 소리 크기 출력</li>
+<li><span aria-hidden="true" class="task-box"></span>앰프·스피커 연결 → 테스트음 재생</li>
+<li><span aria-hidden="true" class="task-box"></span>AI API 연결 → 누르고 말하기로 대화</li>
+</ul>
+<p><strong>주의사항</strong></p>
+<ul>
+<li>USB를 꽂기 전마다 멀티미터로 3V3와 GND가 붙어 있지 않은지 확인합니다.</li>
+<li>패널 FPC는 레버를 올리고 접점 방향을 맞춰 끝까지 넣은 뒤 레버를 내립니다. 납땜보다 여기서 실수가 더 많이 납니다.</li>
+<li>처음이면 남는 핀헤더나 모듈 구멍으로 10번쯤 연습하고 시작합니다.</li>
+<li>환기하면서 하고, 유연납을 만진 뒤에는 손을 씻습니다.</li>
+</ul>
+<h2 id="pcb">다음 단계: PCB로 만들기 (선택)<a aria-label="다음 단계: PCB 링크" class="h-anchor" href="#pcb">#</a></h2>
+<p>한 대는 만능기판으로 충분하고, 핀 배치가 확정되면 2호기를 PCB로 만듭니다. 여러 대를 만들거나, 어댑터에 바로 꽂아 전선을 없애고 싶을 때 의미가 있습니다.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>기판값</td>
+<td>JLCPCB 2층 5장 $2부터 (현재 JLCONE 데스크톱 앱 주문 시), 우리 기판 약 6×4cm</td>
+</tr>
+<tr>
+<td>배송 (한국, 2026-10-21 장바구니 기준)</td>
+<td>E-POST $6.58 (10~16 영업일) · UPS $9.66 (2~5 영업일)</td>
+</tr>
+<tr>
+<td>합계</td>
+<td>약 $8.6~11.7 (약 1.2~1.6만 원), 150달러 이하라 관세 없음</td>
+</tr>
+<tr>
+<td>기본 설정</td>
+<td>두께 1.6mm, 녹색, 유연 HASL, 1oz 그대로</td>
+</tr>
+<tr>
+<td>설계 도구</td>
+<td>KiCad (무료)</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>케이스와 같이 설계:</strong> 케이스에서 USB-C·마이크 구멍 위치를 먼저 정하고, 기판 부품을 거기에 맞춘 뒤 M2 나사 구멍으로 고정합니다. KiCad에서 기판 3D 모델을 내보내 케이스 설계에 불러옵니다.</li>
+<li><strong>화면·스피커는 기판에 안 붙습니다.</strong> 패널은 FPC, 스피커는 전선으로 연결돼 위치 자유도가 큽니다.</li>
+<li><strong>주문 전 확인:</strong> 기판 도면을 실제 크기로 인쇄해 부품을 올려 보고, 케이스 도면과 겹쳐 봅니다.</li>
+<li><strong>어댑터 직결형:</strong> FTS02 헤더 핀 배열을 확인한 뒤 설계합니다.</li>
+</ul>
+<h2 id="shipping">배송·관세<a aria-label="배송·관세 링크" class="h-anchor" href="#shipping">#</a></h2>
+<p>해외 주문 2건은 합쳐도 약 $95라 150달러 면세 기준 아래입니다. Seeed와 Good Display는 다른 회사라 합배송은 안 되므로, 구매처마다 한 번씩, 모두 5건(알리 포함 6건)으로 주문할 때 배송비 낭비가 가장 적습니다.</p>
+<ul>
+<li><strong>XIAO ESP32-S3 Plus는 디바이스마트에서 삽니다.</strong> Seeed에서는 백오더(11월 3일 입고 예정)라, 디바이스마트(13,970원, 약 1주)에서 사면 EN04를 기다리지 않고 기기 B를 먼저 시작할 수 있습니다.</li>
+<li><strong>EN04는 백오더입니다.</strong> Seeed 창고 입고 예정일이 11월 2일이고, 7.3인치 패널은 재고가 있어 함께 옵니다. 국제 배송까지 생각하면 11월 중순쯤 도착을 예상합니다. 유럽 창고에는 EN04 재고가 있지만, 한국 배송 여부와 배송비는 확인하지 않았습니다.</li>
+<li><strong>관세:</strong> Seeed $55.90(배송비 별도), Good Display $39.15(배송비 포함)입니다. 같은 날 들어와 합산돼도 150달러를 넘지 않습니다.</li>
+<li><strong>Good Display는 Economy 배송 7~30 영업일</strong>이라 가장 늦게 옵니다. 먼저 주문하세요. 지금 가격은 15% 세일가로 10월 30일까지입니다.</li>
+<li><strong>LiPo는 국내에서 삽니다.</strong> 배터리만 따로 해외에서 보내는 건 항공·국제우편 제한이 있습니다.</li>
+<li><strong>국내 몰도 한 곳으로는 안 됩니다.</strong> 디바이스마트에는 5mm·PH2.0 LiPo가 없고, 아이씨뱅큐는 INMP441을 낱개로 팔지 않습니다(최소 27개, 견적). LiPo를 디바이스마트의 6.3mm 제품으로 바꾸면 한 곳이 되지만, 커넥터를 바꿔 달아야 해서 추천하지 않습니다.</li>
+<li>국내 몰의 '해외' 표시 상품은 도착까지 1~2주 걸리고, 주문 후 취소·반품이 안 됩니다. 디바이스마트는 한 주문을 준비 기간이 가장 긴 상품에 맞춰 한꺼번에 또는 나눠 보냅니다.</li>
+</ul>
+<h2 id="buy">구매처별 구매 목록<a aria-label="구매 목록 링크" class="h-anchor" href="#buy">#</a></h2>
+<p>해외 2곳(Seeed, Good Display), 국내 3곳(디바이스마트, 아이씨뱅큐, 다이소)에서 사고, 열 인서트만 알리익스프레스에서 선택으로 삽니다. 총 <strong>약 25만 원</strong>(Seeed 배송비 별도)이고, 그중 전선·납·수축튜브·솔더위크·글루건 같은 공구·소모품이 약 2.9만 원이라 이미 있으면 빼면 됩니다. 국내 가격은 모두 부가세 포함입니다. 납땜 인두와 멀티미터는 따로입니다. USB-C 데이터 케이블과 기기 B용 5V 2A 충전기는 가진 것을 씁니다. 디바이스마트는 한 번에 주문하면 66,000원이 넘어 배송비가 무료이고, 공구·소모품을 빼면 배송비 2,700원이 붙습니다.</p>
+<div class="table-wrap table-wide"><table>
+<thead>
+<tr>
+<th>구매처</th>
+<th>품목</th>
+<th>기기</th>
+<th>수량</th>
+<th>가격</th>
+<th>배송</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Seeed 공식몰</td>
+<td><a href="https://www.seeedstudio.com/XIAO-ePaper-Display-Board-nRF52840-EN04-p-6589.html" rel="noopener" target="_blank">EN04 보드</a></td>
+<td>A</td>
+<td>1</td>
+<td>$10.90</td>
+<td>백오더, 11월 2일 입고 예정</td>
+<td><a href="https://www.seeedstudio.com/XIAO-ePaper-DIY-Kit-EN04.html" rel="noopener" target="_blank">DIY Kit 페이지</a>에서 패널과 한 번에 담으면 편함 (할인 없음)</td>
+</tr>
+<tr>
+<td>Seeed 공식몰</td>
+<td><a href="https://www.seeedstudio.com/7-3inch-Six-Color-eInk-ePaper-Display-with-800x480-Pixels-p-6567.html" rel="noopener" target="_blank">7.3인치 Spectra 6 패널</a></td>
+<td>A</td>
+<td>1</td>
+<td>$45.00</td>
+<td>재고 있음, EN04와 함께 발송</td>
+<td></td>
+</tr>
+<tr>
+<td>Good Display</td>
+<td><a href="https://buy-lcd.com/products/gdeq0426t82-t01c" rel="noopener" target="_blank">GDEQ0426T82-T01C 터치 패널</a></td>
+<td>B</td>
+<td>1</td>
+<td>$31.61 + 배송비 $7.54</td>
+<td>Economy 7~30 영업일</td>
+<td>"with Adapter Board" 옵션 = 패널 + <a href="https://buy-lcd.com/products/esp32-fts02" rel="noopener" target="_blank">FTS02 어댑터</a>. 15% 세일가로 10월 30일까지. 가장 먼저 주문</td>
+</tr>
+<tr>
+<td>디바이스마트</td>
+<td><a href="https://www.devicemart.co.kr/goods/view?no=15796357" rel="noopener" target="_blank">Seeed XIAO ESP32-S3 Plus</a></td>
+<td>B</td>
+<td>1</td>
+<td>13,970원</td>
+<td>약 1주 (해외)</td>
+<td>품번 102010671. 설명의 '4MB Flash'는 오기 (실제 16MB)</td>
+</tr>
+<tr>
+<td>디바이스마트</td>
+<td><a href="https://www.devicemart.co.kr/goods/view?no=15366644" rel="noopener" target="_blank">INMP441 마이크 모듈 (THC-AS03)</a></td>
+<td>B</td>
+<td>1</td>
+<td>8,250원</td>
+<td>2~3일</td>
+<td></td>
+</tr>
+<tr>
+<td>디바이스마트</td>
+<td><a href="https://www.devicemart.co.kr/goods/view?no=12496231" rel="noopener" target="_blank">Adafruit MAX98357A 앰프 (ada-3006)</a></td>
+<td>B</td>
+<td>1</td>
+<td>11,880원</td>
+<td>약 2주 (해외)</td>
+<td>DFR0954는 품절이라 바꿈. 회로도 핀 이름이 3006 기준</td>
+</tr>
+<tr>
+<td>디바이스마트</td>
+<td><a href="https://www.devicemart.co.kr/goods/view?no=15818887" rel="noopener" target="_blank">Adafruit 50핀 FPC 연장 세트 (ada-2571)</a></td>
+<td>A</td>
+<td>1</td>
+<td>9,900원</td>
+<td>약 2주 (해외)</td>
+<td>연장 보드 + 20cm 케이블</td>
+</tr>
+<tr>
+<td>디바이스마트</td>
+<td><a href="https://www.devicemart.co.kr/goods/view?no=4629" rel="noopener" target="_blank">네오디뮴 원형자석 10Ø×3t</a></td>
+<td>A</td>
+<td>10</td>
+<td>3,740원</td>
+<td>1~2일</td>
+<td>10개 단위로 팖. 6개 사용 + 예비 4개</td>
+</tr>
+<tr>
+<td>디바이스마트</td>
+<td><a href="https://www.devicemart.co.kr/goods/view?no=24860" rel="noopener" target="_blank">양면 만능기판 50×80 (GA6)</a></td>
+<td>B</td>
+<td>1</td>
+<td>3,850원</td>
+<td>2~3일</td>
+<td>약 4×6cm로 잘라 쓰고, 남는 부분은 납땜 연습용</td>
+</tr>
+<tr>
+<td>디바이스마트</td>
+<td><a href="https://www.devicemart.co.kr/goods/view?no=3585" rel="noopener" target="_blank">핀헤더 소켓(암) 1×40, 2.54mm</a></td>
+<td>B</td>
+<td>2</td>
+<td>1,166원</td>
+<td>3~4일</td>
+<td>XIAO·마이크·앰프 자리</td>
+</tr>
+<tr>
+<td>디바이스마트</td>
+<td><a href="https://www.devicemart.co.kr/goods/view?no=2825" rel="noopener" target="_blank">핀헤더(수) 1×40, 2.54mm</a></td>
+<td>B</td>
+<td>1</td>
+<td>220원</td>
+<td>3~4일</td>
+<td>7핀 2개로 잘라 XIAO에 납땜</td>
+</tr>
+<tr>
+<td>디바이스마트</td>
+<td><a href="https://www.devicemart.co.kr/goods/view?no=864" rel="noopener" target="_blank">저항 4.7kΩ 1/4W</a></td>
+<td>B</td>
+<td>30</td>
+<td>759원</td>
+<td>1~2일</td>
+<td>선택 (터치 I2C 풀업). 30개 단위로 팖</td>
+</tr>
+<tr>
+<td>디바이스마트</td>
+<td><a href="https://www.devicemart.co.kr/goods/view?no=29522" rel="noopener" target="_blank">전해 콘덴서 16V 100µF</a></td>
+<td>B</td>
+<td>10</td>
+<td>330원</td>
+<td>1~2일</td>
+<td>선택 (앰프 전원 안정). 10개 단위로 팖</td>
+</tr>
+<tr>
+<td>디바이스마트</td>
+<td><a href="https://www.devicemart.co.kr/goods/view?no=1399" rel="noopener" target="_blank">세라믹 콘덴서 0.1µF</a></td>
+<td>B</td>
+<td>10</td>
+<td>330원</td>
+<td>1~2일</td>
+<td>선택. 10개 단위로 팖</td>
+</tr>
+<tr>
+<td>디바이스마트</td>
+<td><a href="https://www.devicemart.co.kr/goods/view?no=1357688" rel="noopener" target="_blank">JST PH 호환 2핀 헤더 (NW-PH2.0-2A)</a></td>
+<td>B</td>
+<td>2</td>
+<td>44원</td>
+<td>약 2일</td>
+<td>스피커 플러그를 꽂는 자리. JST 정품(B2B-PH-K-S)은 100개 단위라 호환품으로 바꿈</td>
+</tr>
+<tr>
+<td>디바이스마트</td>
+<td><a href="https://www.devicemart.co.kr/goods/view?no=10912338" rel="noopener" target="_blank">스텐 둥근머리 십자볼트 M2×6</a></td>
+<td>A·B</td>
+<td>20</td>
+<td>440원</td>
+<td>3~4일</td>
+<td>케이스·보드 고정</td>
+</tr>
+<tr>
+<td>디바이스마트 (공구·소모품)</td>
+<td>Adafruit 30AWG 실리콘 전선 2m: <a href="https://www.devicemart.co.kr/goods/view?no=15820118" rel="noopener" target="_blank">검정</a> · <a href="https://www.devicemart.co.kr/goods/view?no=15820122" rel="noopener" target="_blank">흰색</a> · <a href="https://www.devicemart.co.kr/goods/view?no=15820123" rel="noopener" target="_blank">노랑</a> · <a href="https://www.devicemart.co.kr/goods/view?no=15820119" rel="noopener" target="_blank">파랑</a></td>
+<td>B</td>
+<td>색마다 1</td>
+<td>6,160원</td>
+<td>약 2주 (해외)</td>
+<td>빨강은 품절이라 흰색을 전원선으로. 이미 있으면 생략</td>
+</tr>
+<tr>
+<td>디바이스마트 (공구·소모품)</td>
+<td><a href="https://www.devicemart.co.kr/goods/view?no=1320936" rel="noopener" target="_blank">열수축튜브 328세트</a></td>
+<td>B</td>
+<td>1</td>
+<td>4,290원</td>
+<td>3~4일</td>
+<td>이미 있으면 생략</td>
+</tr>
+<tr>
+<td>디바이스마트 (공구·소모품)</td>
+<td><a href="https://www.devicemart.co.kr/goods/view?no=15668874" rel="noopener" target="_blank">플럭스 포함 실납 0.8mm 100g</a></td>
+<td>B</td>
+<td>1</td>
+<td>7,480원</td>
+<td>3~4일</td>
+<td>유연납(주석 63%). 이미 있으면 생략</td>
+</tr>
+<tr>
+<td>디바이스마트 (공구·소모품)</td>
+<td><a href="https://www.devicemart.co.kr/goods/view?no=15777299" rel="noopener" target="_blank">솔더위크 2.0mm (FR551-2015)</a></td>
+<td>B</td>
+<td>1</td>
+<td>5,060원</td>
+<td>2~3일</td>
+<td>잘못 붙은 납을 빨아냄. 이미 있으면 생략</td>
+</tr>
+<tr>
+<td>디바이스마트 (공구·소모품)</td>
+<td><a href="https://www.devicemart.co.kr/goods/view?no=13187061" rel="noopener" target="_blank">미니 글루건 JG-2002</a> + <a href="https://www.devicemart.co.kr/goods/view?no=13187168" rel="noopener" target="_blank">핫멜트 스틱(소) 10개</a></td>
+<td>A·B</td>
+<td>1 + 1</td>
+<td>6,270원</td>
+<td>4~5일</td>
+<td>이미 있으면 생략</td>
+</tr>
+<tr>
+<td>디바이스마트 (선택)</td>
+<td><a href="https://www.devicemart.co.kr/goods/view?no=1077789" rel="noopener" target="_blank">펜 플럭스 HS01</a></td>
+<td>B</td>
+<td>1</td>
+<td>9,900원</td>
+<td>1~2일</td>
+<td>실납에 플럭스가 들어 있어 처음엔 없어도 됨</td>
+</tr>
+<tr>
+<td>아이씨뱅큐</td>
+<td><a href="https://www.icbanq.com/P011958927" rel="noopener" target="_blank">Adafruit 3351 상자형 스피커 (4Ω 3W)</a></td>
+<td>B</td>
+<td>1</td>
+<td>7,321원</td>
+<td>4~6일</td>
+<td>바로 구매 가능한 상품코드 P011958927</td>
+</tr>
+<tr>
+<td>아이씨뱅큐</td>
+<td><a href="https://www.icbanq.com/P019326535" rel="noopener" target="_blank">Adafruit LiPo 3.7V 1200mAh (258)</a></td>
+<td>A</td>
+<td>1</td>
+<td>16,830원</td>
+<td>1주 이내 (해외)</td>
+<td>5mm 두께, JST-PH 2.0. 꽂기 전에 극성 확인</td>
+</tr>
+<tr>
+<td>다이소</td>
+<td><a href="https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=58160" rel="noopener" target="_blank">혼합형 긁힘방지 펠트</a></td>
+<td>A</td>
+<td>1</td>
+<td>1,000원</td>
+<td>매장 또는 다이소몰</td>
+<td>지름 30mm라 자석 자리에 맞게 잘라 붙임</td>
+</tr>
+<tr>
+<td>다이소</td>
+<td><a href="https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=59746" rel="noopener" target="_blank">사각 폼 양면테이프 60개입</a></td>
+<td>A</td>
+<td>1</td>
+<td>1,000원</td>
+<td>매장 또는 다이소몰</td>
+<td>보드·연장 보드 받침, 패널 쿠션</td>
+</tr>
+<tr>
+<td>다이소</td>
+<td><a href="https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=1025647" rel="noopener" target="_blank">PVC 도어 충격 방지 패드 소 5P</a></td>
+<td>A</td>
+<td>1</td>
+<td>1,000원</td>
+<td>매장 또는 다이소몰</td>
+<td>다리 끝 미끄럼 방지</td>
+</tr>
+<tr>
+<td>알리익스프레스 (선택)</td>
+<td><a href="https://ko.aliexpress.com/item/1005006838108683.html" rel="noopener" target="_blank">황동 열 인서트 너트</a></td>
+<td>A·B</td>
+<td>1</td>
+<td>3,740원</td>
+<td>무료 배송, 약 1~2주</td>
+<td>옵션에서 M2xL3xOD3.2, 100PCS 선택. 안 사면 나사를 플라스틱에 바로 박아도 됨</td>
+</tr>
+</tbody>
+</table></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>구매처</th>
+<th>소계</th>
+<th>원화 (대략)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Seeed 공식몰</td>
+<td>$55.90 + 배송비</td>
+<td>약 7.8만 원 + 배송비</td>
+</tr>
+<tr>
+<td>Good Display</td>
+<td>$39.15 (배송비 포함)</td>
+<td>약 5.5만 원</td>
+</tr>
+<tr>
+<td>디바이스마트</td>
+<td>84,139원, 66,000원 이상이라 배송비 무료 (공구·소모품 29,260원 포함, 펜 플럭스 제외)</td>
+<td>약 8.4만 원</td>
+</tr>
+<tr>
+<td>아이씨뱅큐</td>
+<td>24,151원 + 배송비 2,700원 (5만 원 미만)</td>
+<td>약 2.7만 원</td>
+</tr>
+<tr>
+<td>다이소</td>
+<td>3,000원 (매장 구매 기준, 다이소몰은 배송비 3,000원)</td>
+<td>약 0.3만 원</td>
+</tr>
+<tr>
+<td>알리익스프레스 (선택)</td>
+<td>3,740원 (무료 배송)</td>
+<td>약 0.4만 원</td>
+</tr>
+<tr>
+<td><strong>합계</strong></td>
+<td></td>
+<td><strong>약 25만 원 + Seeed 배송비</strong> (공구·소모품이 이미 있으면 약 22.4만 원)</td>
+</tr>
+</tbody>
+</table></div>
+<p>가격과 재고는 2026년 10월 25일에 확인한 값입니다. 링크는 상품 페이지로 바로 연결됩니다. 디바이스마트의 최소 주문 수량이 적힌 수량보다 크면 그 수량으로 담깁니다.</p>
+<h2 id="references">참고 자료<a aria-label="참고 자료 링크" class="h-anchor" href="#references">#</a></h2>
+<p><strong>기기 A 하드웨어</strong></p>
+<ul>
+<li><a href="https://www.seeedstudio.com/XIAO-ePaper-Display-Board-nRF52840-EN04-p-6589.html" rel="noopener" target="_blank">Seeed EN04 보드</a> · <a href="https://www.seeedstudio.com/7-3inch-Six-Color-eInk-ePaper-Display-with-800x480-Pixels-p-6567.html" rel="noopener" target="_blank">7.3인치 Spectra 6 패널</a> · <a href="https://www.seeedstudio.com/XIAO-ePaper-DIY-Kit-EN04.html" rel="noopener" target="_blank">XIAO ePaper DIY Kit EN04</a></li>
+<li><a href="https://wiki.seeedstudio.com/epaper_EN04/" rel="noopener" target="_blank">EN04 시작 가이드 (Seeed 위키)</a> · <a href="https://wiki.seeedstudio.com/EN04_opendisplay" rel="noopener" target="_blank">OpenDisplay 가이드</a></li>
+<li><a href="https://www.pakronics.com.au/products/7-3-spectra-6-e-ink-epaper-display-with-800x480-pixels-spi-interface-support-xiao-arduino-ss100064541" rel="noopener" target="_blank">7.3인치 패널 규격 (Pakronics)</a> · <a href="https://openelab.io/de/products/seeed-studio-7-3-epaper" rel="noopener" target="_blank">OpenELAB</a> · <a href="https://www.waveshare.com/7.3inch-e-paper-hat-e.htm?sku=27863" rel="noopener" target="_blank">Waveshare 7.3인치 (E)</a></li>
+<li><a href="https://www.icbanq.com/P019326535" rel="noopener" target="_blank">Adafruit LiPo 1200mAh (아이씨뱅큐)</a> · <a href="https://www.faa.gov/sites/faa.gov/files/Lithium-Battery-Shipping-Guide_508_2026.pdf" rel="noopener" target="_blank">FAA 리튬 배터리 운송 가이드</a> · <a href="https://postandparcel.info/?p=47790" rel="noopener" target="_blank">UPU 규정</a></li>
+<li><a href="https://forum.seeedstudio.com/t/system-on-sleep-of-xiao-ble/270472?page=4" rel="noopener" target="_blank">XIAO BLE 절전 실측 (Seeed 포럼)</a> · <a href="https://wiki.seeedstudio.com/XIAO-BLE-Sense-Bluetooth_Usage/" rel="noopener" target="_blank">Seeed nRF52 블루투스 사용법</a></li>
+</ul>
+<p><strong>기기 A 앱·데이터</strong></p>
+<ul>
+<li><a href="https://developer.android.com/develop/connectivity/bluetooth/ble/background" rel="noopener" target="_blank">Android BLE 백그라운드 가이드</a> · <a href="https://developer.android.com/reference/androidx/work/PeriodicWorkRequest" rel="noopener" target="_blank">WorkManager</a> · <a href="https://developer.android.com/identity/providers/calendar-provider" rel="noopener" target="_blank">Calendar Provider</a></li>
+<li><a href="https://github.com/NordicSemiconductor/Android-BLE-Library" rel="noopener" target="_blank">Nordic Android BLE Library</a> · <a href="https://open-meteo.com/en/about" rel="noopener" target="_blank">Open-Meteo</a> · <a href="https://learn.microsoft.com/ko-KR/graph/todo-concept-overview" rel="noopener" target="_blank">Microsoft To Do API</a></li>
+</ul>
+<p><strong>기기 B</strong></p>
+<ul>
+<li><a href="https://buy-lcd.com/products/gdeq0426t82-t01c" rel="noopener" target="_blank">GDEQ0426T82-T01C (buy-lcd)</a> · <a href="https://www.good-display.com/product/371.html" rel="noopener" target="_blank">제조사 페이지 (Good Display)</a> · <a href="https://buy-lcd.com/products/esp32-fts02" rel="noopener" target="_blank">ESP32-FTS02 어댑터</a></li>
+<li><a href="https://github.com/ZinggJM/GxEPD2" rel="noopener" target="_blank">GxEPD2 (GitHub)</a></li>
+<li><a href="https://cnx-software.com/?p=143634" rel="noopener" target="_blank">XIAO ESP32-S3 Plus 사양 (CNX Software)</a> · <a href="https://www.robotshop.com/products/seeed-studio-xiao-esp32s3-plus-unsoldered" rel="noopener" target="_blank">XIAO ESP32-S3 Plus (RobotShop)</a></li>
+<li><a href="https://www.sparkfun.com/sparkfun-i2s-audio-breakout-max98357a.html" rel="noopener" target="_blank">SparkFun MAX98357A</a> · <a href="https://www.berrybase.de/en/inmp441-mems-omnidirectional-microphone-module-i2s-interface" rel="noopener" target="_blank">INMP441 모듈 (BerryBase)</a></li>
+<li><a href="https://www.electromaker.io/project/view/pocket-size-esp32-ai-voice-assistant-with-xiaozhi" rel="noopener" target="_blank">ESP32 AI 음성 비서 조립 예시 (Electromaker)</a> · <a href="https://github.com/cube32esp/xiaozhi-esp32" rel="noopener" target="_blank">xiaozhi-esp32</a> · <a href="https://github.com/openai/openai-realtime-embedded" rel="noopener" target="_blank">openai-realtime-embedded</a></li>
+<li><a href="https://www.forasoft.com/article/openai-realtime-api-pricing" rel="noopener" target="_blank">OpenAI Realtime API 요금 (Fora Soft)</a> · <a href="https://www.developersdigest.tech/models/speech/realtime" rel="noopener" target="_blank">실시간 음성 API 요금 비교 (Developers Digest)</a></li>
+<li><a href="https://thepihut.com/products/m5stack-papermono" rel="noopener" target="_blank">M5Stack PaperMono</a> · <a href="https://www.waveshare.com/esp32-s3-epaper-3.97.htm?sku=33810" rel="noopener" target="_blank">Waveshare ESP32-S3-ePaper-3.97</a></li>
+</ul>
+<p><strong>국내 몰 검색</strong></p>
+<ul>
+<li><a href="https://www.devicemart.co.kr/goods/search?keyword=INMP441&amp;search_text=INMP441" rel="noopener" target="_blank">디바이스마트 INMP441</a> · <a href="https://www.icbanq.com/A02_product/totalSearchList.do?hdKeyword=MAX98357" rel="noopener" target="_blank">아이씨뱅큐 MAX98357</a> · <a href="https://www.icbanq.com/A02_product/totalSearchList.do?hdKeyword=XIAO%20ESP32S3%20Plus" rel="noopener" target="_blank">아이씨뱅큐 XIAO ESP32S3 Plus</a> · <a href="https://www.icbanq.com/A02_product/totalSearchList.do?hdKeyword=INMP441" rel="noopener" target="_blank">아이씨뱅큐 INMP441</a></li>
+</ul>
+<p><strong>회로·화면 갱신·PCB</strong></p>
+<ul>
+<li><a href="https://github.com/Seeed-Studio/Seeed_GFX/blob/main/User_Setups/EPaper_Board_Pins_Setups.h" rel="noopener" target="_blank">Seeed_GFX 보드별 핀 설정 (GitHub)</a> · <a href="https://wiki.seeedstudio.com/epaper_ee04/" rel="noopener" target="_blank">EE04 시작 가이드 (Seeed 위키)</a></li>
+<li><a href="https://waveshare.com/wiki/2.13inch_Touch_e-Paper_HAT_Manual" rel="noopener" target="_blank">2.13inch Touch e-Paper HAT 주의사항 (Waveshare)</a> · <a href="https://forum.arduino.cc/t/waveshare-e-paper-displays-with-spi/467865?page=138" rel="noopener" target="_blank">e-paper 수명 시험 글 (Arduino Forum)</a></li>
+<li><a href="https://www.waveshare.com/esp32-s3-touch-lcd-3.5b.htm?sku=31334" rel="noopener" target="_blank">ESP32-S3-Touch-LCD-3.5B (Waveshare)</a></li>
+<li><a href="https://jlcpcb.com/" rel="noopener" target="_blank">JLCPCB</a> · <a href="https://hwdocs.hackclub.dev/user-contrib-guides/jlc-cost-optimizing/" rel="noopener" target="_blank">JLCPCB Cost optimizing (Hack Club)</a></li>
+</ul>
+
+          <p class="doc-note">이 페이지는 계획 단계의 기록입니다. 가격과 재고는 2026년 10월 25일 기준이고, 만들면서 바뀐 내용과 완성품은 별도 페이지로 정리합니다.</p>
+        </article>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <a href="/" class="logo logo-light">
+            <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#12294a"/><path d="M5 16c3.5-6 11-8.5 16.5-4.2L27 8v16l-5.5-3.8C16 24.5 8.5 22 5 16z" fill="#2dd4bf"/><circle cx="11" cy="15" r="1.6" fill="#12294a"/></svg>
+            <span>FULLFISH</span>
+          </a>
+          <nav class="footer-nav" aria-label="하단 메뉴">
+            <a href="/#about">회사소개</a><a href="/#services">서비스</a><a href="/#work">프로젝트</a><a href="/#ai">AI 개발</a><a href="/#process">진행 방식</a><a href="/#contact">문의</a>
+          </nav>
+        </div>
+        <p class="copyright">© <span id="year">2026</span> FULLFISH. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <dialog class="lightbox" id="lightbox" aria-label="이미지 크게 보기">
+      <div class="lb-stage">
+        <img id="lbImg" alt="" />
+      </div>
+      <p class="lb-caption"><span id="lbCaption"></span><span class="lb-count" id="lbCount"></span></p>
+      <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="닫기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      <button type="button" class="lb-btn lb-prev" id="lbPrev" aria-label="이전 이미지"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button type="button" class="lb-btn lb-next" id="lbNext" aria-label="다음 이미지"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+    </dialog>
+
+    <script src="/projects/project.js" defer></script>
+  </body>
+</html>
