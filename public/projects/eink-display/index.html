@@ -87,7 +87,7 @@
 
         <article class="prose" id="doc">
           <h2 id="overview">한눈에 보기<a aria-label="한눈에 보기 링크" class="h-anchor" href="#overview">#</a></h2>
-<p>기기 두 대를 만들고, 부품비는 합쳐서 <strong>약 22만 원</strong>(배송비와 공구·소모품 별도)입니다. 기기 A는 폰이 만든 그림을 블루투스로 받아 7.3인치 컬러 화면에 띄우는 배터리형 정보 디스플레이로, 현관문에 자석으로 붙입니다. 기기 B는 USB 전원으로 켜 두고, 와이파이로 AI API에 직접 연결하는 4.26인치 터치 영어 공부·음성 대화 기기입니다.</p>
+<p>기기 두 대를 만들고, 부품비는 합쳐서 <strong>약 21.5만 원</strong>(배송비와 공구·소모품 별도)입니다. 기기 A는 폰이 만든 그림을 블루투스로 받아 7.3인치 컬러 화면에 띄우는 배터리형 정보 디스플레이로, 현관문에 자석으로 붙입니다. 기기 B는 USB 전원으로 켜 두고, 와이파이로 AI API에 직접 연결하는 4.26인치 터치 영어 공부·음성 대화 기기입니다.</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -1005,7 +1005,7 @@ void loop() {
 <tbody>
 <tr>
 <td>양면 만능기판</td>
-<td>구멍마다 패드가 따로 있는 2.54mm 간격, 약 4×6cm로 잘라 씀</td>
+<td>보유한 3×7cm 양면 기판(10줄 × 24칸, 구멍마다 패드)을 양 끝 패드 줄만 잘라 약 3×6.1cm로 씀</td>
 <td>XIAO·마이크·앰프를 올리는 판</td>
 </tr>
 <tr>
@@ -1311,15 +1311,22 @@ void loop() {
 <figure class="shot"><button aria-label="크게 보기: 기기 B 회로도 v0.1" class="shot-btn" data-lb="b-schematic" type="button"><img alt="기기 B 회로도 v0.1" decoding="async" height="1752" loading="lazy" sizes="(max-width: 760px) 100vw, 760px" src="/projects/eink-display/img/b-schematic-800.webp" srcset="/projects/eink-display/img/b-schematic-800.webp 800w, /projects/eink-display/img/b-schematic.webp 2880w" width="2880"/><span aria-hidden="true" class="shot-zoom"></span></button><figcaption>기기 B 회로도 v0.1</figcaption></figure>
 <p>이름표가 같은 곳끼리 연결합니다. 예를 들어 I2S_BCLK는 U1 D2, 마이크 SCK, 앰프 BCLK 세 곳을 잇는 선입니다. 직접 납땜할 칩은 없고, 모듈 외에 더하는 부품은 저항 2개와 콘덴서 2개(둘 다 선택)뿐입니다.</p>
 <ul>
-<li><strong>R1·R2 (4.7kΩ):</strong> 터치 I2C 풀업입니다. 어댑터에 이미 있으면 생략합니다. 받은 뒤 테스터로 TP SDA와 3.3V 사이 저항을 재 확인합니다.</li>
+<li><strong>R1·R2 (4.7kΩ): 터치 I2C 풀업입니다.</strong> I2C 선(SDA·SCL)은 칩이 0V로 끌어내리기만 하므로, 쉴 때 3.3V로 되돌려 놓을 저항이 있어야 합니다. 없으면 터치 좌표가 안 읽히거나 가끔 끊깁니다. 어댑터나 패널에 이미 있으면 생략하는데, FTS02 판매 페이지에는 있는지 적혀 있지 않습니다. XIAO 칩 안의 풀업(약 45kΩ)은 너무 약해서 믿지 않습니다.
+<ol>
+<li>전원을 끈 채 멀티미터 저항 모드로 어댑터의 TP SDA–3.3V, TP SCL–3.3V 사이를 잽니다.</li>
+<li>2~10kΩ쯤 나오면 이미 있으니 생략합니다. 값이 안 나오거나 아주 크면 다음 단계처럼 답니다.</li>
+<li>만능기판에서 R1은 TP SDA 줄과 3.3V 공용 줄 사이에, R2는 TP SCL 줄과 3.3V 공용 줄 사이에 납땜합니다. 저항은 방향이 없습니다.</li>
+<li>멀티미터가 없으면 배선 후 I2C 스캔 예제를 돌립니다. 터치 칩 주소 0x38이 매번 잡히면 생략해도 되고, 안 잡히거나 가끔만 잡히면 답니다.</li>
+</ol>
+</li>
 <li><strong>C1·C2 (100µF, 0.1µF):</strong> 앰프 VIN 바로 옆에 달아 소리가 클 때의 잡음·재부팅을 막습니다.</li>
 <li><strong>앰프 핀 이름은 Adafruit 3006 기준입니다.</strong> 다른 모듈은 위치가 아니라 핀 이름을 보고 잇습니다. GAIN을 비우면 9dB, SD를 비우면 모노 출력입니다.</li>
 <li><strong>스피커 (Adafruit 3351, 4Ω 3W):</strong> 5V에서 앰프 최대 출력이 정격(3W)에 가까워 코드에서 볼륨 상한(약 80%)을 둡니다. 스피커 선 끝이 JST PH 플러그라, 앰프가 나사 단자면 플러그를 잘라 연결하거나 만능기판에 JST PH 소켓을 달아요. 전원은 5V 2A 충전기를 씁니다.</li>
 </ul>
 <p><strong>만능기판으로 조립 (추천)</strong></p>
 <ol>
-<li>양면 만능기판을 약 4×6cm로 자릅니다. 패널 뒤 어댑터 옆 빈 공간이 약 46×62mm입니다.</li>
-<li>XIAO·마이크·앰프 자리에 암 헤더를 납땜하고 모듈을 꽂습니다.</li>
+<li>가지고 있는 3×7cm 양면 만능기판(10줄 × 24칸, 구멍마다 패드)을 씁니다. 패널 뒤 어댑터 옆 빈 공간이 약 46×62mm라 7cm 그대로는 안 들어가니, 양쪽 끝의 길쭉한 패드 줄을 잘라 A~X 24칸(약 3×6.1cm)만 남깁니다. 커터칼로 앞뒤를 여러 번 긋고 책상 모서리에서 꺾은 뒤 사포로 다듬습니다. 모서리 나사 구멍이 잘려 나가므로 케이스에는 양면 폼테이프나 핫글루로 붙입니다.</li>
+<li>XIAO·마이크·앰프 자리에 암 헤더를 납땜하고 모듈을 꽂습니다. XIAO는 A~G칸(핀 두 줄은 2번·8번 줄, USB-C는 A쪽 끝), 마이크는 J~N칸 근처, 앰프는 P~V칸(7핀 한 줄), 스피커 2핀 헤더는 W~X칸에 둡니다. 저항·콘덴서와 전원 공용 줄은 모듈 밑 빈 구멍에 둡니다.</li>
 <li>기판 뒷면에서 얇은 전선으로 회로도의 같은 이름표끼리 잇습니다 (<a href="#soldering">납땜·조립 가이드</a>의 배선 방법).</li>
 <li>기판 밖으로 나가는 선은 어댑터로 가는 리본 1줄(9가닥)과 스피커 선 2가닥뿐입니다.</li>
 </ol>
@@ -1508,15 +1515,6 @@ void loop() {
 <td>3,740원</td>
 <td>1~2일</td>
 <td>10개 단위로 팖. 6개 사용 + 예비 4개</td>
-</tr>
-<tr>
-<td>디바이스마트</td>
-<td><a href="https://www.devicemart.co.kr/goods/view?no=24860" rel="noopener" target="_blank">양면 만능기판 50×80 (GA6)</a></td>
-<td>B</td>
-<td>1</td>
-<td>3,850원</td>
-<td>2~3일</td>
-<td>약 4×6cm로 잘라 쓰고, 남는 부분은 납땜 연습용</td>
 </tr>
 <tr>
 <td>디바이스마트</td>
@@ -1712,8 +1710,8 @@ void loop() {
 </tr>
 <tr>
 <td>디바이스마트</td>
-<td>84,139원, 66,000원 이상이라 배송비 무료 (공구·소모품 29,260원 포함, 펜 플럭스 제외)</td>
-<td>약 8.4만 원</td>
+<td>80,289원, 66,000원 이상이라 배송비 무료 (공구·소모품 29,260원 포함, 펜 플럭스 제외)</td>
+<td>약 8만 원</td>
 </tr>
 <tr>
 <td>아이씨뱅큐</td>
@@ -1733,7 +1731,7 @@ void loop() {
 <tr>
 <td><strong>합계</strong></td>
 <td></td>
-<td><strong>약 25만 원 + Seeed 배송비</strong> (공구·소모품이 이미 있으면 약 22.4만 원)</td>
+<td><strong>약 25만 원 + Seeed 배송비</strong> (공구·소모품이 이미 있으면 약 22만 원)</td>
 </tr>
 </tbody>
 </table></div>
