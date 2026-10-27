@@ -21,6 +21,8 @@ a { color: #0f766e; }
 .legal li { margin-bottom: 6px; }
 .legal hr { border: 0; border-top: 1px solid #e3e8ef; margin: 28px 0; }
 .legal blockquote { padding: 12px 16px; background: #f5f7fa; border-left: 3px solid #14b8a6; }
+/* 한글 기본 고정폭 글꼴은 \ 를 ₩ 로 그려서 경로가 틀려 보인다 */
+.legal code { font-family: ui-monospace, "SFMono-Regular", Consolas, monospace; font-size: .88em; overflow-wrap: anywhere; }
 .legal .table { overflow-x: auto; }
 .legal table { width: 100%; border-collapse: collapse; font-size: 15px; }
 .legal th, .legal td { border: 1px solid #e3e8ef; padding: 8px 12px; text-align: left; vertical-align: top; }
