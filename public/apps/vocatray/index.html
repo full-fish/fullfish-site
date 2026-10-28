@@ -21,7 +21,7 @@
       .hero-figure { margin: 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
       .hero-figure img { display: block; width: 100%; height: auto; }
       .hero-figure figcaption { padding: 10px 14px; font-size: 13.5px; color: var(--muted); background: #fff; border-top: 1px solid var(--line); }
-      .tag-dev { color: var(--muted); background: var(--bg-soft); }
+      .download { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 28px; font-size: 13.5px; color: var(--muted); }
       .doc-links { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-top: 22px; font-size: 14.5px; font-weight: 600; }
       .doc-links a { color: var(--teal-600); text-decoration: underline; text-underline-offset: 3px; }
     </style>
@@ -63,16 +63,20 @@
                 초등·중학·고등 단어장으로 나눠 담았습니다.
               </p>
               <ul class="doc-meta">
-                <li><span class="tag tag-dev">개발 중</span></li>
+                <li><span class="tag">출시</span></li>
                 <li>Windows · macOS(준비 중)</li>
-                <li>업데이트 2026년 10월 27일</li>
+                <li>업데이트 2026년 10월 28일</li>
               </ul>
               <ol class="stage" aria-label="진행 단계">
                 <li><b></b><span>기획</span></li>
-                <li class="is-current"><b></b><span>개발</span></li>
+                <li><b></b><span>개발</span></li>
                 <li><b></b><span>테스트</span></li>
-                <li><b></b><span>출시</span></li>
+                <li class="is-current"><b></b><span>출시</span></li>
               </ol>
+              <p class="download">
+                <a class="btn btn-primary" href="https://github.com/full-fish/vocatray/releases/latest/download/VocaTray-setup.exe">Windows용 다운로드</a>
+                <span>무료 · Windows 10 · 11</span>
+              </p>
               <p class="doc-links"><a href="/privacy/vocatray/">개인정보처리방침</a><a href="/terms/vocatray/">서비스 약관</a></p>
             </div>
             <figure class="hero-figure">
@@ -127,7 +131,15 @@
             <li>Windows 10 · 11 (Microsoft Edge WebView2 사용)</li>
             <li>macOS — 준비 중</li>
           </ul>
-          <p>지금은 개발 중이라 내려받을 수 있는 파일이 없습니다. 출시하면 이 페이지에 올립니다.</p>
+          <p>
+            <a href="https://github.com/full-fish/vocatray/releases/latest/download/VocaTray-setup.exe">Windows용 설치 파일 내려받기</a>
+            (늘 최신 버전). 버전별 바뀐 내용은 <a href="https://github.com/full-fish/vocatray/releases">GitHub 릴리스</a>에 있습니다.
+          </p>
+          <ol>
+            <li>내려받은 <code>VocaTray-setup.exe</code>를 실행합니다. 관리자 권한은 필요 없습니다.</li>
+            <li>"Windows의 PC 보호" 창이 뜨면 <strong>추가 정보 → 실행</strong>을 누릅니다. 코드 서명을 하지 않은 앱이라 뜨는 경고입니다.</li>
+            <li>설치가 끝나면 작업 표시줄 오른쪽의 ^(숨겨진 아이콘)에서 VocaTray 아이콘을 작업 표시줄로 끌어 두면 늘 보입니다. 다음 로그인부터는 자동으로 켜집니다.</li>
+          </ol>
 
           <h2 id="contact">문의</h2>
           <ul>
