@@ -321,12 +321,12 @@
 <p class="note"><strong>업로드가 안 되거나 포트가 안 보이면:</strong> USB를 뽑고, XIAO의 <strong>B</strong>(BOOT) 버튼을 누른 채로 USB를 꽂은 다음 버튼을 뗍니다. 포트를 다시 고르고 업로드한 뒤, <strong>R</strong>(RESET) 버튼을 한 번 누릅니다.</p>
 
 <h3 id="s7-3">7-3. GY-521 연결<a aria-label="7-3 링크" class="h-anchor" href="#s7-3">#</a></h3>
-<p>GY-521은 선 <strong>5가닥</strong>으로 XIAO에 연결합니다. 앞 설계에서는 4가닥이었는데, 펌웨어를 확인해 보니 센서가 "새 값이 준비됐다"고 알려 주는 <strong>INT 신호</strong>에 맞춰 센서를 읽도록 되어 있어서 INT 선이 꼭 필요합니다. 이 선이 없으면 드론이 자세를 잡지 못합니다.</p>
+<p>GY-521은 만능기판을 거치지 않고 선 <strong>5가닥</strong>으로 XIAO에 바로 연결합니다. 만능기판(<a href="#s7-5">7-5</a>)에는 모터 구동 부품과 분압 저항만 들어갑니다. 앞 설계에서는 4가닥이었는데, 펌웨어를 확인해 보니 센서가 "새 값이 준비됐다"고 알려 주는 <strong>INT 신호</strong>에 맞춰 센서를 읽도록 되어 있어서 INT 선이 꼭 필요합니다. 이 선이 없으면 드론이 자세를 잡지 못합니다.</p>
 <ol>
 <li><strong>핀헤더 떼기.</strong> GY-521에 핀헤더가 달려 있으면 니퍼로 검은 플라스틱을 잘라 낸 뒤, 핀을 하나씩 인두로 녹이면서 핀셋으로 뽑습니다. 0.5g쯤 가벼워집니다.</li>
 <li><strong>전선 준비.</strong> 30AWG 전선 5가닥을 4cm로 자르고 양 끝 피복을 2mm씩 벗긴 뒤, 끝에 납을 살짝 먹입니다(예비 납땜).</li>
-<li><strong>GY-521 쪽 납땜.</strong> VCC, GND, SCL, SDA, INT 구멍에 선을 하나씩 꽂고 납땜합니다. XDA, XCL, AD0는 비워 둡니다.</li>
-<li><strong>XIAO 쪽 납땜.</strong> 아래 표대로 XIAO 핀 구멍에 위에서 꽂고 아래에서 납땜한 뒤, 튀어나온 선은 잘라 냅니다.</li>
+<li><strong>GY-521 쪽 납땜.</strong> 선을 <strong>부품 면(윗면)에서</strong> VCC, GND, SCL, SDA, INT 구멍에 꽂고, 뒷면에서 납땜한 뒤 튀어나온 끝을 바짝 자릅니다. GY-521은 나중에 XIAO 바로 아래에 겹쳐 붙이기 때문에(<a href="#s7-10">7-10</a>) 선이 XIAO 쪽인 윗면으로 나와야 합니다. XDA, XCL, AD0는 비워 둡니다.</li>
+<li><strong>XIAO 쪽 납땜.</strong> 아래 표대로, 선을 XIAO <strong>뒷면(GY-521을 마주 보는 면)에서</strong> 핀 구멍에 꽂고 윗면에서 납땜한 뒤 튀어나온 끝을 자릅니다.</li>
 </ol>
 <div class="table-wrap"><table>
 <thead><tr><th>GY-521</th><th>XIAO</th><th>메모</th></tr></thead>
