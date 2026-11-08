@@ -262,6 +262,45 @@ button { font: inherit; color: inherit; }
 .c-in { font-size: 12.5px; font-weight: 700; fill: #fff; }
 .c-ref { stroke: var(--text); stroke-width: 1.5; }
 .c-reflabel { font-size: 11.5px; font-weight: 600; fill: var(--text); }
+.prose .note-warn { background: #fff7ed; border-left-color: #f59e0b; }
+
+/* 모터 기판 배치도 */
+.bm-col { font-size: 15px; font-weight: 700; fill: var(--muted); }
+.bm-ch { font-size: 15px; font-weight: 700; fill: var(--text); }
+.bm-rail { font-size: 14px; font-weight: 600; fill: var(--text); }
+.bm-brace { fill: none; stroke: #94a3b8; stroke-width: 1.5; }
+.bm-back { stroke: #ea7a3a; stroke-opacity: .55; stroke-width: 13; stroke-linecap: round; }
+.bm-pad { fill: #d6b26a; stroke: #b08a3e; stroke-width: 1; }
+.bm-hole { fill: #fff; }
+.bm-lead, .bm-lead-path { stroke: #7b8492; stroke-width: 3; fill: none; stroke-linecap: round; }
+.bm-diode { fill: #f0a35e; stroke: #b8732f; stroke-width: 1.2; }
+.bm-res { fill: #e8d5b0; stroke: #a8916a; stroke-width: 1.2; }
+.bm-fet { fill: #1d1d1d; }
+.bm-leg { font-size: 13px; font-weight: 700; fill: var(--text); }
+.bm-part { font-size: 12px; font-weight: 600; fill: var(--muted); }
+.bm-mplus { fill: none; stroke: #dc2626; stroke-width: 3; }
+.bm-mminus { fill: none; stroke: #2563eb; stroke-width: 3; }
+.bm-msign { font-size: 17px; font-weight: 800; fill: #dc2626; }
+.bm-msign.minus { fill: #2563eb; }
+.bm-mark { fill: #7c3aed; }
+.bm-markn { font-size: 12px; font-weight: 800; fill: #fff; }
+.bm-legend { font-size: 13px; fill: var(--text); }
+
+/* SOT-23 다리 구분 */
+.sot-body { fill: #1d1d1d; }
+.sot-leg { fill: #b9bec7; }
+.sot-mark { font-size: 15px; font-weight: 700; fill: #cbd5e1; }
+.sot-wire { fill: none; stroke: #7b8492; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.diagram .sot-t { font-size: 17px; }
+.diagram .sot-s { font-size: 15px; }
+.d-links-solid { fill: none; stroke: #9aa6b8; stroke-width: 2; }
+
+/* 코드 복사 버튼 */
+.prose pre.code .copy-btn {
+  position: absolute; top: 8px; right: 10px; padding: 4px 10px; font: inherit; font-family: "Pretendard Variable", Pretendard, system-ui, sans-serif;
+  font-size: 12px; font-weight: 600; color: #dbe4f0; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .18); border-radius: 6px; cursor: pointer;
+}
+.prose pre.code .copy-btn:hover { background: rgba(255, 255, 255, .16); }
 
 .doc-note { margin-top: 72px !important; padding: 16px 20px; background: var(--teal-50); border-radius: 12px; font-size: 14.5px; color: #0f5f57; }
 

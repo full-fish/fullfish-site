@@ -155,3 +155,25 @@
     }
   });
 })();
+
+// ---------- 코드 블록 복사 버튼 ----------
+(() => {
+  document.querySelectorAll('.prose pre.code').forEach((pre) => {
+    const code = pre.querySelector('code');
+    if (!code) return;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'copy-btn';
+    btn.textContent = '복사';
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(code.innerText);
+        btn.textContent = '복사됨';
+      } catch {
+        btn.textContent = '복사 실패';
+      }
+      setTimeout(() => { btn.textContent = '복사'; }, 1500);
+    });
+    pre.appendChild(btn);
+  });
+})();
