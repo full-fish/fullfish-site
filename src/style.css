@@ -217,7 +217,8 @@ mark { color: inherit; background: none; }
 .index-preview.flip .index-preview-box { left: auto; right: 32px; }
 .index-preview.on .index-preview-box { opacity: 1; scale: 1; }
 .index-preview[data-show="vocatray"] .index-preview-box { --pw: 300px; --ph: 250px; }
-.index-preview[data-show="eink"] .index-preview-box { --pw: 336px; --ph: 210px; }
+.index-preview[data-show="eink"] .index-preview-box,
+.index-preview[data-show="drone"] .index-preview-box { --pw: 336px; --ph: 210px; }
 .index-preview-box img {
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover; object-position: top; opacity: 0; transition: opacity 0.3s;
@@ -226,7 +227,8 @@ mark { color: inherit; background: none; }
 .index-preview[data-show="fullmemo"] img[data-key="fullmemo"],
 .index-preview[data-show="pocketlog"] img[data-key="pocketlog"],
 .index-preview[data-show="vocatray"] img[data-key="vocatray"],
-.index-preview[data-show="eink"] img[data-key="eink"] { opacity: 1; }
+.index-preview[data-show="eink"] img[data-key="eink"],
+.index-preview[data-show="drone"] img[data-key="drone"] { opacity: 1; }
 
 /* ---------- 프로젝트 자세히 ---------- */
 /* 숨은 장면의 떠 있는 카드가 가로 스크롤을 만들지 않게 자른다. clip은 sticky를 깨지 않는다 */
@@ -495,6 +497,26 @@ mark { color: inherit; background: none; }
 .e-cap-b { opacity: 0; }
 .scene[data-step^="b"] .e-cap-a { opacity: 0; }
 .scene[data-step^="b"] .e-cap-b { opacity: 1; }
+
+/* 미니 드론: 프로펠러가 돌기 시작하고, 기체가 살짝 떠올랐다가 내려앉는다 */
+.dr-svg {
+  position: absolute; left: 12%; top: 5%; width: 76%; height: 84%; overflow: visible;
+  filter: drop-shadow(0 8px 10px rgb(20 20 20 / 0.12));
+  transition: transform 1.4s var(--ease), filter 1.4s var(--ease);
+}
+.dr-prop { transform-box: fill-box; transform-origin: center; }
+.dr-blade, .dr-blur { transition: opacity 0.5s var(--ease); }
+.scene[data-step="spin"] .dr-prop,
+.scene[data-step="lift"] .dr-prop { animation: dr-spin 0.14s linear infinite; }
+.scene[data-step="spin"] .dr-prop.ccw,
+.scene[data-step="lift"] .dr-prop.ccw { animation-direction: reverse; }
+.scene[data-step="spin"] .dr-blade,
+.scene[data-step="lift"] .dr-blade { opacity: 0.22; }
+.scene[data-step="spin"] .dr-blur,
+.scene[data-step="lift"] .dr-blur { opacity: 0.07; }
+.scene[data-step="lift"] .dr-svg { transform: translateY(-4%) scale(1.07); filter: drop-shadow(0 30px 22px rgb(20 20 20 / 0.09)); }
+@keyframes dr-spin { to { transform: rotate(360deg); } }
+.dr-cap { position: absolute; left: 14px; bottom: 12px; font-size: 12px; color: var(--muted); }
 
 /* 좁은 화면에서는 떠 있는 카드를 조금 줄인다 */
 @media (max-width: 640px) {

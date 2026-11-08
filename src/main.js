@@ -143,6 +143,19 @@ const demos = {
       await sleep(2400);
     }
   },
+
+  async drone(scene, sleep) {
+    scene.dataset.step = 'idle';
+    await sleep(900);
+    scene.dataset.step = 'spin';
+    await sleep(1100);
+    scene.dataset.step = 'lift';
+    await sleep(2800);
+    scene.dataset.step = 'spin';
+    await sleep(1000);
+    scene.dataset.step = 'idle';
+    await sleep(700);
+  },
 };
 
 const running = new Map();

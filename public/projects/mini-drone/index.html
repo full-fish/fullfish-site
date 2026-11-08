@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="ko" class="doc-page">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ESP32-S3 미니 드론 제작 과정 | FULLFISH</title>
+    <meta name="description" content="53g이라 뜨지 못했던 미니 드론을 XIAO ESP32-S3와 MOSFET 모터 구동으로 다시 만드는 과정입니다. 실패 원인 분석, 설계, 배선과 무게, 배터리, 회로, 부품 구매, 조립, 펌웨어, 첫 비행까지 순서대로 정리했습니다." />
+    <link rel="canonical" href="https://full-fish.com/projects/mini-drone/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="ESP32-S3 미니 드론 제작 과정 | FULLFISH" />
+    <meta property="og:description" content="53g이라 못 떴던 드론을 배터리 포함 30g으로 다시 만드는 하드웨어 프로젝트 (제작 중)" />
+    <meta property="og:url" content="https://full-fish.com/projects/mini-drone/" />
+    <meta property="og:image" content="https://full-fish.com/projects/mini-drone/img/og.jpg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+    <link rel="stylesheet" href="/projects/project.css" />
+  </head>
+  <body>
+    <header class="header" id="top">
+      <div class="container header-inner">
+        <a href="/" class="logo" aria-label="FULLFISH 홈">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0b1f3a"/><path d="M5 16c3.5-6 11-8.5 16.5-4.2L27 8v16l-5.5-3.8C16 24.5 8.5 22 5 16z" fill="#2dd4bf"/><circle cx="11" cy="15" r="1.6" fill="#0b1f3a"/></svg>
+          <span>FULLFISH</span>
+        </a>
+        <nav class="nav" id="nav" aria-label="주요 메뉴">
+          <a href="/#work" aria-current="page">프로젝트</a>
+          <a href="/#about">소개</a>
+          <a href="/#contact" class="btn btn-primary btn-sm">연락하기</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="doc-hero">
+        <div class="container">
+          <nav class="crumbs" aria-label="현재 위치">
+            <a href="/#work">프로젝트</a><span aria-hidden="true">›</span><a href="/#drone">하드웨어</a><span aria-hidden="true">›</span><span aria-current="page">미니 드론</span>
+          </nav>
+          <div class="doc-hero-grid">
+            <div class="doc-hero-copy">
+              <p class="eyebrow">Hardware Project</p>
+              <h1>ESP32-S3 미니 드론<br />제작 과정</h1>
+              <p class="lead">
+                예전에 만든 미니 드론은 53g이라 뜨지 못했습니다. 무거웠던 원인을 하나씩 따져 보고, XIAO ESP32-S3와
+                MOSFET 모터 구동, 짧은 직결 배선으로 바꿔 배터리 포함 30g 안쪽으로 다시 만듭니다. 실패 분석부터 첫 비행까지
+                만드는 순서대로 기록합니다.
+              </p>
+              <ul class="doc-meta">
+                <li><span class="tag tag-plan">부품 구매 완료</span></li>
+                <li>작성 2026년 11월 8일</li>
+              </ul>
+              <ol class="stage" aria-label="진행 단계">
+                <li class="is-done"><b></b><span>설계</span></li>
+                <li class="is-current"><b></b><span>부품 주문</span></li>
+                <li><b></b><span>조립 · 펌웨어</span></li>
+                <li><b></b><span>첫 비행</span></li>
+              </ol>
+            </div>
+            <figure class="doc-hero-art">
+              <svg class="hero-drone" viewBox="0 0 800 500" role="img" aria-label="위에서 본 미니 드론 그림: 덕트 4개 안에 4엽 프로펠러, 가운데에 XIAO ESP32-S3 보드"><line x1="400" y1="250" x2="530" y2="140" stroke="#d2cbbf" stroke-width="56" stroke-linecap="round"/><line x1="400" y1="250" x2="530" y2="360" stroke="#d2cbbf" stroke-width="56" stroke-linecap="round"/><line x1="400" y1="250" x2="270" y2="360" stroke="#d2cbbf" stroke-width="56" stroke-linecap="round"/><line x1="400" y1="250" x2="270" y2="140" stroke="#d2cbbf" stroke-width="56" stroke-linecap="round"/><rect x="326" y="184" width="148" height="132" rx="28" fill="#d2cbbf"/><circle cx="530" cy="140" r="90" fill="#f5f3ef" stroke="#cbc4b8" stroke-width="12"/><circle cx="530" cy="140" r="80" fill="none" stroke="#e6e1d9" stroke-width="2"/><line x1="530" y1="140" x2="457.3" y2="182" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><line x1="530" y1="140" x2="530" y2="56" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><line x1="530" y1="140" x2="602.7" y2="182" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><circle cx="530" cy="360" r="90" fill="#f5f3ef" stroke="#cbc4b8" stroke-width="12"/><circle cx="530" cy="360" r="80" fill="none" stroke="#e6e1d9" stroke-width="2"/><line x1="530" y1="360" x2="530" y2="444" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><line x1="530" y1="360" x2="457.3" y2="318" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><line x1="530" y1="360" x2="602.7" y2="318" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><circle cx="270" cy="360" r="90" fill="#f5f3ef" stroke="#cbc4b8" stroke-width="12"/><circle cx="270" cy="360" r="80" fill="none" stroke="#e6e1d9" stroke-width="2"/><line x1="270" y1="360" x2="197.3" y2="402" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><line x1="270" y1="360" x2="270" y2="276" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><line x1="270" y1="360" x2="342.7" y2="402" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><circle cx="270" cy="140" r="90" fill="#f5f3ef" stroke="#cbc4b8" stroke-width="12"/><circle cx="270" cy="140" r="80" fill="none" stroke="#e6e1d9" stroke-width="2"/><line x1="270" y1="140" x2="270" y2="224" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><line x1="270" y1="140" x2="197.3" y2="98" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><line x1="270" y1="140" x2="342.7" y2="98" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><g><g fill="#2b2b2b" fill-opacity="0.84"><ellipse cx="568" cy="127.6" rx="31" ry="8.5" transform="rotate(-18 568 127.6)"/><ellipse cx="542.4" cy="178" rx="31" ry="8.5" transform="rotate(72 542.4 178)"/><ellipse cx="492" cy="152.4" rx="31" ry="8.5" transform="rotate(162 492 152.4)"/><ellipse cx="517.6" cy="102" rx="31" ry="8.5" transform="rotate(252 517.6 102)"/></g><circle cx="530" cy="140" r="12" fill="#141414"/><circle cx="530" cy="140" r="4" fill="#a88a5c"/></g><path d="M630.7 106.8A106 106 0 0 0 579.4 46.2" fill="none" stroke="#a88a5c" stroke-width="3.5" stroke-linecap="round"/><path d="M571.4 42L582.6 40L576.1 52.4Z" fill="#a88a5c"/><g><g fill="#2b2b2b" fill-opacity="0.84"><ellipse cx="568" cy="372.4" rx="31" ry="8.5" transform="rotate(18 568 372.4)"/><ellipse cx="517.6" cy="398" rx="31" ry="8.5" transform="rotate(108 517.6 398)"/><ellipse cx="492" cy="347.6" rx="31" ry="8.5" transform="rotate(198 492 347.6)"/><ellipse cx="542.4" cy="322" rx="31" ry="8.5" transform="rotate(288 542.4 322)"/></g><circle cx="530" cy="360" r="12" fill="#141414"/><circle cx="530" cy="360" r="4" fill="#a88a5c"/></g><path d="M630.7 393.2A106 106 0 0 1 579.4 453.8" fill="none" stroke="#a88a5c" stroke-width="3.5" stroke-linecap="round"/><path d="M571.4 458L582.6 460L576.1 447.6Z" fill="#a88a5c"/><g><g fill="#2b2b2b" fill-opacity="0.84"><ellipse cx="308" cy="347.6" rx="31" ry="8.5" transform="rotate(-18 308 347.6)"/><ellipse cx="282.4" cy="398" rx="31" ry="8.5" transform="rotate(72 282.4 398)"/><ellipse cx="232" cy="372.4" rx="31" ry="8.5" transform="rotate(162 232 372.4)"/><ellipse cx="257.6" cy="322" rx="31" ry="8.5" transform="rotate(252 257.6 322)"/></g><circle cx="270" cy="360" r="12" fill="#141414"/><circle cx="270" cy="360" r="4" fill="#a88a5c"/></g><path d="M169.3 393.2A106 106 0 0 0 220.6 453.8" fill="none" stroke="#a88a5c" stroke-width="3.5" stroke-linecap="round"/><path d="M228.6 458L217.4 460L223.9 447.6Z" fill="#a88a5c"/><g><g fill="#2b2b2b" fill-opacity="0.84"><ellipse cx="308" cy="152.4" rx="31" ry="8.5" transform="rotate(18 308 152.4)"/><ellipse cx="257.6" cy="178" rx="31" ry="8.5" transform="rotate(108 257.6 178)"/><ellipse cx="232" cy="127.6" rx="31" ry="8.5" transform="rotate(198 232 127.6)"/><ellipse cx="282.4" cy="102" rx="31" ry="8.5" transform="rotate(288 282.4 102)"/></g><circle cx="270" cy="140" r="12" fill="#141414"/><circle cx="270" cy="140" r="4" fill="#a88a5c"/></g><path d="M169.3 106.8A106 106 0 0 1 220.6 46.2" fill="none" stroke="#a88a5c" stroke-width="3.5" stroke-linecap="round"/><path d="M228.6 42L217.4 40L223.9 52.4Z" fill="#a88a5c"/><rect x="372" y="186" width="56" height="128" rx="7" fill="#b9b3a8"/><rect x="361" y="204" width="78" height="92" rx="8" fill="#1c1c1c"/><rect x="388" y="198" width="24" height="12" rx="4" fill="#9b958c"/><rect x="377" y="234" width="46" height="42" rx="3" fill="#b8b2a7"/><rect x="383" y="240" width="34" height="30" rx="2" fill="#c6c0b5"/><g fill="#a88a5c"><circle cx="369" cy="238" r="2.6"/><circle cx="431" cy="238" r="2.6"/><circle cx="369" cy="246" r="2.6"/><circle cx="431" cy="246" r="2.6"/><circle cx="369" cy="254" r="2.6"/><circle cx="431" cy="254" r="2.6"/><circle cx="369" cy="262" r="2.6"/><circle cx="431" cy="262" r="2.6"/><circle cx="369" cy="270" r="2.6"/><circle cx="431" cy="270" r="2.6"/><circle cx="369" cy="278" r="2.6"/><circle cx="431" cy="278" r="2.6"/><circle cx="369" cy="286" r="2.6"/><circle cx="431" cy="286" r="2.6"/></g><circle cx="424" cy="220" r="3" fill="#a88a5c"/><path d="M391 128L400 112L409 128Z" fill="#a88a5c"/></svg>
+              <figcaption>위에서 본 모습 · 덕트형 프레임에 615 모터 4개 (그림)</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <div class="toc-bar" id="tocBar">
+        <div class="container toc-bar-inner">
+          <button type="button" class="toc-toggle" id="tocToggle" aria-expanded="false" aria-controls="toc">
+            <span class="toc-toggle-label">목차</span>
+            <span class="toc-current" id="tocCurrent">한눈에 보기</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="container doc-layout">
+        <aside class="toc" id="toc" aria-label="목차">
+          <p class="toc-title">목차</p>
+          <ol class="toc-list"><li class="toc-chapter"><a href="#overview" data-toc="overview">한눈에 보기</a></li><li class="toc-chapter"><a href="#progress" data-toc="progress">진행 순서</a></li><li class="toc-chapter"><a href="#s1" data-toc="s1">1. 실패 원인 찾기</a></li><li class="toc-chapter"><a href="#s2" data-toc="s2">2. 새 설계 정하기</a><ol class="toc-sub"><li><a href="#s2-parts" data-toc="s2-parts">부품 구성</a></li><li><a href="#s2-motors" data-toc="s2-motors">모터 방향과 배치</a></li></ol></li><li class="toc-chapter"><a href="#s3" data-toc="s3">3. 무게 줄이기 (배선)</a></li><li class="toc-chapter"><a href="#s4" data-toc="s4">4. 배터리 고르기</a><ol class="toc-sub"><li><a href="#s4-safety" data-toc="s4-safety">보호회로 없는 배터리</a></li></ol></li><li class="toc-chapter"><a href="#s5" data-toc="s5">5. 회로 설계</a><ol class="toc-sub"><li><a href="#s5-motor" data-toc="s5-motor">모터 구동</a></li><li><a href="#s5-batt" data-toc="s5-batt">배터리 전압 감시</a></li><li><a href="#s5-pins" data-toc="s5-pins">핀 배정</a></li></ol></li><li class="toc-chapter"><a href="#s6" data-toc="s6">6. 부품 구매</a></li><li class="toc-chapter"><a href="#s7" data-toc="s7">7. 조립</a></li><li class="toc-chapter"><a href="#s8" data-toc="s8">8. 펌웨어</a></li><li class="toc-chapter"><a href="#s9" data-toc="s9">9. 첫 비행</a><ol class="toc-sub"><li><a href="#s9-law" data-toc="s9-law">비행 규정</a></li></ol></li><li class="toc-chapter"><a href="#references" data-toc="references">참고 자료</a></li></ol>
+          <a href="#top" class="toc-top">맨 위로 ↑</a>
+        </aside>
+
+        <article class="prose" id="doc">
+          <h2 id="overview">한눈에 보기<a aria-label="한눈에 보기 링크" class="h-anchor" href="#overview">#</a></h2>
+<p>배터리 포함 <strong>약 30g</strong>, 추력/무게비 <strong>약 2.3</strong>을 목표로 하는 손바닥만 한 쿼드콥터입니다. 보드는 Seeed XIAO ESP32-S3, 자세 센서는 갖고 있던 GY-521(MPU6050)을 쓰고, 모터 구동은 MOSFET 4개로 바꿉니다. 프레임과 모터, 프로펠러는 예전 드론 것을 그대로 씁니다. 새로 산 부품비는 <strong>약 3~3.5만 원</strong>입니다.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr><th>항목</th><th>예전 드론 (못 뜸)</th><th>새 드론</th></tr>
+</thead>
+<tbody>
+<tr><td>보드</td><td>Arduino Pro Mini (5V)</td><td>Seeed XIAO ESP32-S3</td></tr>
+<tr><td>자세 센서</td><td>GY-521 (MPU6050)</td><td>같은 GY-521 재사용</td></tr>
+<tr><td>모터 구동</td><td>MX1508 드라이버(HW-354) 2장</td><td>AO3400A MOSFET 4개</td></tr>
+<tr><td>모터 · 프로펠러</td><td>615 코어리스 4개, 31mm 4엽</td><td>그대로 재사용</td></tr>
+<tr><td>프레임</td><td>덕트형 (E010 스타일)</td><td>그대로 재사용</td></tr>
+<tr><td>배터리</td><td>1S 650mAh, 약 17g</td><td>1S 300mAh 고방전, 약 8~9g</td></tr>
+<tr><td>배선</td><td>긴 전선, 핀헤더</td><td>짧게 직결</td></tr>
+<tr><td>조종</td><td>-</td><td>휴대폰 앱 (와이파이)</td></tr>
+<tr><td>무게 (배터리 포함)</td><td>53g</td><td>목표 약 30g</td></tr>
+<tr><td>추력/무게비</td><td>약 1.3</td><td>약 2.3</td></tr>
+</tbody>
+</table></div>
+<figure class="diagram chart"><div class="diagram-scroll"><svg viewBox="0 0 640 230" role="img" aria-label="배터리 포함 무게 비교: 예전 드론 53g, 새 드론 목표 30g, ESP-FLY 25g. 모터 4개 추력은 68g이고, 추력/무게비 2가 되는 무게는 34g"><line class="c-grid" x1="160.0" y1="44" x2="160.0" y2="186"/><text class="c-tick" x="160.0" y="204" text-anchor="middle">0</text><line class="c-grid" x1="222.0" y1="44" x2="222.0" y2="186"/><text class="c-tick" x="222.0" y="204" text-anchor="middle">10</text><line class="c-grid" x1="284.0" y1="44" x2="284.0" y2="186"/><text class="c-tick" x="284.0" y="204" text-anchor="middle">20</text><line class="c-grid" x1="346.0" y1="44" x2="346.0" y2="186"/><text class="c-tick" x="346.0" y="204" text-anchor="middle">30</text><line class="c-grid" x1="408.0" y1="44" x2="408.0" y2="186"/><text class="c-tick" x="408.0" y="204" text-anchor="middle">40</text><line class="c-grid" x1="470.0" y1="44" x2="470.0" y2="186"/><text class="c-tick" x="470.0" y="204" text-anchor="middle">50</text><line class="c-grid" x1="532.0" y1="44" x2="532.0" y2="186"/><text class="c-tick" x="532.0" y="204" text-anchor="middle">60</text><line class="c-grid" x1="594.0" y1="44" x2="594.0" y2="186"/><text class="c-tick" x="594.0" y="204" text-anchor="middle">70g</text><line class="c-base" x1="160" y1="44" x2="160" y2="186"/><g><title>예전 드론: 53g, 추력/무게비 1.3 · 못 뜸</title><path class="c-bar-muted" d="M160 59H484.6a4 4 0 0 1 4 4V77a4 4 0 0 1 -4 4H160Z"/><text class="c-in" x="480.6" y="74.5" text-anchor="end">53g</text></g><text class="c-name" x="148" y="68" text-anchor="end">예전 드론</text><text class="c-sub" x="148" y="84" text-anchor="end">추력/무게비 1.3 · 못 뜸</text><g><title>새 드론 목표: 30g, 추력/무게비 약 2.3</title><path class="c-bar-main" d="M160 107H342.0a4 4 0 0 1 4 4V125a4 4 0 0 1 -4 4H160Z"/><text class="c-in" x="338.0" y="122.5" text-anchor="end">30g</text></g><text class="c-name" x="148" y="116" text-anchor="end">새 드론 목표</text><text class="c-sub" x="148" y="132" text-anchor="end">추력/무게비 약 2.3</text><g><title>ESP-FLY (참고): 25g, 추력/무게비 2.7</title><path class="c-bar-muted" d="M160 155H311.0a4 4 0 0 1 4 4V173a4 4 0 0 1 -4 4H160Z"/><text class="c-in" x="307.0" y="170.5" text-anchor="end">25g</text></g><text class="c-name" x="148" y="164" text-anchor="end">ESP-FLY (참고)</text><text class="c-sub" x="148" y="180" text-anchor="end">추력/무게비 2.7</text><line class="c-ref" x1="370.8" y1="38" x2="370.8" y2="186"/><text class="c-reflabel" x="370.8" y="28" text-anchor="middle">34g · 추력/무게비 2가 되는 무게</text><line class="c-ref" x1="581.6" y1="38" x2="581.6" y2="186"/><text class="c-reflabel" x="587.6" y="28" text-anchor="end">68g · 모터 4개 추력</text></svg></div><figcaption>모터 4개의 추력은 약 68g입니다. 그 절반인 34g보다 가벼워야 떠서 자세를 잡을 여유가 생깁니다.</figcaption></figure>
+
+<h2 id="progress">진행 순서<a aria-label="진행 순서 링크" class="h-anchor" href="#progress">#</a></h2>
+<p>아래 순서대로 진행하고, 단계가 끝날 때마다 이 페이지를 고칩니다.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr><th>단계</th><th>하는 일</th><th>상태</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="#s1">1. 실패 원인 찾기</a></td><td>예전 드론의 무게와 추력 따져 보기</td><td><span class="tag">완료</span></td></tr>
+<tr><td><a href="#s2">2. 새 설계 정하기</a></td><td>보드, 센서, 모터 구동 방식, 재사용할 부품 정하기</td><td><span class="tag">완료</span></td></tr>
+<tr><td><a href="#s3">3. 무게 줄이기</a></td><td>배선 방식과 전선 굵기 정하기</td><td><span class="tag">완료</span></td></tr>
+<tr><td><a href="#s4">4. 배터리 고르기</a></td><td>고방전 300mAh 고르기, 충전 방법 정하기</td><td><span class="tag">완료</span></td></tr>
+<tr><td><a href="#s5">5. 회로 설계</a></td><td>MOSFET 구동, 배터리 전압 감시, 핀 배정</td><td><span class="tag">초안</span></td></tr>
+<tr><td><a href="#s6">6. 부품 구매</a></td><td>디바이스마트, 알리익스프레스 주문</td><td><span class="tag">완료</span></td></tr>
+<tr><td><a href="#s7">7. 조립</a></td><td>센서 확인, 납땜, 무게 재기</td><td><span class="tag tag-plan">다음</span></td></tr>
+<tr><td><a href="#s8">8. 펌웨어</a></td><td>ESP-Drone 기반, 핀과 전압 감시 설정</td><td><span class="tag tag-todo">예정</span></td></tr>
+<tr><td><a href="#s9">9. 첫 비행</a></td><td>프로펠러 없이 점검, 낮게 띄우기</td><td><span class="tag tag-todo">예정</span></td></tr>
+</tbody>
+</table></div>
+
+<h2 id="s1">1. 실패 원인 찾기<a aria-label="1. 실패 원인 찾기 링크" class="h-anchor" href="#s1">#</a></h2>
+<p>예전 드론은 Arduino Pro Mini, GY-521, MX1508 모터 드라이버(HW-354) 2장, 615 코어리스 모터 4개를 덕트형 프레임에 얹은 구성이었습니다. 무게는 배터리를 빼고 36g, 650mAh 배터리를 달면 53g이었고, 모터를 끝까지 돌려도 뜨지 않았습니다.</p>
+<div class="formula"><span class="formula-lhs">추력/무게비</span><span>=</span><span class="frac"><span class="num">모터 4개 추력 약 68g</span><span class="den">전체 무게 53g</span></span><span>≈ 1.3</span></div>
+<p>추력이 무게보다 조금 큰 정도로는 떠오르기도 어렵고, 떠도 자세를 바로잡을 힘이 남지 않습니다. 쿼드콥터는 추력/무게비가 <strong>최소 2</strong>는 넘어야 합니다. 무게를 늘린 부품은 이렇습니다.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr><th>원인</th><th>무게</th><th>새 드론에서는</th></tr>
+</thead>
+<tbody>
+<tr><td>650mAh 배터리</td><td>약 17g</td><td>300mAh 고방전 배터리로 바꿔 약 8~9g</td></tr>
+<tr><td>MX1508 드라이버 2장</td><td>약 6g</td><td>SOT-23 MOSFET 4개와 만능기판 조각, 약 0.5g</td></tr>
+<tr><td>긴 전선</td><td>5~8g</td><td>짧게 직결해서 약 1.5~2g</td></tr>
+<tr><td>핀헤더 · 테이프 · 고무줄</td><td>3~4g</td><td>핀헤더 없이 직결, 폼테이프로 고정</td></tr>
+</tbody>
+</table></div>
+<p>무게 말고 하나가 더 있었습니다. Pro Mini 5V 보드는 5V에서 돌도록 만든 보드라서, 1S 리튬 배터리 전압(3.0~4.2V)에서는 규격 밖이라 동작이 불안정할 수 있습니다.</p>
+
+<h2 id="s2">2. 새 설계 정하기<a aria-label="2. 새 설계 정하기 링크" class="h-anchor" href="#s2">#</a></h2>
+<p>방향은 두 가지입니다. 무거운 부품을 가벼운 것으로 바꾸고, 쓸 수 있는 부품은 그대로 씁니다. 참고한 드론은 <a href="https://www.elektormagazine.com/labs/esp-fly-the-smallest-esp32-drone-you-can-build" rel="noopener" target="_blank">ESP-FLY</a>입니다. XIAO ESP32-S3, MPU6050, 615 코어리스 모터를 쓰는 같은 구성으로, 배터리 포함 25g에 추력 68g(추력/무게비 2.7)이고 250mAh 배터리로 5분 반쯤 납니다.</p>
+<figure class="diagram"><div class="diagram-scroll"><svg viewBox="20 16 732 340" role="img" aria-label="새 드론 구성: 휴대폰 앱과 와이파이, GY-521과 I2C로 XIAO ESP32-S3에 연결. XIAO가 PWM으로 MOSFET 4개를 켜고 끄고, 배터리는 XIAO BAT 패드와 모터 +에 직접 연결"><defs><marker id="dr-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="d-arrowhead" d="M0 0L10 5L0 10z"/></marker></defs><g class="d-links"><path d="M210 72H300" marker-start="url(#dr-arrow)" marker-end="url(#dr-arrow)"/><path d="M210 180H300" marker-start="url(#dr-arrow)" marker-end="url(#dr-arrow)"/><path d="M470 72H560" marker-end="url(#dr-arrow)"/><path d="M645 104V148" marker-end="url(#dr-arrow)"/><path d="M385 276V212" marker-end="url(#dr-arrow)"/><path d="M470 308H645V212" marker-end="url(#dr-arrow)"/></g><rect class="d-box" x="40" y="40" width="170" height="64" rx="8"/><text class="d-name" x="125.0" y="68.0" text-anchor="middle">휴대폰</text><text class="d-sub" x="125.0" y="84.0" text-anchor="middle">ESP-Drone 앱</text><rect class="d-box" x="40" y="148" width="170" height="64" rx="8"/><text class="d-name" x="125.0" y="176.0" text-anchor="middle">GY-521</text><text class="d-sub" x="125.0" y="192.0" text-anchor="middle">MPU6050 자세 센서</text><rect class="d-box main" x="300" y="40" width="170" height="172" rx="8"/><text class="d-name" x="385.0" y="106.0" text-anchor="middle">XIAO ESP32-S3</text><text class="d-sub" x="385.0" y="122.0" text-anchor="middle">자세 계산 · 모터 제어</text><text class="d-sub" x="385.0" y="138.0" text-anchor="middle">와이파이 조종</text><text class="d-sub" x="385.0" y="154.0" text-anchor="middle">배터리 충전 (USB-C)</text><rect class="d-box" x="560" y="40" width="170" height="64" rx="8"/><text class="d-name" x="645.0" y="68.0" text-anchor="middle">AO3400A ×4</text><text class="d-sub" x="645.0" y="84.0" text-anchor="middle">MOSFET 저측 스위칭</text><rect class="d-box" x="560" y="148" width="170" height="64" rx="8"/><text class="d-name" x="645.0" y="176.0" text-anchor="middle">615 모터 ×4</text><text class="d-sub" x="645.0" y="192.0" text-anchor="middle">31mm 4엽 프로펠러</text><rect class="d-box" x="300" y="276" width="170" height="64" rx="8"/><text class="d-name" x="385.0" y="304.0" text-anchor="middle">배터리 1S 300mAh</text><text class="d-sub" x="385.0" y="320.0" text-anchor="middle">고방전 · 보호회로 없음</text><text class="d-label" x="255" y="64" text-anchor="middle">와이파이</text><text class="d-label" x="255" y="172" text-anchor="middle">I2C</text><text class="d-label" x="515" y="64" text-anchor="middle">PWM ×4</text><text class="d-label" x="655" y="130">모터 − 쪽</text><text class="d-label" x="395" y="240">BAT 패드</text><text class="d-label" x="395" y="256">분압 → D8</text><text class="d-label" x="490" y="300">모터 + 로 직접 (3~4A)</text></svg></div><figcaption>새 드론의 구성. 모터 전류는 XIAO를 거치지 않고 배터리에서 바로 흐릅니다.</figcaption></figure>
+<h3 id="s2-parts">부품 구성<a aria-label="부품 구성 링크" class="h-anchor" href="#s2-parts">#</a></h3>
+<ul>
+<li><strong>보드: Seeed XIAO ESP32-S3.</strong> 와이파이로 휴대폰에서 조종하고, 리튬 배터리 충전 회로가 들어 있어 USB-C로 바로 충전합니다.</li>
+<li><strong>자세 센서: 갖고 있던 GY-521.</strong> 10년쯤 된 모듈이지만 센서 성능에는 문제가 없습니다. 조립 전에 제대로 응답하는지만 확인합니다 (<a href="#s7">7단계</a>).</li>
+<li><strong>모터 구동: AO3400A MOSFET 4개.</strong> MX1508 드라이버 대신 SOT-23 MOSFET으로 모터의 − 쪽을 켜고 끕니다(저측 스위칭). 3.3V 신호로도 충분히 켜지는 MOSFET이라 XIAO 핀에 바로 연결합니다.</li>
+<li><strong>프레임 · 모터 · 프로펠러: 예전 것 재사용.</strong> 덕트형 프레임은 3D 프린팅으로 새로 만드는 것보다 가볍습니다.</li>
+<li><strong>전원.</strong> 배터리를 XIAO 뒷면의 BAT 패드에 연결합니다. 배터리로 돌 때는 XIAO의 5V 핀에 전원이 나오지 않으니 쓰지 않습니다.</li>
+<li><strong>프로펠러.</strong> 지금 것은 4엽입니다. 같은 지름의 3엽보다 추력은 더 나오지만 전류를 더 먹고 효율은 조금 낮습니다.</li>
+</ul>
+<h3 id="s2-motors">모터 방향과 배치<a aria-label="모터 방향과 배치 링크" class="h-anchor" href="#s2-motors">#</a></h3>
+<p>대각선끼리 같은 방향으로 돌아야 기체가 제자리에서 돌지 않습니다. 배치는 ESP-FLY와 ESP-Drone 펌웨어의 기본 순서를 따릅니다.</p>
+<figure class="diagram"><div class="diagram-scroll"><svg viewBox="-170 30 1140 450" role="img" aria-label="위에서 본 모터 배치: 앞오른쪽 M1 반시계, 뒤오른쪽 M2 시계, 뒤왼쪽 M3 반시계, 앞왼쪽 M4 시계"><line x1="400" y1="250" x2="530" y2="140" stroke="#d2cbbf" stroke-width="56" stroke-linecap="round"/><line x1="400" y1="250" x2="530" y2="360" stroke="#d2cbbf" stroke-width="56" stroke-linecap="round"/><line x1="400" y1="250" x2="270" y2="360" stroke="#d2cbbf" stroke-width="56" stroke-linecap="round"/><line x1="400" y1="250" x2="270" y2="140" stroke="#d2cbbf" stroke-width="56" stroke-linecap="round"/><rect x="326" y="184" width="148" height="132" rx="28" fill="#d2cbbf"/><circle cx="530" cy="140" r="90" fill="#f5f3ef" stroke="#cbc4b8" stroke-width="12"/><circle cx="530" cy="140" r="80" fill="none" stroke="#e6e1d9" stroke-width="2"/><line x1="530" y1="140" x2="457.3" y2="182" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><line x1="530" y1="140" x2="530" y2="56" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><line x1="530" y1="140" x2="602.7" y2="182" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><circle cx="530" cy="360" r="90" fill="#f5f3ef" stroke="#cbc4b8" stroke-width="12"/><circle cx="530" cy="360" r="80" fill="none" stroke="#e6e1d9" stroke-width="2"/><line x1="530" y1="360" x2="530" y2="444" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><line x1="530" y1="360" x2="457.3" y2="318" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><line x1="530" y1="360" x2="602.7" y2="318" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><circle cx="270" cy="360" r="90" fill="#f5f3ef" stroke="#cbc4b8" stroke-width="12"/><circle cx="270" cy="360" r="80" fill="none" stroke="#e6e1d9" stroke-width="2"/><line x1="270" y1="360" x2="197.3" y2="402" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><line x1="270" y1="360" x2="270" y2="276" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><line x1="270" y1="360" x2="342.7" y2="402" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><circle cx="270" cy="140" r="90" fill="#f5f3ef" stroke="#cbc4b8" stroke-width="12"/><circle cx="270" cy="140" r="80" fill="none" stroke="#e6e1d9" stroke-width="2"/><line x1="270" y1="140" x2="270" y2="224" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><line x1="270" y1="140" x2="197.3" y2="98" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><line x1="270" y1="140" x2="342.7" y2="98" stroke="#cbc4b8" stroke-width="5" stroke-linecap="round"/><g><g fill="#2b2b2b" fill-opacity="0.84"><ellipse cx="568" cy="127.6" rx="31" ry="8.5" transform="rotate(-18 568 127.6)"/><ellipse cx="542.4" cy="178" rx="31" ry="8.5" transform="rotate(72 542.4 178)"/><ellipse cx="492" cy="152.4" rx="31" ry="8.5" transform="rotate(162 492 152.4)"/><ellipse cx="517.6" cy="102" rx="31" ry="8.5" transform="rotate(252 517.6 102)"/></g><circle cx="530" cy="140" r="12" fill="#141414"/><circle cx="530" cy="140" r="4" fill="#a88a5c"/></g><path d="M630.7 106.8A106 106 0 0 0 579.4 46.2" fill="none" stroke="#a88a5c" stroke-width="3.5" stroke-linecap="round"/><path d="M571.4 42L582.6 40L576.1 52.4Z" fill="#a88a5c"/><g><g fill="#2b2b2b" fill-opacity="0.84"><ellipse cx="568" cy="372.4" rx="31" ry="8.5" transform="rotate(18 568 372.4)"/><ellipse cx="517.6" cy="398" rx="31" ry="8.5" transform="rotate(108 517.6 398)"/><ellipse cx="492" cy="347.6" rx="31" ry="8.5" transform="rotate(198 492 347.6)"/><ellipse cx="542.4" cy="322" rx="31" ry="8.5" transform="rotate(288 542.4 322)"/></g><circle cx="530" cy="360" r="12" fill="#141414"/><circle cx="530" cy="360" r="4" fill="#a88a5c"/></g><path d="M630.7 393.2A106 106 0 0 1 579.4 453.8" fill="none" stroke="#a88a5c" stroke-width="3.5" stroke-linecap="round"/><path d="M571.4 458L582.6 460L576.1 447.6Z" fill="#a88a5c"/><g><g fill="#2b2b2b" fill-opacity="0.84"><ellipse cx="308" cy="347.6" rx="31" ry="8.5" transform="rotate(-18 308 347.6)"/><ellipse cx="282.4" cy="398" rx="31" ry="8.5" transform="rotate(72 282.4 398)"/><ellipse cx="232" cy="372.4" rx="31" ry="8.5" transform="rotate(162 232 372.4)"/><ellipse cx="257.6" cy="322" rx="31" ry="8.5" transform="rotate(252 257.6 322)"/></g><circle cx="270" cy="360" r="12" fill="#141414"/><circle cx="270" cy="360" r="4" fill="#a88a5c"/></g><path d="M169.3 393.2A106 106 0 0 0 220.6 453.8" fill="none" stroke="#a88a5c" stroke-width="3.5" stroke-linecap="round"/><path d="M228.6 458L217.4 460L223.9 447.6Z" fill="#a88a5c"/><g><g fill="#2b2b2b" fill-opacity="0.84"><ellipse cx="308" cy="152.4" rx="31" ry="8.5" transform="rotate(18 308 152.4)"/><ellipse cx="257.6" cy="178" rx="31" ry="8.5" transform="rotate(108 257.6 178)"/><ellipse cx="232" cy="127.6" rx="31" ry="8.5" transform="rotate(198 232 127.6)"/><ellipse cx="282.4" cy="102" rx="31" ry="8.5" transform="rotate(288 282.4 102)"/></g><circle cx="270" cy="140" r="12" fill="#141414"/><circle cx="270" cy="140" r="4" fill="#a88a5c"/></g><path d="M169.3 106.8A106 106 0 0 1 220.6 46.2" fill="none" stroke="#a88a5c" stroke-width="3.5" stroke-linecap="round"/><path d="M228.6 42L217.4 40L223.9 52.4Z" fill="#a88a5c"/><rect x="372" y="186" width="56" height="128" rx="7" fill="#b9b3a8"/><rect x="361" y="204" width="78" height="92" rx="8" fill="#1c1c1c"/><rect x="388" y="198" width="24" height="12" rx="4" fill="#9b958c"/><rect x="377" y="234" width="46" height="42" rx="3" fill="#b8b2a7"/><rect x="383" y="240" width="34" height="30" rx="2" fill="#c6c0b5"/><g fill="#a88a5c"><circle cx="369" cy="238" r="2.6"/><circle cx="431" cy="238" r="2.6"/><circle cx="369" cy="246" r="2.6"/><circle cx="431" cy="246" r="2.6"/><circle cx="369" cy="254" r="2.6"/><circle cx="431" cy="254" r="2.6"/><circle cx="369" cy="262" r="2.6"/><circle cx="431" cy="262" r="2.6"/><circle cx="369" cy="270" r="2.6"/><circle cx="431" cy="270" r="2.6"/><circle cx="369" cy="278" r="2.6"/><circle cx="431" cy="278" r="2.6"/><circle cx="369" cy="286" r="2.6"/><circle cx="431" cy="286" r="2.6"/></g><circle cx="424" cy="220" r="3" fill="#a88a5c"/><path d="M391 128L400 112L409 128Z" fill="#a88a5c"/><text class="dl-name" x="650" y="120" text-anchor="start">M1 · 앞오른쪽</text><text class="dl-sub" x="650" y="150" text-anchor="start">CCW (반시계) · 검정/흰 선</text><text class="dl-name" x="650" y="380" text-anchor="start">M2 · 뒤오른쪽</text><text class="dl-sub" x="650" y="410" text-anchor="start">CW (시계) · 빨강/파랑 선</text><text class="dl-name" x="150" y="380" text-anchor="end">M3 · 뒤왼쪽</text><text class="dl-sub" x="150" y="410" text-anchor="end">CCW (반시계) · 검정/흰 선</text><text class="dl-name" x="150" y="120" text-anchor="end">M4 · 앞왼쪽</text><text class="dl-sub" x="150" y="150" text-anchor="end">CW (시계) · 빨강/파랑 선</text><text class="dl-sub" x="400" y="98" text-anchor="middle">앞</text></svg></div><figcaption>위에서 본 모터 번호와 회전 방향. 화살표가 프로펠러가 도는 방향입니다.</figcaption></figure>
+<ul>
+<li>615 모터는 선 색으로 방향을 구분합니다. <strong>CW(시계)는 빨강/파랑, CCW(반시계)는 검정/흰색</strong>입니다.</li>
+<li>코어리스 브러시 모터는 전원 극성을 바꾸면 반대로 돕니다. CW 모터밖에 없으면 두 개를 +/−를 바꿔 연결해서 CCW로 쓸 수 있습니다. 이때는 선 색 규칙이 안 맞으니 표시를 해 둡니다.</li>
+<li>프로펠러도 방향이 있어서, 모터 방향에 맞는 것을 끼웁니다.</li>
+</ul>
+
+<h2 id="s3">3. 무게 줄이기 (배선)<a aria-label="3. 무게 줄이기 링크" class="h-anchor" href="#s3">#</a></h2>
+<p>전선은 굵을수록 무겁지만, 모터 전원선을 너무 가늘게 하면 전압이 떨어집니다. 그래서 전원선과 신호선의 굵기를 나눴습니다.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr><th>용도</th><th>굵기</th><th>무게 (실리콘 피복, 1m)</th></tr>
+</thead>
+<tbody>
+<tr><td>배터리 · 모터 전원선</td><td>24~26AWG</td><td>24AWG 약 3~3.5g, 26AWG 약 2g</td></tr>
+<tr><td>신호선 (GY-521, MOSFET 게이트)</td><td>30AWG</td><td>약 1g</td></tr>
+</tbody>
+</table></div>
+<p>모터 4개를 합치면 3~4A가 흐릅니다. 전원선을 30AWG로 하면 10cm 왕복에서 약 0.27V가 떨어져 추력이 줄고, 전압이 순간적으로 내려가면 ESP32가 리셋될 수도 있습니다. 24AWG는 약 0.07V만 떨어집니다.</p>
+<div class="formula"><span class="formula-lhs">30AWG 전압 강하</span><span>≈</span><span>4A × 0.34Ω/m × 0.2m</span><span>≈ 0.27V</span></div>
+<p>배선 방식도 비교했습니다 (부품 무게는 빼고 배선만).</p>
+<div class="table-wrap"><table>
+<thead>
+<tr><th>방식</th><th>배선 무게</th><th>추력/무게비</th></tr>
+</thead>
+<tbody>
+<tr><td>직결 (선택)</td><td>약 1.5~2g</td><td>약 2.3</td></tr>
+<tr><td>핀헤더 + 만능기판</td><td>약 5~6g</td><td>약 2.06 (아슬아슬)</td></tr>
+</tbody>
+</table></div>
+<ul>
+<li>MOSFET, 다이오드, 저항만 약 1×2cm 만능기판 조각에 모읍니다. 0.5g쯤 늘지만 작은 SOT-23 다리가 떨어지지 않게 보호합니다.</li>
+<li>GY-521은 XIAO 뒷면에 양면 폼테이프로 붙이고, 30AWG 4가닥(3V3, GND, SDA, SCL)을 2~3cm로 짧게 잇습니다. 폼테이프는 모터 진동도 흡수합니다.</li>
+<li>암헤더(소켓)는 쓰지 않습니다. 핀헤더보다 2배 넘게 무겁고 높이도 늘어납니다.</li>
+</ul>
+
+<h2 id="s4">4. 배터리 고르기<a aria-label="4. 배터리 고르기 링크" class="h-anchor" href="#s4">#</a></h2>
+<p>조건은 <strong>1S 300mAh, 방전율 25C 이상, PH2.0 커넥터, 8~9g</strong>입니다. 300mAh에 25C면 순간적으로 7.5A까지 낼 수 있어서 모터 4개가 먹는 3~4A를 넉넉히 감당합니다.</p>
+<ul>
+<li>일반용 300mAh 배터리(1C, 약 0.3A)는 전류가 모자라서 못 씁니다.</li>
+<li>보호회로가 달린 배터리(Adafruit 제품 등)도 못 씁니다. 보호회로는 보통 2~3A쯤에서 전원을 끊어서, 비행 중에 전원이 꺼집니다.</li>
+<li>국내 몰(아이씨뱅큐)에는 조건에 맞는 제품이 없어서 알리익스프레스에서 샀습니다.</li>
+</ul>
+<p>고른 배터리는 <strong>GAONENG GNB 1S 300mAh 3.8V 60C HV</strong> (PH2.0, 5개)입니다. HV 타입이라 완충 전압이 4.35V지만, 일반 4.2V 충전기나 XIAO로 충전해도 안전합니다. 용량을 조금 덜 쓸 뿐입니다.</p>
+<ul>
+<li><strong>XIAO로 충전:</strong> 배터리를 꽂은 채 USB-C를 연결하면 약 100mA로 충전되어, 1개에 약 3시간 걸립니다.</li>
+<li><strong>여러 개를 돌려 쓸 때:</strong> PH2.0 4포트 충전기(AOKoda CX405)가 있으면 편합니다.</li>
+</ul>
+<h3 id="s4-safety">보호회로 없는 배터리 다루기<a aria-label="보호회로 없는 배터리 링크" class="h-anchor" href="#s4-safety">#</a></h3>
+<p>드론용 배터리는 위와 같은 이유로 일부러 보호회로 없이 나옵니다. 그래서 보호회로가 하던 일을 나눠서 챙깁니다.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr><th>위험</th><th>막아 주는 것</th><th>할 일</th></tr>
+</thead>
+<tbody>
+<tr><td>과충전</td><td>충전기 (XIAO, CX405가 4.2V에서 멈춤)</td><td>없음</td></tr>
+<tr><td>과방전 (3.0V 아래)</td><td>없음</td><td>전압을 읽어 3.3V 근처에서 착륙 (<a href="#s5-batt">회로</a>, <a href="#s8">펌웨어</a>), 비행이 끝나면 배터리 분리</td></tr>
+<tr><td>단락 (쇼트)</td><td>없음</td><td>납땜할 때 +/− 선이 닿지 않게, 추락 뒤 피복 확인, 부푼 배터리는 폐기</td></tr>
+</tbody>
+</table></div>
+<p>배터리를 꽂아 둔 채 보관하면 XIAO와 분압 저항이 계속 전류를 먹어서 셀이 과방전됩니다. 쓰지 않을 때는 꼭 뺍니다.</p>
+
+<h2 id="s5">5. 회로 설계<a aria-label="5. 회로 설계 링크" class="h-anchor" href="#s5">#</a></h2>
+<figure class="diagram"><div class="diagram-scroll"><svg viewBox="16 16 728 372" role="img" aria-label="회로도. 왼쪽: 모터 한 채널. 모터 +는 배터리 +, 모터 −는 AO3400A 드레인, 소스는 GND. 다이오드는 모터와 나란히, 띠가 배터리 + 쪽. 게이트는 XIAO D0~D3에 연결하고 10kΩ로 GND에 풀다운. 오른쪽: 배터리 +에서 10kΩ 두 개로 나눈 가운데를 XIAO D8에 연결"><rect class="d-lane" x="24" y="24" width="452" height="356" rx="8"/><text class="d-lane-name" x="40" y="48">모터 구동 (한 채널, 4개 반복)</text><rect class="d-lane" x="492" y="24" width="244" height="356" rx="8"/><text class="d-lane-name" x="508" y="48">배터리 전압 감시</text><path class="sch-wire" d="M200 84H420"/><text class="d-sub" x="200" y="76">배터리 + (BAT 패드와 같은 점)</text><circle class="sch-dot" cx="300" cy="84" r="3.5"/><circle class="sch-dot" cx="390" cy="84" r="3.5"/><path class="sch-wire" d="M300 84V114M300 160V204"/><circle class="sch-part" cx="300" cy="137" r="23"/><text class="d-name" x="300" y="142" text-anchor="middle">M</text><text class="d-name" x="266" y="132" text-anchor="end">615 모터</text><text class="d-sub" x="266" y="148" text-anchor="end">+ 배터리 · − 드레인</text><path class="sch-wire" d="M390 84V124M390 148V204H300"/><path class="sch-part" d="M378 148H402L390 126Z"/><path class="sch-wire sch-thick" d="M377 124H403"/><text class="d-name" x="410" y="134">다이오드</text><text class="d-sub" x="410" y="150">띠 = + 쪽</text><circle class="sch-dot" cx="300" cy="204" r="3.5"/><path class="sch-wire" d="M300 204V218M300 282V334"/><rect class="sch-part" x="252" y="218" width="96" height="64" rx="6"/><text class="d-name" x="300" y="246" text-anchor="middle">AO3400A</text><text class="d-sub" x="300" y="263" text-anchor="middle">N-MOSFET</text><text class="d-sub" x="308" y="214">D</text><text class="d-sub" x="308" y="298">S</text><text class="d-sub" x="238" y="244">G</text><path class="sch-wire" d="M150 250H252"/><text class="d-name" x="40" y="246">XIAO D0~D3</text><text class="d-sub" x="40" y="262">PWM 신호</text><circle class="sch-dot" cx="190" cy="250" r="3.5"/><path class="sch-wire" d="M190 250V266"/><path class="sch-wire" d="M190 266L197 270.0L183 278.0L197 286.0L183 294.0L197 302.0L183 310.0L190 314"/><path class="sch-wire" d="M190 314V334"/><text class="d-name" x="176" y="290" text-anchor="end">10kΩ</text><text class="d-sub" x="176" y="306" text-anchor="end">풀다운</text><path class="sch-wire" d="M170 334H330"/><circle class="sch-dot" cx="190" cy="334" r="3.5"/><circle class="sch-dot" cx="300" cy="334" r="3.5"/><path class="sch-wire" d="M250 334V342M238 342H262M243 348H257M248 354H252"/><text class="d-sub" x="338" y="338">GND</text><path class="sch-wire" d="M520 84H700"/><text class="d-sub" x="520" y="76">배터리 +</text><circle class="sch-dot" cx="600" cy="84" r="3.5"/><path class="sch-wire" d="M600 84V112"/><path class="sch-wire" d="M600 112L607 116.0L593 124.0L607 132.0L593 140.0L607 148.0L593 156.0L600 160"/><path class="sch-wire" d="M600 160V244"/><text class="d-name" x="616" y="140">10kΩ</text><circle class="sch-dot" cx="600" cy="202" r="3.5"/><path class="sch-wire" d="M600 202H646"/><text class="d-name" x="652" y="198">XIAO D8</text><text class="d-sub" x="652" y="214">ADC (GPIO7)</text><path class="sch-wire" d="M600 244L607 248.0L593 256.0L607 264.0L593 272.0L607 280.0L593 288.0L600 292"/><path class="sch-wire" d="M600 292V334"/><text class="d-name" x="616" y="272">10kΩ</text><path class="sch-wire" d="M560 334H640"/><path class="sch-wire" d="M600 334V342M588 342H612M593 348H607M598 354H602"/><text class="d-sub" x="648" y="338">GND</text><text class="d-sub" x="614" y="368" text-anchor="middle">완충 4.35V → D8에 약 2.18V</text></svg></div><figcaption>왼쪽 회로를 모터마다 하나씩, 4개 만듭니다. 오른쪽은 배터리 전압을 읽는 분압 회로입니다.</figcaption></figure>
+<h3 id="s5-motor">모터 구동<a aria-label="모터 구동 링크" class="h-anchor" href="#s5-motor">#</a></h3>
+<ul>
+<li>모터 +는 배터리 +에, 모터 −는 MOSFET의 드레인(D)에 연결하고, 소스(S)는 GND로 갑니다. XIAO가 게이트(G)에 PWM 신호를 주면 MOSFET이 모터의 − 쪽을 켜고 끄면서 속도를 조절합니다.</li>
+<li><strong>10kΩ 풀다운 (게이트–GND):</strong> 전원을 켜고 펌웨어가 핀을 잡기 전까지 게이트가 떠 있으면 모터가 저절로 돌 수 있습니다. 저항이 게이트를 GND 쪽으로 붙잡아 둡니다.</li>
+<li><strong>다이오드 (모터와 나란히, 띠가 배터리 + 쪽):</strong> MOSFET이 꺼지는 순간 모터 코일에서 생기는 역기전력을 돌려보내 MOSFET을 보호합니다.</li>
+</ul>
+<p class="note">다이오드는 1N4148을 샀습니다. 같은 구성의 ESP-FLY도 1N4148을 쓰니 그대로 시작합니다. 다만 PWM으로 끌 때마다 모터 전류(약 1A)가 다이오드로 흐르고, 1N4148의 평균 정격(150~300mA)보다 큽니다. 첫 비행 뒤 다이오드가 뜨거우면 1A급 쇼트키 다이오드(SS14, B5819W)로 바꿉니다. 자리와 방향이 같아서 바꿔 끼우기만 하면 됩니다.</p>
+<h3 id="s5-batt">배터리 전압 감시<a aria-label="배터리 전압 감시 링크" class="h-anchor" href="#s5-batt">#</a></h3>
+<p>XIAO ESP32-S3에는 배터리 전압을 읽는 회로가 들어 있지 않습니다. 그래서 10kΩ 저항 2개로 배터리 전압을 절반으로 나눠 ADC 핀에 넣습니다. 10kΩ는 최소 주문 수량이 10개라 풀다운 4개에 쓰고 남은 것으로 충분합니다.</p>
+<ul>
+<li>연결: 배터리 + → 10kΩ → D8 → 10kΩ → GND</li>
+<li>완충 4.35V가 약 2.18V로 내려와 ADC가 읽을 수 있는 범위에 들어갑니다. 펌웨어에서 읽은 값에 2를 곱하면 배터리 전압입니다.</li>
+<li>분압 저항에는 항상 약 0.2mA가 흐릅니다. 그래서 보관할 때 배터리를 빼야 합니다.</li>
+</ul>
+<h3 id="s5-pins">핀 배정 (초안)<a aria-label="핀 배정 링크" class="h-anchor" href="#s5-pins">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr><th>XIAO 핀</th><th>GPIO</th><th>연결</th><th>메모</th></tr>
+</thead>
+<tbody>
+<tr><td>D0</td><td>GPIO1</td><td>M1 (앞오른쪽) 게이트</td><td>PWM</td></tr>
+<tr><td>D1</td><td>GPIO2</td><td>M2 (뒤오른쪽) 게이트</td><td>PWM</td></tr>
+<tr><td>D2</td><td>GPIO3</td><td>M3 (뒤왼쪽) 게이트</td><td>PWM</td></tr>
+<tr><td>D3</td><td>GPIO4</td><td>M4 (앞왼쪽) 게이트</td><td>PWM</td></tr>
+<tr><td>D4</td><td>GPIO5</td><td>GY-521 SDA</td><td>I2C</td></tr>
+<tr><td>D5</td><td>GPIO6</td><td>GY-521 SCL</td><td>I2C</td></tr>
+<tr><td>D6</td><td>GPIO43</td><td>비워 둠</td><td>부팅할 때 로그 신호가 나와서, 모터를 달면 순간적으로 돌 수 있음</td></tr>
+<tr><td>D8</td><td>GPIO7</td><td>배터리 전압 (분압)</td><td>ADC1이라 와이파이를 쓰는 중에도 읽힘</td></tr>
+<tr><td>3V3 · GND</td><td>-</td><td>GY-521 VCC · GND</td><td>GND는 배터리 −, MOSFET 소스와 공통</td></tr>
+<tr><td>BAT 패드</td><td>-</td><td>배터리 +/−</td><td>충전과 전원</td></tr>
+</tbody>
+</table></div>
+
+<h2 id="s6">6. 부품 구매<a aria-label="6. 부품 구매 링크" class="h-anchor" href="#s6">#</a></h2>
+<p>필요한 부품은 2026년 11월에 모두 샀습니다. (선택)은 없어도 되는 부품입니다. 가격은 10월 말 장바구니 기준이고, 알리익스프레스는 배송비를 포함한 결제 금액입니다.</p>
+<div class="table-wrap table-wide"><table>
+<thead>
+<tr><th>구매처</th><th>부품</th><th>수량</th><th>가격</th><th>용도</th></tr>
+</thead>
+<tbody>
+<tr><td>디바이스마트</td><td><a href="https://www.devicemart.co.kr/goods/view?no=14981265" rel="noopener" target="_blank">Seeed XIAO ESP32-S3</a></td><td>1</td><td>13,640원</td><td>메인 보드</td></tr>
+<tr><td>디바이스마트</td><td><a href="https://www.devicemart.co.kr/goods/view?no=15910331" rel="noopener" target="_blank">AO3400A (SOT-23)</a></td><td>4</td><td>440원</td><td>모터 구동 MOSFET</td></tr>
+<tr><td>디바이스마트</td><td><a href="https://www.devicemart.co.kr/goods/view?no=25" rel="noopener" target="_blank">1N4148</a></td><td>10 (최소 수량)</td><td>220원</td><td>역기전력 다이오드</td></tr>
+<tr><td>디바이스마트</td><td><a href="https://www.devicemart.co.kr/goods/view?no=2133" rel="noopener" target="_blank">10kΩ 1/8W</a></td><td>10 (최소 수량)</td><td>165원</td><td>게이트 풀다운 4개, 분압 2개</td></tr>
+<tr><td>디바이스마트</td><td><a href="https://www.devicemart.co.kr/goods/view?no=24860" rel="noopener" target="_blank">만능기판 GA6</a> (선택)</td><td>1</td><td>3,850원</td><td>MOSFET 기판 조각용</td></tr>
+<tr><td>알리익스프레스</td><td><a href="https://www.aliexpress.com/item/4000344782776.html" rel="noopener" target="_blank">GAONENG GNB 1S 300mAh 60C HV, PH2.0</a></td><td>5</td><td>24,204원</td><td>배터리</td></tr>
+<tr><td>알리익스프레스</td><td>615 코어리스 모터 (Kidpower Store, 59,000RPM)</td><td>4</td><td>5,599원</td><td>방향 맞추기, 예비</td></tr>
+<tr><td>알리익스프레스</td><td><a href="https://www.aliexpress.com/item/1005010616479405.html" rel="noopener" target="_blank">AOKoda CX405 4포트 충전기</a> (선택)</td><td>1</td><td>4,560원</td><td>배터리 여러 개 동시 충전</td></tr>
+</tbody>
+</table></div>
+<p><strong>갖고 있던 부품:</strong> 615 코어리스 모터 4개, 31mm 4엽 프로펠러, 덕트형 프레임, GY-521. 예전 드론의 Pro Mini, D1 Mini Pro, MX1508 드라이버는 이번에 쓰지 않습니다.</p>
+<p><strong>나중에 살 수도 있는 것:</strong> 쇼트키 다이오드 SS14 또는 B5819W 4개 (<a href="#s5-motor">다이오드 메모</a> 참고).</p>
+
+<h2 id="s7">7. 조립<a aria-label="7. 조립 링크" class="h-anchor" href="#s7">#</a></h2>
+<p>문제가 생겼을 때 원인을 좁히기 쉽게, 부품을 하나씩 확인하면서 붙입니다.</p>
+<ol>
+<li><strong>GY-521 확인.</strong> XIAO에 임시로 연결하고 I2C 스캔으로 주소 0x68이 잡히는지 봅니다. 이어서 0x75번 레지스터(WHO_AM_I)를 읽어 0x68이 나오면 MPU6050 형식으로 응답하는 것입니다. 주소와 값이 같아서 헷갈리기 쉽습니다. 가속도와 자이로 값이 기울이는 대로 바뀌면 그대로 씁니다.</li>
+<li><strong>XIAO 확인.</strong> USB로 예제를 올려 보고, 배터리를 BAT 패드에 연결해 충전 표시등이 켜지는지 봅니다. PH2.0 커넥터는 판매처마다 +/− 순서가 다를 수 있으니, 꽂기 전에 빨간 선이 BAT +로 가는지 확인합니다.</li>
+<li><strong>MOSFET 기판 만들기.</strong> 약 1×2cm 만능기판 조각에 AO3400A, 다이오드, 10kΩ를 4세트 납땜합니다. 다이오드는 띠가 배터리 + 쪽입니다.</li>
+<li><strong>분압 저항 달기.</strong> 10kΩ 2개를 배터리 +와 GND 사이에 직렬로 달고, 가운데를 D8에 연결합니다.</li>
+<li><strong>모터 연결.</strong> 모터 + 4가닥은 배터리 + 한 점으로 모으고, 모터 −는 각 MOSFET 드레인으로 보냅니다. 전원선은 24~26AWG로 짧게 합니다. 프로펠러 없이 하나씩 돌려서 방향이 <a href="#s2-motors">배치도</a>와 맞는지 확인합니다.</li>
+<li><strong>GY-521 붙이기.</strong> XIAO 뒷면에 폼테이프로 붙이고 30AWG 4가닥을 2~3cm로 잇습니다. 센서의 X축이 어느 쪽을 보는지 적어 둡니다 (펌웨어에서 방향을 맞출 때 씀).</li>
+<li><strong>프레임에 얹고 무게 재기.</strong> 배터리 포함 30g 이하가 목표입니다. 34g을 넘으면 추력/무게비가 2 아래로 내려가니, 전선 길이와 테이프부터 다시 줄입니다.</li>
+</ol>
+
+<h2 id="s8">8. 펌웨어<a aria-label="8. 펌웨어 링크" class="h-anchor" href="#s8">#</a></h2>
+<p>처음부터 짜지 않고 <a href="https://github.com/espressif/esp-drone" rel="noopener" target="_blank">ESP-Drone</a>에서 시작합니다. Espressif가 Crazyflie 오픈소스를 ESP32-S2/S3로 옮긴 드론 펌웨어로, 와이파이로 휴대폰 앱이나 게임패드로 조종합니다. ESP-FLY는 이것을 Circuit Digest가 고친 버전을 쓰는데, 같은 XIAO ESP32-S3와 MPU6050 조합이라 가장 가까운 출발점입니다.</p>
+<ul class="tasks">
+<li><span aria-hidden="true" class="task-box"></span>ESP-IDF 설치 (ESP-FLY 안내는 ESP-IDF 5.0.7 사용)</li>
+<li><span aria-hidden="true" class="task-box"></span><span><code>idf.py menuconfig</code>의 ESPDrone Config에서 모터 핀을 D0~D3, I2C 핀을 D4/D5로 설정</span></li>
+<li><span aria-hidden="true" class="task-box"></span>배터리 전압 읽기를 D8(GPIO7)로 바꾸고 분압비 2배 반영</li>
+<li><span aria-hidden="true" class="task-box"></span>비행 중 3.3V 근처가 되면 자동 착륙</li>
+<li><span aria-hidden="true" class="task-box"></span>GY-521의 장착 방향에 맞게 센서 축 설정</li>
+<li><span aria-hidden="true" class="task-box"></span>휴대폰 ESP-Drone 앱으로 와이파이 연결 확인</li>
+<li><span aria-hidden="true" class="task-box"></span>PC용 Crazyflie Client(cfclient)로 트림과 추력 한계 조정</li>
+</ul>
+
+<h2 id="s9">9. 첫 비행<a aria-label="9. 첫 비행 링크" class="h-anchor" href="#s9">#</a></h2>
+<ol>
+<li><strong>프로펠러 없이 모터 점검.</strong> 앱에서 낮은 추력을 주고, M1~M4가 순서대로 맞는 자리에서 맞는 방향으로 도는지 봅니다.</li>
+<li><strong>센서 방향 점검.</strong> 기체를 앞으로 기울였을 때 앱이나 cfclient의 자세 표시도 앞으로 기우는지 봅니다. 반대로 움직이면 이륙하자마자 뒤집힙니다.</li>
+<li><strong>프로펠러 달기.</strong> 모터 방향에 맞는 프로펠러를 끼웁니다.</li>
+<li><strong>넓은 실내에서 낮게 띄우기.</strong> 추력을 천천히 올려 바닥 근처에서 버티는지 봅니다. 한쪽으로 흐르면 트림으로 맞춥니다.</li>
+<li><strong>비행 뒤 점검.</strong> 배터리를 빼고 모터, MOSFET, 다이오드가 뜨거운지 만져 봅니다. 다이오드가 뜨거우면 쇼트키로 바꿉니다.</li>
+</ol>
+<h3 id="s9-law">비행 규정<a aria-label="비행 규정 링크" class="h-anchor" href="#s9-law">#</a></h3>
+<ul>
+<li>최대이륙중량 250g 이하라서 조종 자격은 필요 없습니다.</li>
+<li>무게와 상관없이 비행금지구역과 제한구역(공항 주변 등)에서는 승인이 필요합니다. 서울은 제한 구역이 많아서, 밖에서 날리기 전에 <a href="https://drone.onestop.go.kr/" rel="noopener" target="_blank">드론원스톱</a>이나 Ready to fly 앱으로 확인합니다.</li>
+<li>처음에는 실내에서 날리는 것이 가장 간단합니다.</li>
+</ul>
+
+<h2 id="references">참고 자료<a aria-label="참고 자료 링크" class="h-anchor" href="#references">#</a></h2>
+<p><strong>참고한 드론</strong></p>
+<ul>
+<li><a href="https://www.elektormagazine.com/labs/esp-fly-the-smallest-esp32-drone-you-can-build" rel="noopener" target="_blank">ESP-FLY 제작 기록 (Elektor Labs)</a> · <a href="https://www.cnx-software.com/?p=169715" rel="noopener" target="_blank">ESP-FLY 소개 (CNX Software)</a></li>
+</ul>
+<p><strong>펌웨어</strong></p>
+<ul>
+<li><a href="https://docs.espressif.com/projects/espressif-esp-drone/" rel="noopener" target="_blank">ESP-Drone 문서 (Espressif)</a> · <a href="https://github.com/espressif/esp-drone" rel="noopener" target="_blank">ESP-Drone (GitHub)</a> · <a href="https://github.com/Circuit-Digest/ESP-Drone" rel="noopener" target="_blank">Circuit Digest ESP-Drone (GitHub)</a></li>
+</ul>
+<p><strong>보드</strong></p>
+<ul>
+<li><a href="https://wiki.openelab.io/seeed-studio/xiao-esp32s3" rel="noopener" target="_blank">XIAO ESP32-S3 사양과 배터리 (OpenELAB 위키)</a></li>
+</ul>
+<p><strong>규정</strong></p>
+<ul>
+<li><a href="https://drone.onestop.go.kr/" rel="noopener" target="_blank">드론원스톱 민원서비스</a> · <a href="https://www.segye.com/view/20240607510803" rel="noopener" target="_blank">드론 비행 규정 정리 (세계일보)</a></li>
+</ul>
+
+          <p class="doc-note">이 페이지는 만드는 중인 기록입니다. 조립과 비행 결과는 단계가 끝날 때마다 이어서 고칩니다.</p>
+        </article>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <a href="/" class="logo logo-light">
+            <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#12294a"/><path d="M5 16c3.5-6 11-8.5 16.5-4.2L27 8v16l-5.5-3.8C16 24.5 8.5 22 5 16z" fill="#2dd4bf"/><circle cx="11" cy="15" r="1.6" fill="#12294a"/></svg>
+            <span>FULLFISH</span>
+          </a>
+          <nav class="footer-nav" aria-label="하단 메뉴">
+            <a href="/#work">프로젝트</a><a href="/#about">소개</a><a href="/#contact">연락</a>
+          </nav>
+        </div>
+        <p class="copyright">© <span id="year">2026</span> FULLFISH. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <dialog class="lightbox" id="lightbox" aria-label="이미지 크게 보기">
+      <div class="lb-stage">
+        <img id="lbImg" alt="" />
+      </div>
+      <p class="lb-caption"><span id="lbCaption"></span><span class="lb-count" id="lbCount"></span></p>
+      <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="닫기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      <button type="button" class="lb-btn lb-prev" id="lbPrev" aria-label="이전 이미지"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button type="button" class="lb-btn lb-next" id="lbNext" aria-label="다음 이미지"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+    </dialog>
+
+    <script src="/projects/project.js" defer></script>
+  </body>
+</html>

@@ -232,6 +232,37 @@ button { font: inherit; color: inherit; }
 .g-item.g-contain img { object-fit: contain; background: #fff; padding: 6px; }
 .g-cap { display: block; padding: 9px 11px 10px; font-size: 12.5px; line-height: 1.45; color: var(--muted); }
 
+/* 본문 메모 */
+.prose .note { margin: 0 0 20px; padding: 14px 18px; background: var(--bg-soft); border-left: 3px solid var(--teal-500); border-radius: 0 10px 10px 0; font-size: 15.5px; }
+.tag-todo { color: var(--muted); background: var(--bg-soft); }
+
+/* 진행 단계: 끝난 단계 */
+.stage .is-done b { border-color: var(--teal-500); background: var(--teal-500); }
+
+/* 히어로 그림 (사진 대신 SVG) */
+.doc-hero-art { margin: 0; background: var(--shot-bg); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: 0 10px 30px -18px rgba(11, 31, 58, .25); }
+.doc-hero-art svg { display: block; width: 100%; height: auto; }
+.doc-hero-art figcaption { padding: 12px 14px; font-size: 13.5px; font-weight: 600; background: #fff; border-top: 1px solid var(--line); }
+
+/* 도표: 그림 위 이름표, 회로도, 막대 차트 */
+.dl-name { font-size: 26px; font-weight: 700; fill: var(--text); }
+.dl-sub { font-size: 20px; fill: var(--muted); }
+.sch-wire { fill: none; stroke: #334155; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.sch-thick { stroke-width: 2.4; }
+.sch-part { fill: #fff; stroke: #334155; stroke-width: 1.6; stroke-linejoin: round; }
+.sch-dot { fill: #334155; }
+.chart svg { min-width: 560px; }
+.c-grid { stroke: #eef1f5; stroke-width: 1; }
+.c-base { stroke: #cbd3de; stroke-width: 1; }
+.c-tick { font-size: 11.5px; fill: var(--muted); }
+.c-name { font-size: 13px; font-weight: 700; fill: var(--text); }
+.c-sub { font-size: 11.5px; fill: var(--muted); }
+.c-bar-main { fill: var(--teal-600); }
+.c-bar-muted { fill: #6b7686; }
+.c-in { font-size: 12.5px; font-weight: 700; fill: #fff; }
+.c-ref { stroke: var(--text); stroke-width: 1.5; }
+.c-reflabel { font-size: 11.5px; font-weight: 600; fill: var(--text); }
+
 .doc-note { margin-top: 72px !important; padding: 16px 20px; background: var(--teal-50); border-radius: 12px; font-size: 14.5px; color: #0f5f57; }
 
 /* 라이트박스 */
