@@ -425,3 +425,17 @@ body.lb-open { overflow: hidden; }
 .diagram .st-lab { font-size: 14px; }
 .diagram .st-big { font-size: 16px; }
 .diagram .st-mid { font-size: 13px; }
+
+/* MOSFET 다리 달기 그림 */
+.mj-card { fill: #f3ead9; stroke: #d9c9a8; stroke-width: 1; }
+.mj-tape { fill: #f5b94a; opacity: .45; }
+.mj-hold { fill: #e5e7eb; stroke: #cbd5e1; stroke-width: 1; opacity: .92; }
+.mj-wire { fill: none; stroke: #9aa1ab; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; }
+.mj-wire-s { stroke-width: 6; }
+.mj-joint { fill: #d7dbe0; stroke: #6b7280; stroke-width: 1; }
+.mj-solder { fill: #cfd4da; stroke: #6b7280; stroke-width: 1; }
+.mj-pen { font-size: 18px; font-weight: 700; fill: #9a3412; }
+.mj-pcb { fill: #e9d8ae; stroke: #b59f6e; stroke-width: 1; }
+.mj-pad { fill: #c58b3a; }
+.mj-cut { stroke: #ef4444; stroke-width: 1.5; stroke-dasharray: 5 4; }
+.mj-dim { stroke: #64748b; stroke-width: 1.2; }
