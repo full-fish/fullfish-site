@@ -14,7 +14,7 @@ from pathlib import Path
 
 from manifold3d import Manifold
 
-from cadlib import (EPS, along_x, box, check, cyl_z, extrude, overlap_volume, rect,
+from cadlib import (EPS, along_x, box, check, cyl_z, extrude, overlap_volume, poly, rect,
                     roofed_rect, rounded_slab, rrect, save_stl, to_bed, union)
 
 OUT = Path(__file__).parent / "stl" / "device-b"
@@ -58,6 +58,9 @@ MIC_D, MIC_V = 1.8, 102.0
 SENS_W, SENS_D = 21.0, 14.0      # 칸 안쪽 가로, 깊이(w)
 SENS_TOP = 33.4                  # 칸 천장 아래면 v (화면 테두리 아래)
 SENS_WALL, SENS_BACK_T = 1.2, 1.0
+SENS_BACK_CHAMFER = 3.0          # 뒷판 왼쪽 아래 모서리 (몸통 안쪽 구석 반지름 2.8)
+SENS_MODULE = (18.0, 26.0, 5.0)  # SHT40 모듈 가로, 세로, 두께 (여유를 더한 값)
+SENS_FOAM = 3.0                  # 모듈과 앞벽 사이 폼테이프
 VENT_Y = [6.0, 10.0, 14.0, 18.0, 22.0, 26.0]   # 왼쪽 옆벽 통풍 슬롯 높이
 VENT_W, VENT_L = 1.6, 10.0
 
@@ -167,12 +170,14 @@ def front_plate():
 
 
 def sensor_back():
-    """센서 칸 뒤(w = 16)를 막는 1mm 판. 몸통 왼쪽 벽, 바닥 벽, 칸의 두 벽 끝에 글루로 붙인다."""
+    """센서 칸 뒤(w = 16)를 막는 1mm 판. 몸통 왼쪽 벽, 바닥 벽, 칸의 두 벽 끝에 글루로 붙인다.
+    앞판 좌표 (x, v, w)로 돌려준다. 왼쪽 아래 모서리는 몸통 안쪽 둥근 구석에 걸리지 않게 잘라 낸다."""
     w = PLATE_T + SENS_D
     v_bottom = (WALL + w * SA) / CA        # 바닥 벽 안쪽 면이 w=16 평면과 만나는 v
-    width = (IN_X - (IN_X - LIP_CLR - LIP_T - SENS_W - SENS_WALL)) - 0.3
-    height = SENS_TOP + SENS_WALL - v_bottom - 0.3
-    return box(0, 0, 0, width, height, SENS_BACK_T)
+    x0, x1 = -IN_X + 0.3, -IN_X + LIP_CLR + LIP_T + SENS_W + SENS_WALL
+    v0, v1 = v_bottom + 0.3, SENS_TOP + SENS_WALL
+    c = SENS_BACK_CHAMFER
+    return extrude(poly([(x0 + c, v0), (x1, v0), (x1, v1), (x0, v1), (x0, v0 + c)]), w, w + SENS_BACK_T)
 
 
 # ═════════════ 몸통 ═════════════
@@ -244,7 +249,11 @@ def dummies():
                          SPK_L / 2, SPK_CV + SPK_H / 2, PLATE_T + SPK_GAP + SPK_D))
     xiao = to_dev(box(IN_X - 0.5 - XIAO_L, USB_V - XIAO_W / 2, XIAO_PCB_W,
                       IN_X - 0.5, USB_V + XIAO_W / 2, XIAO_PCB_W + 1.6 + 3.2))
-    return {"패널": panel, "스피커": speaker, "XIAO": xiao}
+    mw, ml, mt = SENS_MODULE
+    cx = -IN_X + LIP_CLR + LIP_T + SENS_W / 2
+    module = to_dev(box(cx - mw / 2, SENS_TOP - 0.5 - ml, PLATE_T + SENS_FOAM,
+                        cx + mw / 2, SENS_TOP - 0.5, PLATE_T + SENS_FOAM + mt))
+    return {"패널": panel, "스피커": speaker, "XIAO": xiao, "SHT40 모듈": module}
 
 
 def main():
@@ -270,9 +279,12 @@ def main():
     print("  앞판 × 몸통:", round(overlap_volume(fp, bd), 3))
     print("  뒷덮개 × 몸통:", round(overlap_volume(bc, bd), 3))
     print("  앞판 × 뒷덮개:", round(overlap_volume(fp, bc), 3))
+    sb = to_dev(sensor_back())
+    print(f"  센서 칸 뒷판 × 앞판: {round(overlap_volume(sb, fp), 3)}, × 몸통: {round(overlap_volume(sb, bd), 3)},"
+          f" × 뒷덮개: {round(overlap_volume(sb, bc), 3)}")
     for name, d in dummies().items():
         print(f"  {name} × 앞판: {round(overlap_volume(d, fp), 3)}, × 몸통: {round(overlap_volume(d, bd), 3)},"
-              f" × 뒷덮개: {round(overlap_volume(d, bc), 3)}")
+              f" × 뒷덮개: {round(overlap_volume(d, bc), 3)}, × 센서 칸 뒷판: {round(overlap_volume(d, sb), 3)}")
     x0, y0, z0, x1, y1, z1 = (fp + bd + bc).bounding_box()
     print(f"  조립 크기: 가로 {x1 - x0:.1f}, 높이 {y1 - y0:.1f}, 깊이 {z1 - z0:.1f}")
 
